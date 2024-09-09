@@ -1,0 +1,40 @@
+package listener
+
+import (
+    "testing"
+    "github.com/x1rh/event-listener/logger"
+    "log/slog"
+    "dexpert-event-listener/gen/model"
+    "dexpert-event-listener/gen/query"
+    "time"
+    "context"
+)
+
+func TestEventListen(t *testing.T) {
+    logger.Init(slog.LevelInfo, false)
+    el, err := NewTokenFactoryEventListener(nil)
+    if err != nil {
+        t.Fatal(err)
+    }
+    el.Start()
+
+    ult := query.UserLaunchTx
+    if err = ult.WithContext(context.Background()).Create(&model.UserLaunchTx{
+        UID:             1,
+        ContractAddress: "123",
+        ChainID:         1,
+        ChainName:       "eth",
+        PairAddress:     "123",
+        Fee:             "123",
+        FeeTokenSymbol:  "123",
+        Timestamp:       time.Now().UTC(),
+        TypeName:        "123",
+    }); err != nil {
+        slog.Error("user launch tx create error", slog.String("err", err.Error()))
+    }
+}
+
+func TestGetLen(t *testing.T) {
+    s := "0x000000000000000000000000d3952283b16c813c"
+    t.Log(len(s))
+}
