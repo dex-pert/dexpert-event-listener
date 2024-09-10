@@ -14,6 +14,7 @@ import (
     "os/signal"
     "time"
     "syscall"
+    "dexpert-event-listener/constant"
 )
 
 func main() {
@@ -34,15 +35,17 @@ func main() {
 
     appCtx := appctx.NewContext(&c)
     c.Chains = appCtx.Chains
-
     logger.Init(slog.LevelInfo, false)
-    iListeners, err := listener.InitListeners(&c)
+
+    if _, ok := c.Chains[constant.ChainIDEthereumSepolia]; !ok {
+        panic(fmt.Sprintf("chain id %d not exist", constant.ChainIDEthereumSepolia))
+    }
+    ethereumSepoliaCtx := listener.NewContext(c.Chains[constant.ChainIDEthereumSepolia])
+    ethereumSepoliaTokenFactoryEventListener, err := listener.NewTokenFactoryEventListener(ethereumSepoliaCtx)
     if err != nil {
-        slog.Error("fail to new a token factory listener", slog.Any("err", err))
+        slog.Error("ethereum sepolia token factory event listener new failed", slog.Any("err", err))
     }
-    for _, v := range iListeners {
-        go v.Start()
-    }
+    go ethereumSepoliaTokenFactoryEventListener.Start()
 
     signalChan := make(chan os.Signal, 1)
     signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)

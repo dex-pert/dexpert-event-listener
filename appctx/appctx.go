@@ -30,12 +30,8 @@ func NewContext(c *config.Config) *Context {
     query.SetDefault(db)
 
     chains := make(map[int]*config.ChainConfig, len(c.Chains))
-    for _, v := range c.ChainConfig {
-        chains[v.ChainId] = &config.ChainConfig{
-            ChainId:   v.ChainId,
-            ChainName: v.ChainName,
-            URL:       v.URL,
-        }
+    for i, v := range c.ChainConfig {
+        chains[v.ChainId] = &c.ChainConfig[i]
     }
 
     tokenFactoryProxy, err := tokenfactory.NewProxy(chains)

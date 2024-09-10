@@ -15,11 +15,7 @@ import (
     "time"
 )
 
-type TokenFactoryEventListener struct {
-    EL *el.EventListener
-}
-
-func NewTokenFactoryEventListener(ltCtx *LTContext) (IListener, error) {
+func NewTokenFactoryEventListener(ltCtx *Context) (*el.EventListener, error) {
     c := el.ChainConfig{
         ChainId:   ltCtx.Chain.ChainId,
         ChainName: ltCtx.Chain.ChainName,
@@ -48,11 +44,7 @@ func NewTokenFactoryEventListener(ltCtx *LTContext) (IListener, error) {
     if err != nil {
         return nil, errors.Wrap(err, "fail to new an EventListener object")
     }
-    return &TokenFactoryEventListener{EL: _el}, nil
-}
-
-func (t *TokenFactoryEventListener) Start() {
-    t.EL.Start()
+    return _el, nil
 }
 
 // LogTokenCreated signature: TokenCreated(address,address,uint8,uint96,uint256)
@@ -64,7 +56,7 @@ type LogTokenCreated struct {
     Level        *big.Int
 }
 
-func logHandler(ltCtx *LTContext, c *el.Contract) el.LogHandleFunc {
+func logHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc {
     return func(ctx context.Context, event *el.Event) error {
         switch event.Name {
         case "TokenCreated":

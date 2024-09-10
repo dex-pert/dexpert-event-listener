@@ -12,4 +12,5 @@ chain_config:
     token_symbol: "ETH"
     launch_fee: "0.08"
     token_decimal: 18
-
+    block_number: 6641775
+    token_factor_address: "0x822935C2240E6A0b5C96E3eA355446a83ed12C03"
