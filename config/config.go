@@ -1,16 +1,16 @@
 package config
 
 type Config struct {
-    Chains []*Chain
-    MySQL  *MySQL
+    Chains []Chain
+    MySQL  *MySQL `yaml:"mysql"`
 }
 
 type MySQL struct {
-    User     string
-    Pass     string
-    Host     string
-    Port     string
-    Database string
+    User string `yaml:"user"`
+    Pass string `yaml:"pass"`
+    Host string `yaml:"host"`
+    Port string `yaml:"port"`
+    DB   string `yaml:"db"`
 }
 
 type Chain struct {

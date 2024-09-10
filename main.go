@@ -6,28 +6,29 @@ import (
 
     "github.com/x1rh/event-listener/logger"
     "github.com/joho/godotenv"
-    "log"
     "dexpert-event-listener/appctx"
     "os"
     "dexpert-event-listener/config"
+    "fmt"
+    "gopkg.in/yaml.v3"
 )
 
 func main() {
     err := godotenv.Load(".env")
     if err != nil {
-        log.Println(err)
+        panic(fmt.Sprintf("error loading .env file: %v", err))
     }
-    chains := config.GetChainConfigs()
-    appCtx := appctx.NewContext(&config.Config{
-        MySQL: &config.MySQL{
-            User:     os.Getenv("MYSQL_USER"),
-            Pass:     os.Getenv("MYSQL_PASS"),
-            Host:     os.Getenv("MYSQL_HOST"),
-            Port:     os.Getenv("MYSQL_PORT"),
-            Database: os.Getenv("DB_NAME"),
-        },
-        Chains: chains,
-    })
+    file, err := os.ReadFile("./etc/config.yaml")
+    if err != nil {
+        panic(fmt.Sprintf("error reading config.yaml: %v", err))
+    }
+    yamlContent := os.ExpandEnv(string(file))
+    var c config.Config
+    err = yaml.Unmarshal([]byte(yamlContent), &c)
+    if err != nil {
+        panic(fmt.Sprintf("error parsing config.yaml: %v", err))
+    }
+    appCtx := appctx.NewContext(&c)
     logger.Init(slog.LevelInfo, false)
     el, err := listener.NewTokenFactoryEventListener(appCtx)
     if err != nil {

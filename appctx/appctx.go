@@ -7,18 +7,18 @@ import (
     "gorm.io/gorm/logger"
     "time"
     "log/slog"
-    "dexpert-event-listener/gen/query"
+    "dexpert-event-listener/gorm/query"
     "dexpert-event-listener/config"
     "dexpert-event-listener/abi/tokenfactory"
 )
 
 type Context struct {
-    Chains            map[int]*config.Chain
+    ChainConfig       *config.Chain
     TokenFactoryProxy *tokenfactory.Proxy
 }
 
 func NewContext(c *config.Config) *Context {
-    dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", c.MySQL.User, c.MySQL.Pass, c.MySQL.Host, c.MySQL.Port, c.MySQL.Database)
+    dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", c.MySQL.User, c.MySQL.Pass, c.MySQL.Host, c.MySQL.Port, c.MySQL.DB)
     db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
         SkipDefaultTransaction: true,
         PrepareStmt:            true,

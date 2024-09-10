@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"dexpert-event-listener/gen/model"
+	"dexpert-event-listener/gorm/model"
 )
 
 func newUserLaunchTx(db *gorm.DB, opts ...gen.DOOption) userLaunchTx {
