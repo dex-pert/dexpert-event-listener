@@ -12,7 +12,8 @@ import (
 func main() {
     g := gen.NewGenerator(gen.Config{
         OutPath: "./query",
-        Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
+        // Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
+        Mode: gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
     })
 
     err := godotenv.Load("../.env")
@@ -32,6 +33,7 @@ func main() {
     // Generate basic type-safe DAO API for struct `model.User` following conventions
     g.ApplyBasic(g.GenerateModel("user_transaction"),
         g.GenerateModel("user_launch_tx"),
+        g.GenerateModel("user_wallet"),
         g.GenerateModel("user_swap_tx"))
     // Generate the code
     g.Execute()

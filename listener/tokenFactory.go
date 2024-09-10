@@ -9,6 +9,10 @@ import (
     "github.com/ethereum/go-ethereum/common"
     "github.com/pkg/errors"
     "github.com/ethereum/go-ethereum/ethclient"
+    "dexpert-event-listener/gorm/query"
+    "dexpert-event-listener/gorm/model"
+    "dexpert-event-listener/constant"
+    "time"
 )
 
 type TokenFactoryEventListener struct {
@@ -73,6 +77,51 @@ func logHandler(ltCtx *LTContext, c *el.Contract) el.LogHandleFunc {
             l.Token = el.HashToAddress(event.IndexedParams[1])
             slog.Info("TokenCreated event", slog.Any("event", l))
 
+            _ = query.Q.Transaction(func(tx *query.Query) error {
+                uw := tx.UserWallet
+
+                userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Owner.String()), uw.ChainID.Eq(int32(ltCtx.Chain.ChainId))).Take()
+                if err != nil {
+                    userWallet = &model.UserWallet{UID: 0}
+                    slog.Error("TokenCreated event", "fail to get user wallet,err is: ", err)
+                }
+
+                now := time.Now().UTC()
+                userLaunchTx := model.UserLaunchTx{
+                    UID:             userWallet.UID,
+                    ContractAddress: l.Token.String(),
+                    ChainID:         int32(ltCtx.Chain.ChainId),
+                    PairAddress:     "",
+                    Fee:             ltCtx.LaunchFee,
+                    FeeTokenSymbol:  ltCtx.TokenSymbol,
+                    Timestamp:       now,
+                    TypeName:        constant.WithSwapName(constant.SwapTypeLaunch),
+                    ChainName:       ltCtx.Chain.ChainName,
+                }
+                if err = tx.WithContext(ctx).UserLaunchTx.Create(&userLaunchTx); err != nil {
+                    slog.Error("TokenCreated event", "fail to create user launch tx,err is: ", err)
+                    return errors.Wrap(err, "fail to create user launch tx")
+                }
+
+                if err = tx.WithContext(ctx).UserTransaction.Create(&model.UserTransaction{
+                    UID:             userWallet.UID,
+                    Tid:             userLaunchTx.ID,
+                    SwapType:        constant.SwapTypeLaunch,
+                    Volume:          "0.00",
+                    Timestamp:       now,
+                    SwapName:        constant.WithSwapName(constant.SwapTypeLaunch),
+                    ChainName:       ltCtx.Chain.ChainName,
+                    ChainID:         int32(ltCtx.Chain.ChainId),
+                    Fee:             ltCtx.LaunchFee,
+                    FeeTokenSymbol:  ltCtx.TokenSymbol,
+                    FeeTokenDecimal: ltCtx.TokenDecimal,
+                }); err != nil {
+                    slog.Error("TokenCreated event", "fail to create user transaction,err is: ", err)
+                    return errors.Wrap(err, "fail to create user transaction")
+                }
+
+                return nil
+            })
         default:
             // do nothing
         }

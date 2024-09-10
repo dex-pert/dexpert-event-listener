@@ -15,7 +15,10 @@ type MySQL struct {
 }
 
 type ChainConfig struct {
-    ChainId   int    `yaml:"chain_id"`
-    ChainName string `yaml:"chain_name"`
-    URL       string `yaml:"url"`
+    ChainId      int    `yaml:"chain_id"`
+    ChainName    string `yaml:"chain_name"`
+    URL          string `yaml:"url"`
+    TokenSymbol  string `yaml:"token_symbol"`
+    LaunchFee    string `yaml:"launch_fee"`
+    TokenDecimal int    `yaml:"token_decimal"`
 }

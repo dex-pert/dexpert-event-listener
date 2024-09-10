@@ -46,7 +46,7 @@ func newUserTransaction(db *gorm.DB, opts ...gen.DOOption) userTransaction {
 }
 
 type userTransaction struct {
-	userTransactionDo
+	userTransactionDo userTransactionDo
 
 	ALL             field.Asterisk
 	ID              field.Int32  // 记录编号
@@ -93,6 +93,18 @@ func (u *userTransaction) updateTableName(table string) *userTransaction {
 	u.fillFieldMap()
 
 	return u
+}
+
+func (u *userTransaction) WithContext(ctx context.Context) IUserTransactionDo {
+	return u.userTransactionDo.WithContext(ctx)
+}
+
+func (u userTransaction) TableName() string { return u.userTransactionDo.TableName() }
+
+func (u userTransaction) Alias() string { return u.userTransactionDo.Alias() }
+
+func (u userTransaction) Columns(cols ...field.Expr) gen.Columns {
+	return u.userTransactionDo.Columns(cols...)
 }
 
 func (u *userTransaction) GetFieldByName(fieldName string) (field.OrderExpr, bool) {

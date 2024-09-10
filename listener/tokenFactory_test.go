@@ -4,8 +4,8 @@ import (
     "testing"
     "github.com/x1rh/event-listener/logger"
     "log/slog"
-    "dexpert-event-listener/gen/model"
-    "dexpert-event-listener/gen/query"
+    "dexpert-event-listener/gorm/model"
+    "dexpert-event-listener/gorm/query"
     "time"
     "context"
 )

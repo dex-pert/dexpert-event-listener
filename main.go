@@ -11,6 +11,9 @@ import (
     "dexpert-event-listener/config"
     "fmt"
     "gopkg.in/yaml.v3"
+    "os/signal"
+    "time"
+    "syscall"
 )
 
 func main() {
@@ -37,18 +40,21 @@ func main() {
     if err != nil {
         slog.Error("fail to new a token factory listener", slog.Any("err", err))
     }
-    listenerLen := len(iListeners)
-    switch listenerLen {
-    case 0:
-        return
-    case 1:
-        iListeners[0].Start()
-    default:
-        for i := len(iListeners) - 1; i > 0; i-- {
-            go func() {
-                iListeners[i].Start()
-            }()
-        }
-        iListeners[0].Start()
+    for _, v := range iListeners {
+        go v.Start()
     }
+
+    signalChan := make(chan os.Signal, 1)
+    signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
+    done := make(chan bool, 1)
+    go func() {
+        sig := <-signalChan
+        slog.Info("Received signal: %s\n", sig)
+        done <- true
+    }()
+    slog.Info("Dexpert event listener running. Press Ctrl+C to exit...")
+    <-done
+    slog.Info("Shutting down gracefully...")
+    time.Sleep(2 * time.Second)
+    slog.Info("ShuShutdown complete.")
 }

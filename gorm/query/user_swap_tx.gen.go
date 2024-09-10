@@ -54,7 +54,7 @@ func newUserSwapTx(db *gorm.DB, opts ...gen.DOOption) userSwapTx {
 
 // userSwapTx 记录用户swap产生的交易
 type userSwapTx struct {
-	userSwapTxDo
+	userSwapTxDo userSwapTxDo
 
 	ALL             field.Asterisk
 	ID              field.Int32
@@ -116,6 +116,16 @@ func (u *userSwapTx) updateTableName(table string) *userSwapTx {
 
 	return u
 }
+
+func (u *userSwapTx) WithContext(ctx context.Context) IUserSwapTxDo {
+	return u.userSwapTxDo.WithContext(ctx)
+}
+
+func (u userSwapTx) TableName() string { return u.userSwapTxDo.TableName() }
+
+func (u userSwapTx) Alias() string { return u.userSwapTxDo.Alias() }
+
+func (u userSwapTx) Columns(cols ...field.Expr) gen.Columns { return u.userSwapTxDo.Columns(cols...) }
 
 func (u *userSwapTx) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	_f, ok := u.fieldMap[fieldName]

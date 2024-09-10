@@ -52,3 +52,20 @@ CREATE TABLE `user_transaction`  (
                                      `fee_token_decimal` int NOT NULL COMMENT '手续费token的decimal',
                                      PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 202 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE `user_wallet`  (
+                                `id` int NOT NULL AUTO_INCREMENT,
+                                `uid` bigint NOT NULL,
+                                `address` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'eth:42|solana:44|ton:33|btc:',
+                                `chain_id` int NOT NULL DEFAULT 0 COMMENT '非evm链，可以私下用负数指定',
+                                `chain_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '需要区分出测试网，例如eth-sepolia',
+                                `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                `is_deleted` tinyint NOT NULL DEFAULT 0 COMMENT '0:no|1:yes',
+                                PRIMARY KEY (`id`) USING BTREE,
+                                UNIQUE INDEX `uid`(`uid` ASC, `chain_name` ASC) USING BTREE,
+                                UNIQUE INDEX `uix_address_name`(`address` ASC, `chain_name` ASC) USING BTREE,
+                                UNIQUE INDEX `uix_address_chainid`(`address` ASC, `chain_id` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户钱包的绑定' ROW_FORMAT = DYNAMIC;
+
+# 2024

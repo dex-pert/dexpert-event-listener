@@ -44,7 +44,7 @@ func newUserLaunchTx(db *gorm.DB, opts ...gen.DOOption) userLaunchTx {
 }
 
 type userLaunchTx struct {
-	userLaunchTxDo
+	userLaunchTxDo userLaunchTxDo
 
 	ALL             field.Asterisk
 	ID              field.Int32
@@ -87,6 +87,18 @@ func (u *userLaunchTx) updateTableName(table string) *userLaunchTx {
 	u.fillFieldMap()
 
 	return u
+}
+
+func (u *userLaunchTx) WithContext(ctx context.Context) IUserLaunchTxDo {
+	return u.userLaunchTxDo.WithContext(ctx)
+}
+
+func (u userLaunchTx) TableName() string { return u.userLaunchTxDo.TableName() }
+
+func (u userLaunchTx) Alias() string { return u.userLaunchTxDo.Alias() }
+
+func (u userLaunchTx) Columns(cols ...field.Expr) gen.Columns {
+	return u.userLaunchTxDo.Columns(cols...)
 }
 
 func (u *userLaunchTx) GetFieldByName(fieldName string) (field.OrderExpr, bool) {

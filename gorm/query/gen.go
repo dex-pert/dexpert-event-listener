@@ -20,6 +20,7 @@ var (
 	UserLaunchTx    *userLaunchTx
 	UserSwapTx      *userSwapTx
 	UserTransaction *userTransaction
+	UserWallet      *userWallet
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
@@ -27,6 +28,7 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	UserLaunchTx = &Q.UserLaunchTx
 	UserSwapTx = &Q.UserSwapTx
 	UserTransaction = &Q.UserTransaction
+	UserWallet = &Q.UserWallet
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
@@ -35,6 +37,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		UserLaunchTx:    newUserLaunchTx(db, opts...),
 		UserSwapTx:      newUserSwapTx(db, opts...),
 		UserTransaction: newUserTransaction(db, opts...),
+		UserWallet:      newUserWallet(db, opts...),
 	}
 }
 
@@ -44,6 +47,7 @@ type Query struct {
 	UserLaunchTx    userLaunchTx
 	UserSwapTx      userSwapTx
 	UserTransaction userTransaction
+	UserWallet      userWallet
 }
 
 func (q *Query) Available() bool { return q.db != nil }
@@ -54,6 +58,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		UserLaunchTx:    q.UserLaunchTx.clone(db),
 		UserSwapTx:      q.UserSwapTx.clone(db),
 		UserTransaction: q.UserTransaction.clone(db),
+		UserWallet:      q.UserWallet.clone(db),
 	}
 }
 
@@ -71,6 +76,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		UserLaunchTx:    q.UserLaunchTx.replaceDB(db),
 		UserSwapTx:      q.UserSwapTx.replaceDB(db),
 		UserTransaction: q.UserTransaction.replaceDB(db),
+		UserWallet:      q.UserWallet.replaceDB(db),
 	}
 }
 
@@ -78,6 +84,7 @@ type queryCtx struct {
 	UserLaunchTx    IUserLaunchTxDo
 	UserSwapTx      IUserSwapTxDo
 	UserTransaction IUserTransactionDo
+	UserWallet      IUserWalletDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
@@ -85,6 +92,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		UserLaunchTx:    q.UserLaunchTx.WithContext(ctx),
 		UserSwapTx:      q.UserSwapTx.WithContext(ctx),
 		UserTransaction: q.UserTransaction.WithContext(ctx),
+		UserWallet:      q.UserWallet.WithContext(ctx),
 	}
 }
 
