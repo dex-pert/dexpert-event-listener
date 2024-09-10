@@ -28,11 +28,27 @@ func main() {
     if err != nil {
         panic(fmt.Sprintf("error parsing config.yaml: %v", err))
     }
+
     appCtx := appctx.NewContext(&c)
+    c.Chains = appCtx.Chains
+
     logger.Init(slog.LevelInfo, false)
-    el, err := listener.NewTokenFactoryEventListener(appCtx)
+    iListeners, err := listener.InitListeners(&c)
     if err != nil {
         slog.Error("fail to new a token factory listener", slog.Any("err", err))
     }
-    el.Start()
+    listenerLen := len(iListeners)
+    switch listenerLen {
+    case 0:
+        return
+    case 1:
+        iListeners[0].Start()
+    default:
+        for i := len(iListeners) - 1; i > 0; i-- {
+            go func() {
+                iListeners[i].Start()
+            }()
+        }
+        iListeners[0].Start()
+    }
 }

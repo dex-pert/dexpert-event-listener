@@ -1,8 +1,9 @@
 package config
 
 type Config struct {
-    Chains []Chain
-    MySQL  *MySQL `yaml:"mysql"`
+    ChainConfig []ChainConfig        `yaml:"chain_config"`
+    MySQL       *MySQL               `yaml:"mysql"`
+    Chains      map[int]*ChainConfig `yaml:"chains"`
 }
 
 type MySQL struct {
@@ -13,8 +14,8 @@ type MySQL struct {
     DB   string `yaml:"db"`
 }
 
-type Chain struct {
-    ChainId   int
-    ChainName string
-    URL       string
+type ChainConfig struct {
+    ChainId   int    `yaml:"chain_id"`
+    ChainName string `yaml:"chain_name"`
+    URL       string `yaml:"url"`
 }

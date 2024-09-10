@@ -13,7 +13,7 @@ import (
 )
 
 type Context struct {
-    ChainConfig       *config.Chain
+    Chains            map[int]*config.ChainConfig
     TokenFactoryProxy *tokenfactory.Proxy
 }
 
@@ -29,20 +29,22 @@ func NewContext(c *config.Config) *Context {
     }
     query.SetDefault(db)
 
-    chains := make(map[int]*config.Chain, len(c.Chains))
-    for _, v := range c.Chains {
-        chains[v.ChainId] = &config.Chain{
+    chains := make(map[int]*config.ChainConfig, len(c.Chains))
+    for _, v := range c.ChainConfig {
+        chains[v.ChainId] = &config.ChainConfig{
             ChainId:   v.ChainId,
             ChainName: v.ChainName,
             URL:       v.URL,
         }
     }
+
     tokenFactoryProxy, err := tokenfactory.NewProxy(chains)
     if err != nil {
         panic(err)
     }
     return &Context{
         TokenFactoryProxy: tokenFactoryProxy,
+        Chains:            chains,
     }
 }
 

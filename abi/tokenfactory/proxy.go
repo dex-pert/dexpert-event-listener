@@ -3,14 +3,14 @@ package tokenfactory
 import "dexpert-event-listener/config"
 
 type Proxy struct {
-    chains  map[int]*config.Chain
+    chains  map[int]*config.ChainConfig
     mapping map[int]*Client
 }
 
-func NewProxy(chains map[int]*config.Chain) (*Proxy, error) {
+func NewProxy(chains map[int]*config.ChainConfig) (*Proxy, error) {
     chainsLen := len(chains)
     p := &Proxy{
-        chains:  make(map[int]*config.Chain, chainsLen),
+        chains:  make(map[int]*config.ChainConfig, chainsLen),
         mapping: make(map[int]*Client, chainsLen),
     }
     for k, v := range chains {
