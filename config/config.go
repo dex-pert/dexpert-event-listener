@@ -1,7 +1,8 @@
-package appctx
+package config
 
 type Config struct {
-    MySQL *MySQL
+    Chains []*Chain
+    MySQL  *MySQL
 }
 
 type MySQL struct {
@@ -10,4 +11,10 @@ type MySQL struct {
     Host     string
     Port     string
     Database string
+}
+
+type Chain struct {
+    ChainId   int
+    ChainName string
+    URL       string
 }

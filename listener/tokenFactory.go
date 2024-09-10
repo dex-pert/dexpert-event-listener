@@ -10,6 +10,7 @@ import (
     "github.com/ethereum/go-ethereum/common"
     "github.com/ethereum/go-ethereum/ethclient"
     "github.com/pkg/errors"
+    "dexpert-event-listener/constant"
 )
 
 // LogTokenCreated signature: TokenCreated(address,address,uint8,uint96,uint256)
@@ -33,6 +34,7 @@ func logHandler(appctx *appctx.Context, c *el.Contract) el.LogHandleFunc {
             l.Owner = el.HashToAddress(event.IndexedParams[0])
             l.Token = el.HashToAddress(event.IndexedParams[1])
             slog.Info("TokenCreated event", slog.Any("event", l))
+
         default:
             // do nothing
         }
@@ -42,9 +44,9 @@ func logHandler(appctx *appctx.Context, c *el.Contract) el.LogHandleFunc {
 
 func NewTokenFactoryEventListener(ctx *appctx.Context) (*el.EventListener, error) {
     c := el.ChainConfig{
-        ChainId:   11155111,
-        ChainName: "ethereum-sepolia",
-        URL:       "https://eth-sepolia.g.alchemy.com/v2/gOeoBV9mlFL1pWj7qbKEdlB6pXTfNum6",
+        ChainId:   constant.ChainIDEthereumSepolia,
+        ChainName: constant.ChainNameEthereumSepolia,
+        URL:       constant.ChainURLEthereumSepolia,
     }
 
     client, err := ethclient.Dial(c.URL)

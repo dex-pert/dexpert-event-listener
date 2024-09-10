@@ -8,12 +8,16 @@ import (
     "time"
     "log/slog"
     "dexpert-event-listener/gen/query"
+    "dexpert-event-listener/config"
+    "dexpert-event-listener/abi/tokenfactory"
 )
 
 type Context struct {
+    Chains            map[int]*config.Chain
+    TokenFactoryProxy *tokenfactory.Proxy
 }
 
-func NewContext(c *Config) *Context {
+func NewContext(c *config.Config) *Context {
     dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", c.MySQL.User, c.MySQL.Pass, c.MySQL.Host, c.MySQL.Port, c.MySQL.Database)
     db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
         SkipDefaultTransaction: true,
@@ -24,7 +28,22 @@ func NewContext(c *Config) *Context {
         panic(err)
     }
     query.SetDefault(db)
-    return &Context{}
+
+    chains := make(map[int]*config.Chain, len(c.Chains))
+    for _, v := range c.Chains {
+        chains[v.ChainId] = &config.Chain{
+            ChainId:   v.ChainId,
+            ChainName: v.ChainName,
+            URL:       v.URL,
+        }
+    }
+    tokenFactoryProxy, err := tokenfactory.NewProxy(chains)
+    if err != nil {
+        panic(err)
+    }
+    return &Context{
+        TokenFactoryProxy: tokenFactoryProxy,
+    }
 }
 
 type Writer struct {

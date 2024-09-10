@@ -9,6 +9,7 @@ import (
     "log"
     "dexpert-event-listener/appctx"
     "os"
+    "dexpert-event-listener/config"
 )
 
 func main() {
@@ -16,14 +17,16 @@ func main() {
     if err != nil {
         log.Println(err)
     }
-    appCtx := appctx.NewContext(&appctx.Config{
-        MySQL: &appctx.MySQL{
+    chains := config.GetChainConfigs()
+    appCtx := appctx.NewContext(&config.Config{
+        MySQL: &config.MySQL{
             User:     os.Getenv("MYSQL_USER"),
             Pass:     os.Getenv("MYSQL_PASS"),
             Host:     os.Getenv("MYSQL_HOST"),
             Port:     os.Getenv("MYSQL_PORT"),
             Database: os.Getenv("DB_NAME"),
         },
+        Chains: chains,
     })
     logger.Init(slog.LevelInfo, false)
     el, err := listener.NewTokenFactoryEventListener(appCtx)
