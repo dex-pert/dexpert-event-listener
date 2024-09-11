@@ -9,12 +9,12 @@ import (
     "log/slog"
     "dexpert-event-listener/gorm/query"
     "dexpert-event-listener/config"
-    "dexpert-event-listener/abi/tokenfactory"
+    "dexpert-event-listener/abi"
 )
 
 type Context struct {
-    Chains            map[int]*config.ChainConfig
-    TokenFactoryProxy *tokenfactory.Proxy
+    Chains   map[int]*config.ChainConfig
+    AbiProxy *abi.Proxy
 }
 
 func NewContext(c *config.Config) *Context {
@@ -34,13 +34,13 @@ func NewContext(c *config.Config) *Context {
         chains[v.ChainId] = &c.ChainConfig[i]
     }
 
-    tokenFactoryProxy, err := tokenfactory.NewProxy(chains)
+    abiProxy, err := abi.NewProxy(chains)
     if err != nil {
         panic(err)
     }
     return &Context{
-        TokenFactoryProxy: tokenFactoryProxy,
-        Chains:            chains,
+        AbiProxy: abiProxy,
+        Chains:   chains,
     }
 }
 

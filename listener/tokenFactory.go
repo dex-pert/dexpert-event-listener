@@ -27,15 +27,12 @@ func NewTokenFactoryEventListener(ltCtx *Context) (*el.EventListener, error) {
         panic(err)
     }
 
-    tokenFactorAddress := ltCtx.TokenFactorAddress
-    abiStr := ltCtx.ABIStr
-    blockNumber := big.NewInt(ltCtx.BlockNumber)
-    step := big.NewInt(ltCtx.Step)
-    tokenFactory, err := el.NewContract(tokenFactorAddress, abiStr, blockNumber, step)
+    tokenFactory, err := el.NewContract(ltCtx.TokenFactoryAddress, ltCtx.TokenFactoryABIStr, big.NewInt(ltCtx.TokenFactoryBlockNumber), big.NewInt(ltCtx.TokenFactoryStep))
     if err != nil {
         panic(err)
     }
-    tokenFactory.SetLogHandler(logHandler(ltCtx, tokenFactory))
+    tokenFactory.SetLogHandler(tokenFactoryLogHandler(ltCtx, tokenFactory))
+
     _el, err := el.New(
         c,
         el.WithClient(client),
@@ -56,7 +53,7 @@ type LogTokenCreated struct {
     Level        *big.Int
 }
 
-func logHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc {
+func tokenFactoryLogHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc {
     return func(ctx context.Context, event *el.Event) error {
         switch event.Name {
         case "TokenCreated":
@@ -70,23 +67,28 @@ func logHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc {
             slog.Info("TokenCreated event", slog.Any("event", l))
 
             _ = query.Q.Transaction(func(tx *query.Query) error {
-                uw := tx.UserWallet
+                block, err := ltCtx.AbiProxy.WithChainID(ltCtx.Chain.ChainId).BlockByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
+                if err != nil {
+                    slog.Error("TokenCreated event", "fail to get block,err is: ", err)
+                    return err
+                }
 
+                uw := tx.UserWallet
                 userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Owner.String()), uw.ChainID.Eq(int32(ltCtx.Chain.ChainId))).Take()
                 if err != nil {
                     userWallet = &model.UserWallet{UID: 0}
                     slog.Error("TokenCreated event", "fail to get user wallet,err is: ", err)
                 }
 
-                now := time.Now().UTC()
+                eventTime := time.Unix(int64(block.Time()), 0).UTC()
                 userLaunchTx := model.UserLaunchTx{
                     UID:             userWallet.UID,
                     ContractAddress: l.Token.String(),
                     ChainID:         int32(ltCtx.Chain.ChainId),
                     PairAddress:     "",
-                    Fee:             ltCtx.LaunchFee,
-                    FeeTokenSymbol:  ltCtx.TokenSymbol,
-                    Timestamp:       now,
+                    Fee:             ltCtx.TokenFactoryLaunchFee,
+                    FeeTokenSymbol:  ltCtx.TokenFactoryTokenSymbol,
+                    Timestamp:       eventTime,
                     TypeName:        constant.WithSwapName(constant.SwapTypeLaunch),
                     ChainName:       ltCtx.Chain.ChainName,
                 }
@@ -100,13 +102,13 @@ func logHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc {
                     Tid:             userLaunchTx.ID,
                     SwapType:        constant.SwapTypeLaunch,
                     Volume:          "0.00",
-                    Timestamp:       now,
+                    Timestamp:       eventTime,
                     SwapName:        constant.WithSwapName(constant.SwapTypeLaunch),
                     ChainName:       ltCtx.Chain.ChainName,
                     ChainID:         int32(ltCtx.Chain.ChainId),
-                    Fee:             ltCtx.LaunchFee,
-                    FeeTokenSymbol:  ltCtx.TokenSymbol,
-                    FeeTokenDecimal: ltCtx.TokenDecimal,
+                    Fee:             ltCtx.TokenFactoryLaunchFee,
+                    FeeTokenSymbol:  ltCtx.TokenFactoryTokenSymbol,
+                    FeeTokenDecimal: ltCtx.TokenFactoryTokenDecimal,
                 }); err != nil {
                     slog.Error("TokenCreated event", "fail to create user transaction,err is: ", err)
                     return errors.Wrap(err, "fail to create user transaction")

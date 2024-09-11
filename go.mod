@@ -8,6 +8,7 @@ require (
 	github.com/ethereum/go-ethereum v1.14.8
 	github.com/joho/godotenv v1.5.1
 	github.com/pkg/errors v0.9.1
+	github.com/shopspring/decimal v1.3.1
 	github.com/x1rh/event-listener v0.0.3
 	gopkg.in/yaml.v3 v3.0.1
 	gorm.io/driver/mysql v1.5.7

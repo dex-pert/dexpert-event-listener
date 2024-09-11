@@ -1,4 +1,4 @@
-package tokenfactory
+package abi
 
 import "dexpert-event-listener/config"
 
