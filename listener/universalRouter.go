@@ -90,7 +90,7 @@ func universalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc 
 
                 volume := ""
                 if l.TokenIn.String() == ltCtx.UniversalRouterUSDTAddress {
-                    volume = decimal.NewFromBigInt(l.FeeAmount, -int32(feeTokenDecimal)).StringFixed(int32(feeTokenDecimal))
+                    volume = decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal)).String()
                 } else {
                     var swapPath []common.Address
                     if l.TokenIn.String() == ltCtx.UniversalRouterEthAddress || l.TokenIn.String() == ltCtx.UniversalRouterWethAddress {
@@ -103,8 +103,8 @@ func universalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc 
                         slog.Error("PaymentFee event", "uniswapv2router getAmountsOutByAddressAndBlockNumber,err is: ", err)
                         return err
                     }
-                    _volume := decimal.NewFromBigInt(outAmounts[len(outAmounts)-1], -ltCtx.UniversalRouterUSDTDecimal)
-                    volume = _volume.Mul(decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal))).String()
+                    volume = decimal.NewFromBigInt(outAmounts[len(outAmounts)-1], -ltCtx.UniversalRouterUSDTDecimal).String()
+                    // volume = _volume.Mul(decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal))).String()
                 }
                 if volume == "0" {
                     volume = "0.00"
@@ -121,7 +121,7 @@ func universalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc 
                 userSwapTx := model.UserSwapTx{
                     UID:             userWallet.UID,
                     Address:         l.Payer.String(),
-                    Tx:              "",
+                    Tx:              event.TxHash.String(),
                     TokenSymbol:     tokenSymbol,
                     AmountIn:        decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal)).String(),
                     TokenIn:         l.TokenIn.String(),
