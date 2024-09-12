@@ -2,7 +2,6 @@ package listener
 
 import (
     el "github.com/x1rh/event-listener"
-    "github.com/ethereum/go-ethereum/ethclient"
     "math/big"
     "github.com/pkg/errors"
     "github.com/ethereum/go-ethereum/common"
@@ -24,9 +23,9 @@ func NewUniversalRouterEventListener(ltCtx *Context) (*el.EventListener, error) 
         URL:       ltCtx.Chain.URL,
     }
 
-    client, err := ethclient.Dial(c.URL)
-    if err != nil {
-        panic(err)
+    client := ltCtx.AbiProxy.WithChainID(c.ChainId).Client
+    if client == nil {
+        return nil, errors.Errorf("newUniversalRouterEventListener client is nil")
     }
 
     universalRouter, err := el.NewContract(ltCtx.UniversalRouterAddress, ltCtx.UniversalRouterABIStr, big.NewInt(ltCtx.UniversalRouterBlockNumber), big.NewInt(ltCtx.UniversalRouterStep))
@@ -117,7 +116,7 @@ func universalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc 
                     slog.Error("PaymentFee event", "fail to get user wallet,err is: ", err)
                 }
 
-                eventTime := time.Unix(int64(block.Time()), 0).UTC()
+                eventTime := time.Unix(int64(block.Time()), 0)
                 userSwapTx := model.UserSwapTx{
                     UID:             userWallet.UID,
                     Address:         l.Payer.String(),

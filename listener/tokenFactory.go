@@ -8,7 +8,6 @@ import (
 
     "github.com/ethereum/go-ethereum/common"
     "github.com/pkg/errors"
-    "github.com/ethereum/go-ethereum/ethclient"
     "dexpert-event-listener/gorm/query"
     "dexpert-event-listener/gorm/model"
     "dexpert-event-listener/constant"
@@ -22,9 +21,9 @@ func NewTokenFactoryEventListener(ltCtx *Context) (*el.EventListener, error) {
         URL:       ltCtx.Chain.URL,
     }
 
-    client, err := ethclient.Dial(c.URL)
-    if err != nil {
-        panic(err)
+    client := ltCtx.AbiProxy.WithChainID(c.ChainId).Client
+    if client == nil {
+        return nil, errors.Errorf("newTokenFactoryEventListener client is nil")
     }
 
     tokenFactory, err := el.NewContract(ltCtx.TokenFactoryAddress, ltCtx.TokenFactoryABIStr, big.NewInt(ltCtx.TokenFactoryBlockNumber), big.NewInt(ltCtx.TokenFactoryStep))
@@ -80,7 +79,7 @@ func tokenFactoryLogHandler(ltCtx *Context, c *el.Contract) el.LogHandleFunc {
                     slog.Error("TokenCreated event", "fail to get user wallet,err is: ", err)
                 }
 
-                eventTime := time.Unix(int64(block.Time()), 0).UTC()
+                eventTime := time.Unix(int64(block.Time()), 0)
                 userLaunchTx := model.UserLaunchTx{
                     UID:             userWallet.UID,
                     ContractAddress: l.Token.String(),

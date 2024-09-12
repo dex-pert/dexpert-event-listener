@@ -55,7 +55,7 @@ func main() {
         ethereumCtx := listener.NewContext(&listener.ContextParam{ChainConfig: c.Chains[constant.ChainIDEthereumSepolia], AbiProxy: appCtx.AbiProxy})
         ethereumUniversalRouterEventListener, err := listener.NewUniversalRouterEventListener(ethereumCtx)
         if err != nil {
-            slog.Error("ethereum universal router event listener new failed", slog.Any("err", err))
+            slog.Error("ethereum sepolia universal router event listener new failed", slog.Any("err", err))
         }
         go ethereumUniversalRouterEventListener.Start()
     }

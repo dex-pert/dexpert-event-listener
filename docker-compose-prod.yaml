@@ -1,0 +1,11 @@
+version: '3'
+services:
+  dexpert-event-listener:
+    build:
+      context: ./
+      dockerfile: dockerfile-prod
+    container_name: dexpert-event-listener
+    image: dexpert-event-listener:v0.0.1
+    restart: always
+    env_file:
+      - ./.env
