@@ -14,6 +14,7 @@ chain_config:
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
     standard_token_factory01_block_number: 6641775
+    standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
 
     dexpert_universal_router_address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
     dexpert_universal_router_block_number: 6641775
@@ -21,6 +22,7 @@ chain_config:
     dexpert_universal_router_weth_address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
     dexpert_universal_router_usdt_decimal: 6
+    dexpert_universal_router_is_close: ${IS_CLOSE_ETHEREUM_SEPOLIA_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
 
-is_close_standard_token_factory01_listener: ${IS_CLOSE_STANDARD_TOKEN_FACTORY01_LISTENER} # 是否关闭 Factory Listener
-is_close_universal_router_listener: ${IS_CLOSE_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener
+is_close_standard_token_factory01_listener: ${IS_CLOSE_STANDARD_TOKEN_FACTORY01_LISTENER} # 是否关闭 Standard Token Factory01 Listener， true 关闭
+is_close_universal_router_listener: ${IS_CLOSE_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener， true 关闭

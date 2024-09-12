@@ -25,10 +25,12 @@ type ChainConfig struct {
     StandardTokenFactory01FeeSymbol   string `yaml:"standard_token_factory01_fee_symbol" json:"standard_token_factory01_fee_symbol,omitempty"`
     StandardTokenFactory01FeeDecimal  int32  `yaml:"standard_token_factory01_fee_decimal" json:"standard_token_factory01_fee_decimal,omitempty"`
     StandardTokenFactory01BlockNumber int64  `yaml:"standard_token_factory01_block_number" json:"standard_token_factory01_block_number,omitempty"`
+    StandardTokenFactory01IsClose     bool   `yaml:"standard_token_factory01_is_close" json:"standard_token_factory01_is_close,omitempty"`
     DexpertUniversalRouterAddress     string `yaml:"dexpert_universal_router_address" json:"dexpert_universal_router_address,omitempty"`
     DexpertUniversalRouterBlockNumber int64  `yaml:"dexpert_universal_router_block_number" json:"dexpert_universal_router_block_number,omitempty"`
     DexpertUniversalRouterUSDTAddress string `yaml:"dexpert_universal_router_usdt_address" json:"dexpert_universal_router_usdt_address,omitempty"`
     DexpertUniversalRouterWethAddress string `yaml:"dexpert_universal_router_weth_address" json:"dexpert_universal_router_weth_address,omitempty"`
     DexpertUniversalRouterEthAddress  string `yaml:"dexpert_universal_router_eth_address" json:"dexpert_universal_router_eth_address,omitempty"`
     DexpertUniversalRouterUSDTDecimal int32  `yaml:"dexpert_universal_router_usdt_decimal" json:"dexpert_universal_router_usdt_decimal,omitempty"`
+    DexpertUniversalRouterIsClose     bool   `yaml:"is_close" json:"is_close,omitempty"`
 }

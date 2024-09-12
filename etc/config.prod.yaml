@@ -1,28 +1,21 @@
-mysql:
-  user: ${MYSQL_USER}
-  pass: ${MYSQL_PASS}
-  host: ${MYSQL_HOST}
-  port: ${MYSQL_PORT}
-  db:   ${DB_NAME}
-
 chain_config:
   - chain_id: 11155111
     chain_name: "ethereum-sepolia"
     url: "https://eth-sepolia.g.alchemy.com/v2/gOeoBV9mlFL1pWj7qbKEdlB6pXTfNum6"
     uniswap_v2_router_address: "0xb22cE52905d25987321d6BF73d1705886f1Cc4F4"
-    token_factory_token_symbol: "ETH"
-    token_factory_launch_fee: "0.08"
-    token_factory_token_decimal: 18
-    token_factory_block_number: 6641775
-    token_factory_address: "0x822935C2240E6A0b5C96E3eA355446a83ed12C03"
-#    universal_router_address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
-    universal_router_address: "0x5C0Fe44391ee35856A5De861dFd340197D252624" # 2024-09-11 测试
-#    universal_router_block_number: 6641775
-    universal_router_block_number: 6672478 # 2024-09-11 测试
-    universal_router_usdt_address: "0xB72bC8971D5e595776592E8290bE6F31937097c6"
-    universal_router_weth_address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
-    universal_router_eth_address: "0x0000000000000000000000000000000000000000"
-    universal_router_usdt_decimal: 6
+    standard_token_factory01_address: "0x822935C2240E6A0b5C96E3eA355446a83ed12C03"
+    standard_token_factory01_fee_symbol: "ETH"
+    standard_token_factory01_fee_decimal: 18
+    standard_token_factory01_block_number: 6641775
+    standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
 
-is_close_token_factory_listener: ${IS_CLOSE_TOKEN_FACTORY_LISTENER} # 是否关闭 Factory Listener
-is_close_universal_router_listener: ${IS_CLOSE_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener
+    dexpert_universal_router_address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
+    dexpert_universal_router_block_number: 6641775
+    dexpert_universal_router_usdt_address: "0xB72bC8971D5e595776592E8290bE6F31937097c6"
+    dexpert_universal_router_weth_address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
+    dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_usdt_decimal: 6
+    dexpert_universal_router_is_close: ${IS_CLOSE_ETHEREUM_SEPOLIA_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
+
+is_close_standard_token_factory01_listener: ${IS_CLOSE_STANDARD_TOKEN_FACTORY01_LISTENER} # 是否关闭 Standard Token Factory01 Listener， true 关闭
+is_close_universal_router_listener: ${IS_CLOSE_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener， true 关闭
