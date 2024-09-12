@@ -25,4 +25,4 @@ chain_config:
     dexpert_universal_router_is_close: ${IS_CLOSE_ETHEREUM_SEPOLIA_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
 
 is_close_standard_token_factory01_listener: ${IS_CLOSE_STANDARD_TOKEN_FACTORY01_LISTENER} # 是否关闭 Standard Token Factory01 Listener， true 关闭
-is_close_universal_router_listener: ${IS_CLOSE_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener， true 关闭
+is_close_dexpert_universal_router_listener: ${IS_CLOSE_DEXPERT_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener， true 关闭

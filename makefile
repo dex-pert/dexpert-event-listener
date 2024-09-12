@@ -1,3 +1,5 @@
+export PROD_PROJECT=prod_dexpert_event_listener
+
 .PHONY: run
 run:
 	go run main.go
@@ -24,3 +26,11 @@ linuxrund:
 linuxstop:
 	bash stop.sh
 
+.PHONY: compose-up
+compose-up:
+	docker-compose -p $(PROD_PROJECT) -f docker-compose-prod.yaml build dexpert-event-listener && \
+	docker-compose -p $(PROD_PROJECT) -f docker-compose-prod.yaml up -d
+
+.PHONY: compose-down
+compose-down:
+	docker-compose -p $(PROD_PROJECT) -f docker-compose-prod.yaml down

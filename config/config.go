@@ -2,7 +2,7 @@ package config
 
 type Config struct {
     IsCloseStandardTokenFactory01EventListener bool          `yaml:"is_close_standard_token_factory01_listener"`
-    IsCloseUniversalRouterListener             bool          `yaml:"is_close_universal_router_listener"`
+    IsCloseDexpertUniversalRouterListener      bool          `yaml:"is_close_dexpert_universal_router_listener"`
     ChainConfig                                []ChainConfig `yaml:"chain_config"`
     MySQL                                      *MySQL        `yaml:"mysql"`
     Chains                                     map[int]*ChainConfig
@@ -32,5 +32,5 @@ type ChainConfig struct {
     DexpertUniversalRouterWethAddress string `yaml:"dexpert_universal_router_weth_address" json:"dexpert_universal_router_weth_address,omitempty"`
     DexpertUniversalRouterEthAddress  string `yaml:"dexpert_universal_router_eth_address" json:"dexpert_universal_router_eth_address,omitempty"`
     DexpertUniversalRouterUSDTDecimal int32  `yaml:"dexpert_universal_router_usdt_decimal" json:"dexpert_universal_router_usdt_decimal,omitempty"`
-    DexpertUniversalRouterIsClose     bool   `yaml:"is_close" json:"is_close,omitempty"`
+    DexpertUniversalRouterIsClose     bool   `yaml:"dexpert_universal_router_is_close" json:"dexpert_universal_router_is_close,omitempty"`
 }

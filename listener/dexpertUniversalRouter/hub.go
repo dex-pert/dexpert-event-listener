@@ -12,7 +12,7 @@ type Hub struct {
 }
 
 func NewHub(p *abi.Proxy) (*Hub, error) {
-    eventListenerMap := make(map[int]*el.EventListener, len(p.Chains()))
+    eventListenerMap := make(map[int]*el.EventListener)
     for i, v := range p.Chains() {
         if v.DexpertUniversalRouterIsClose { // 关闭
             continue
