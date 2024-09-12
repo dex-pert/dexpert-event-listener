@@ -37,6 +37,9 @@ func newUserLaunchTx(db *gorm.DB, opts ...gen.DOOption) userLaunchTx {
 	_userLaunchTx.Timestamp = field.NewTime(tableName, "timestamp")
 	_userLaunchTx.TypeName = field.NewString(tableName, "type_name")
 	_userLaunchTx.ChainName = field.NewString(tableName, "chain_name")
+	_userLaunchTx.Tx = field.NewString(tableName, "tx")
+	_userLaunchTx.Owner = field.NewString(tableName, "owner")
+	_userLaunchTx.Level = field.NewString(tableName, "level")
 
 	_userLaunchTx.fillFieldMap()
 
@@ -57,6 +60,9 @@ type userLaunchTx struct {
 	Timestamp       field.Time   // 交易时间
 	TypeName        field.String // 类别:  luanch
 	ChainName       field.String
+	Tx              field.String // 交易哈希值
+	Owner           field.String // token owner address, eth:42|solana:44|ton:33|btc:
+	Level           field.String // 等级
 
 	fieldMap map[string]field.Expr
 }
@@ -83,6 +89,9 @@ func (u *userLaunchTx) updateTableName(table string) *userLaunchTx {
 	u.Timestamp = field.NewTime(table, "timestamp")
 	u.TypeName = field.NewString(table, "type_name")
 	u.ChainName = field.NewString(table, "chain_name")
+	u.Tx = field.NewString(table, "tx")
+	u.Owner = field.NewString(table, "owner")
+	u.Level = field.NewString(table, "level")
 
 	u.fillFieldMap()
 
@@ -111,7 +120,7 @@ func (u *userLaunchTx) GetFieldByName(fieldName string) (field.OrderExpr, bool) 
 }
 
 func (u *userLaunchTx) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 10)
+	u.fieldMap = make(map[string]field.Expr, 13)
 	u.fieldMap["Id"] = u.ID
 	u.fieldMap["uid"] = u.UID
 	u.fieldMap["contract_address"] = u.ContractAddress
@@ -122,6 +131,9 @@ func (u *userLaunchTx) fillFieldMap() {
 	u.fieldMap["timestamp"] = u.Timestamp
 	u.fieldMap["type_name"] = u.TypeName
 	u.fieldMap["chain_name"] = u.ChainName
+	u.fieldMap["tx"] = u.Tx
+	u.fieldMap["owner"] = u.Owner
+	u.fieldMap["level"] = u.Level
 }
 
 func (u userLaunchTx) clone(db *gorm.DB) userLaunchTx {

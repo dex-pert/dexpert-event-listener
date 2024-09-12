@@ -1,11 +1,11 @@
 package config
 
 type Config struct {
-    IsCloseTokenFactoryListener    bool          `yaml:"is_close_token_factory_listener"`
-    IsCloseUniversalRouterListener bool          `yaml:"is_close_universal_router_listener"`
-    ChainConfig                    []ChainConfig `yaml:"chain_config"`
-    MySQL                          *MySQL        `yaml:"mysql"`
-    Chains                         map[int]*ChainConfig
+    IsCloseStandardTokenFactory01EventListener bool          `yaml:"is_close_standard_token_factory01_listener"`
+    IsCloseUniversalRouterListener             bool          `yaml:"is_close_universal_router_listener"`
+    ChainConfig                                []ChainConfig `yaml:"chain_config"`
+    MySQL                                      *MySQL        `yaml:"mysql"`
+    Chains                                     map[int]*ChainConfig
 }
 
 type MySQL struct {
@@ -17,19 +17,18 @@ type MySQL struct {
 }
 
 type ChainConfig struct {
-    ChainId                    int    `yaml:"chain_id"`
-    ChainName                  string `yaml:"chain_name"`
-    URL                        string `yaml:"url"`
-    UniswapV2RouterAddress     string `yaml:"uniswap_v2_router_address"`
-    TokenFactoryTokenSymbol    string `yaml:"token_factory_token_symbol"`
-    TokenFactoryLaunchFee      string `yaml:"token_factory_launch_fee"`
-    TokenFactoryTokenDecimal   int32  `yaml:"token_factory_token_decimal"`
-    TokenFactoryBlockNumber    int64  `yaml:"token_factory_block_number"`
-    TokenFactoryAddress        string `yaml:"token_factory_address"`
-    UniversalRouterAddress     string `yaml:"universal_router_address"`
-    UniversalRouterBlockNumber int64  `yaml:"universal_router_block_number"`
-    UniversalRouterUSDTAddress string `yaml:"universal_router_usdt_address"`
-    UniversalRouterWethAddress string `yaml:"universal_router_weth_address"`
-    UniversalRouterEthAddress  string `yaml:"universal_router_eth_address"`
-    UniversalRouterUSDTDecimal int32  `yaml:"universal_router_usdt_decimal"`
+    ChainId                           int    `yaml:"chain_id" json:"chain_id,omitempty"`
+    ChainName                         string `yaml:"chain_name" json:"chain_name,omitempty"`
+    URL                               string `yaml:"url" json:"url,omitempty"`
+    UniswapV2RouterAddress            string `yaml:"uniswap_v2_router_address" json:"uniswap_v_2_router_address,omitempty"`
+    StandardTokenFactory01Address     string `yaml:"standard_token_factory01_address" json:"standard_token_factory_01_address,omitempty"`
+    StandardTokenFactory01FeeSymbol   string `yaml:"standard_token_factory01_fee_symbol" json:"standard_token_factory01_fee_symbol,omitempty"`
+    StandardTokenFactory01FeeDecimal  int32  `yaml:"standard_token_factory01_fee_decimal" json:"standard_token_factory01_fee_decimal,omitempty"`
+    StandardTokenFactory01BlockNumber int64  `yaml:"standard_token_factory01_block_number" json:"standard_token_factory01_block_number,omitempty"`
+    DexpertUniversalRouterAddress     string `yaml:"dexpert_universal_router_address" json:"dexpert_universal_router_address,omitempty"`
+    DexpertUniversalRouterBlockNumber int64  `yaml:"dexpert_universal_router_block_number" json:"dexpert_universal_router_block_number,omitempty"`
+    DexpertUniversalRouterUSDTAddress string `yaml:"dexpert_universal_router_usdt_address" json:"dexpert_universal_router_usdt_address,omitempty"`
+    DexpertUniversalRouterWethAddress string `yaml:"dexpert_universal_router_weth_address" json:"dexpert_universal_router_weth_address,omitempty"`
+    DexpertUniversalRouterEthAddress  string `yaml:"dexpert_universal_router_eth_address" json:"dexpert_universal_router_eth_address,omitempty"`
+    DexpertUniversalRouterUSDTDecimal int32  `yaml:"dexpert_universal_router_usdt_decimal" json:"dexpert_universal_router_usdt_decimal,omitempty"`
 }

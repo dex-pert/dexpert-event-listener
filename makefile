@@ -2,13 +2,13 @@
 run:
 	go run main.go
 
-.PHONY: tokenfactory
-tokenfactory:
-	cd abi && abigen --abi tokenfactory/tokenfactory.abi --pkg tokenfactory --type tokenfactory --out ./tokenfactory/tokenfactory.go
+.PHONY: standardTokenFactory01
+standardTokenFactory01:
+	cd abi && abigen --abi standardTokenFactory01/standardTokenFactory01.abi --pkg standardTokenFactory01 --type standardTokenFactory01 --out ./standardTokenFactory01/standardTokenFactory01.go
 
-.PHONY: universalrouter
-universalrouter:
-	cd abi && abigen --abi universalrouter/universalrouter.abi --pkg universalrouter --type universalrouter --out ./universalrouter/universalrouter.go
+.PHONY: dexpertUniversalRouter
+dexpertUniversalRouter:
+	cd abi && abigen --abi dexpertUniversalRouter/dexpertUniversalRouter.abi --pkg dexpertUniversalRouter --type dexpertUniversalRouter --out ./dexpertUniversalRouter/dexpertUniversalRouter.go
 
 .PHONY: uniswapv2router
 uniswapv2router:

@@ -68,4 +68,7 @@ CREATE TABLE `user_wallet`  (
                                 UNIQUE INDEX `uix_address_chainid`(`address` ASC, `chain_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户钱包的绑定' ROW_FORMAT = DYNAMIC;
 
-# 2024
+# 2024-09-12
+alter table `user_launch_tx` add column `tx` varchar(128) not null default '' comment '交易哈希值';
+alter table `user_launch_tx` add column `owner` varchar(64) COMMENT 'token owner address, eth:42|solana:44|ton:33|btc:';
+alter table `user_launch_tx` add column `level` varchar(10) COMMENT '等级';

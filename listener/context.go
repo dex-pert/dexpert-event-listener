@@ -12,24 +12,25 @@ const (
 )
 
 type Context struct {
-    AbiProxy                   *abi.Proxy
-    Chain                      el.ChainConfig
-    TokenFactoryStep           int64
-    TokenFactoryTokenSymbol    string
-    TokenFactoryLaunchFee      string
-    TokenFactoryTokenDecimal   int32
-    TokenFactoryBlockNumber    int64
-    TokenFactoryAddress        string
-    TokenFactoryABIStr         string
-    UniversalRouterStep        int64
-    UniversalRouterAddress     string
-    UniversalRouterABIStr      string
-    UniversalRouterBlockNumber int64
-    UniversalRouterUSDTAddress string
-    UniversalRouterWethAddress string
-    UniswapV2RouterAddress     string
-    UniversalRouterEthAddress  string
-    UniversalRouterUSDTDecimal int32
+    AbiProxy                          *abi.Proxy
+    Chain                             el.ChainConfig
+    StandardTokenFactory01Address     string
+    StandardTokenFactory01Step        int64
+    StandardTokenFactory01FeeSymbol   string
+    StandardTokenFactory01FeeDecimal  int32
+    StandardTokenFactory01BlockNumber int64
+    StandardTokenFactory01ABIStr      string
+
+    DexpertUniversalRouterAddress     string
+    DexpertUniversalRouterStep        int64
+    DexpertUniversalRouterABIStr      string
+    DexpertUniversalRouterBlockNumber int64
+    DexpertUniversalRouterUSDTAddress string
+    DexpertUniversalRouterWethAddress string
+    DexpertUniversalRouterEthAddress  string
+    DexpertUniversalRouterUSDTDecimal int32
+
+    UniswapV2RouterAddress string
 }
 
 type ContextParam struct {
@@ -38,8 +39,8 @@ type ContextParam struct {
 }
 
 type options struct {
-    TokenFactoryStep    int64
-    UniversalRouterStep int64
+    StandardTokenFactory01Step int64
+    UniversalRouterStep        int64
 }
 
 type Option interface {
@@ -50,9 +51,9 @@ type optionFunc func(*options)
 
 func (f optionFunc) apply(o *options) { f(o) }
 
-func WithTokenFactoryStep(p int64) Option {
+func WithStandardTokenFactory01Step(p int64) Option {
     return optionFunc(func(o *options) {
-        o.TokenFactoryStep = p
+        o.StandardTokenFactory01Step = p
     })
 }
 
@@ -64,34 +65,34 @@ func WithUniversalRouterStep(p int64) Option {
 
 func NewContext(c *ContextParam, opts ...Option) *Context {
     _options := options{
-        TokenFactoryStep:    defaultStep,
-        UniversalRouterStep: defaultStep,
+        StandardTokenFactory01Step: defaultStep,
+        UniversalRouterStep:        defaultStep,
     }
     for _, o := range opts {
         o.apply(&_options)
     }
     return &Context{
-        TokenFactoryStep:       _options.TokenFactoryStep,
-        UniversalRouterStep:    _options.UniversalRouterStep,
         UniswapV2RouterAddress: c.ChainConfig.UniswapV2RouterAddress,
         Chain: el.ChainConfig{
             ChainId:   c.ChainConfig.ChainId,
             ChainName: c.ChainConfig.ChainName,
             URL:       c.ChainConfig.URL,
         },
-        AbiProxy:                   c.AbiProxy,
-        TokenFactoryBlockNumber:    c.ChainConfig.TokenFactoryBlockNumber,
-        TokenFactoryABIStr:         constant.GetTokenFactoryABIByChainId(c.ChainConfig.ChainId),
-        TokenFactoryAddress:        c.ChainConfig.TokenFactoryAddress,
-        TokenFactoryTokenSymbol:    c.ChainConfig.TokenFactoryTokenSymbol,
-        TokenFactoryLaunchFee:      c.ChainConfig.TokenFactoryLaunchFee,
-        TokenFactoryTokenDecimal:   c.ChainConfig.TokenFactoryTokenDecimal,
-        UniversalRouterAddress:     c.ChainConfig.UniversalRouterAddress,
-        UniversalRouterABIStr:      constant.GetUniversalRouterABIByChainId(c.ChainConfig.ChainId),
-        UniversalRouterBlockNumber: c.ChainConfig.UniversalRouterBlockNumber,
-        UniversalRouterUSDTAddress: c.ChainConfig.UniversalRouterUSDTAddress,
-        UniversalRouterWethAddress: c.ChainConfig.UniversalRouterWethAddress,
-        UniversalRouterEthAddress:  c.ChainConfig.UniversalRouterEthAddress,
-        UniversalRouterUSDTDecimal: c.ChainConfig.UniversalRouterUSDTDecimal,
+        AbiProxy:                          c.AbiProxy,
+        StandardTokenFactory01Step:        _options.StandardTokenFactory01Step,
+        StandardTokenFactory01BlockNumber: c.ChainConfig.StandardTokenFactory01BlockNumber,
+        StandardTokenFactory01ABIStr:      constant.GetStandardTokenFactory01ABIByChainId(c.ChainConfig.ChainId),
+        StandardTokenFactory01Address:     c.ChainConfig.StandardTokenFactory01Address,
+        StandardTokenFactory01FeeSymbol:   c.ChainConfig.StandardTokenFactory01FeeSymbol,
+        StandardTokenFactory01FeeDecimal:  c.ChainConfig.StandardTokenFactory01FeeDecimal,
+
+        DexpertUniversalRouterStep:        _options.UniversalRouterStep,
+        DexpertUniversalRouterAddress:     c.ChainConfig.DexpertUniversalRouterAddress,
+        DexpertUniversalRouterABIStr:      constant.GetDexpertUniversalRouterABIByChainId(c.ChainConfig.ChainId),
+        DexpertUniversalRouterBlockNumber: c.ChainConfig.DexpertUniversalRouterBlockNumber,
+        DexpertUniversalRouterUSDTAddress: c.ChainConfig.DexpertUniversalRouterUSDTAddress,
+        DexpertUniversalRouterWethAddress: c.ChainConfig.DexpertUniversalRouterWethAddress,
+        DexpertUniversalRouterEthAddress:  c.ChainConfig.DexpertUniversalRouterEthAddress,
+        DexpertUniversalRouterUSDTDecimal: c.ChainConfig.DexpertUniversalRouterUSDTDecimal,
     }
 }

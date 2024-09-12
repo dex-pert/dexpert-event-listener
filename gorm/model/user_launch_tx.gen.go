@@ -22,6 +22,9 @@ type UserLaunchTx struct {
 	Timestamp       time.Time `gorm:"column:timestamp;not null;comment:交易时间" json:"timestamp"`                            // 交易时间
 	TypeName        string    `gorm:"column:type_name;not null;comment:类别:  luanch" json:"type_name"`                     // 类别:  luanch
 	ChainName       string    `gorm:"column:chain_name" json:"chain_name"`
+	Tx              string    `gorm:"column:tx;not null;comment:交易哈希值" json:"tx"`                                          // 交易哈希值
+	Owner           string    `gorm:"column:owner;comment:token owner address, eth:42|solana:44|ton:33|btc:" json:"owner"` // token owner address, eth:42|solana:44|ton:33|btc:
+	Level           string    `gorm:"column:level;comment:等级" json:"level"`                                                // 等级
 }
 
 // TableName UserLaunchTx's table name
