@@ -17,7 +17,7 @@ chain_config:
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
 
     dexpert_universal_router_address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
-    dexpert_universal_router_block_number: 6641775
+    dexpert_universal_router_block_number: 6441775
     dexpert_universal_router_usdt_address: "0xB72bC8971D5e595776592E8290bE6F31937097c6"
     dexpert_universal_router_weth_address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
