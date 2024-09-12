@@ -1,49 +1,20 @@
-package listener
+package dexpertUniversalRouter
 
 import (
-    el "github.com/x1rh/event-listener"
-    "math/big"
-    "github.com/pkg/errors"
-    "github.com/ethereum/go-ethereum/common"
-    "context"
-    "log/slog"
-    "dexpert-event-listener/gorm/model"
     "time"
-    "dexpert-event-listener/constant"
-    "dexpert-event-listener/gorm/query"
+    "github.com/ethereum/go-ethereum/common"
+    "math/big"
+    "context"
     "dexpert-event-listener/abi/erc20"
     "github.com/shopspring/decimal"
     "dexpert-event-listener/abi/uniswapv2router"
+    "dexpert-event-listener/gorm/model"
+    "dexpert-event-listener/constant"
+    el "github.com/x1rh/event-listener"
+    "log/slog"
+    "github.com/pkg/errors"
+    "dexpert-event-listener/gorm/query"
 )
-
-func NewDexpertUniversalRouterEventListener(ltCtx *Context) (*el.EventListener, error) {
-    c := el.ChainConfig{
-        ChainId:   ltCtx.Chain.ChainId,
-        ChainName: ltCtx.Chain.ChainName,
-        URL:       ltCtx.Chain.URL,
-    }
-
-    client := ltCtx.AbiProxy.WithChainID(c.ChainId).Client
-    if client == nil {
-        return nil, errors.Errorf("newUniversalRouterEventListener client is nil")
-    }
-
-    universalRouter, err := el.NewContract(ltCtx.DexpertUniversalRouterAddress, ltCtx.DexpertUniversalRouterABIStr, big.NewInt(ltCtx.DexpertUniversalRouterBlockNumber), big.NewInt(ltCtx.DexpertUniversalRouterStep))
-    if err != nil {
-        panic(err)
-    }
-    universalRouter.SetLogHandler(dexpertUniversalRouterLogHandler(ltCtx, universalRouter))
-
-    _el, err := el.New(
-        c,
-        el.WithClient(client),
-        el.WithContract(*universalRouter),
-    )
-    if err != nil {
-        return nil, errors.Wrap(err, "fail to new an EventListener object")
-    }
-    return _el, nil
-}
 
 // LogPaymentFee event PaymentFee(address payer, address tokenIn, uint256 amountIn, address feeToken, uint256 feeAmount, uint256 level, uint256 swapType, uint256 feeBps, uint256 feeBaseBps)
 type LogPaymentFee struct {
@@ -69,18 +40,17 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
             slog.Info("PaymentFee event", slog.Any("event", l))
 
             _ = query.Q.Transaction(func(tx *query.Query) error {
-                abiProxy := ltCtx.AbiProxy.WithChainID(ltCtx.Chain.ChainId)
-                block, err := abiProxy.BlockByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
-                if err != nil {
-                    slog.Error("TokenCreated event", "fail to get block,err is: ", err)
-                    return err
-                }
-                tokenSymbol, tokenName, tokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.TokenIn, abiProxy.Client)
+                block, err := ltCtx.EthClient.BlockByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
                 if err != nil {
                     slog.Error("PaymentFee event", "fail to get block,err is: ", err)
                     return err
                 }
-                feeTokenSymbol, feeTokenName, feeTokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.FeeToken, abiProxy.Client)
+                tokenSymbol, tokenName, tokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.TokenIn, ltCtx.EthClient)
+                if err != nil {
+                    slog.Error("PaymentFee event", "fail to get block,err is: ", err)
+                    return err
+                }
+                feeTokenSymbol, feeTokenName, feeTokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.FeeToken, ltCtx.EthClient)
                 if err != nil {
                     slog.Error("PaymentFee event", "erc20 getSymbolNameDecimalByAddress,err is: ", err)
                     return err
@@ -88,21 +58,21 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                 fee := decimal.NewFromBigInt(l.FeeAmount, -int32(feeTokenDecimal)).String()
 
                 volume := ""
-                if l.TokenIn.String() == ltCtx.DexpertUniversalRouterUSDTAddress {
+                if l.TokenIn.String() == ltCtx.USDTAddress {
                     volume = decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal)).String()
                 } else {
                     var swapPath []common.Address
-                    if l.TokenIn.String() == ltCtx.DexpertUniversalRouterEthAddress || l.TokenIn.String() == ltCtx.DexpertUniversalRouterWethAddress {
-                        swapPath = []common.Address{common.HexToAddress(ltCtx.DexpertUniversalRouterWethAddress), common.HexToAddress(ltCtx.DexpertUniversalRouterUSDTAddress)}
+                    if l.TokenIn.String() == ltCtx.EthAddress || l.TokenIn.String() == ltCtx.WethAddress {
+                        swapPath = []common.Address{common.HexToAddress(ltCtx.WethAddress), common.HexToAddress(ltCtx.USDTAddress)}
                     } else {
-                        swapPath = []common.Address{l.TokenIn, common.HexToAddress(ltCtx.DexpertUniversalRouterWethAddress), common.HexToAddress(ltCtx.DexpertUniversalRouterUSDTAddress)}
+                        swapPath = []common.Address{l.TokenIn, common.HexToAddress(ltCtx.WethAddress), common.HexToAddress(ltCtx.USDTAddress)}
                     }
-                    outAmounts, err := uniswapv2router.GetAmountsOutByAddressAndBlockNumber(ltCtx.UniswapV2RouterAddress, new(big.Int).SetUint64(event.BlockNumber), l.AmountIn, abiProxy.Client, swapPath)
+                    outAmounts, err := uniswapv2router.GetAmountsOutByAddressAndBlockNumber(ltCtx.UniswapV2RouterAddress, new(big.Int).SetUint64(event.BlockNumber), l.AmountIn, ltCtx.EthClient, swapPath)
                     if err != nil {
                         slog.Error("PaymentFee event", "uniswapv2router getAmountsOutByAddressAndBlockNumber,err is: ", err)
                         return err
                     }
-                    volume = decimal.NewFromBigInt(outAmounts[len(outAmounts)-1], -ltCtx.DexpertUniversalRouterUSDTDecimal).String()
+                    volume = decimal.NewFromBigInt(outAmounts[len(outAmounts)-1], -ltCtx.USDTDecimal).String()
                     // volume = _volume.Mul(decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal))).String()
                 }
                 if volume == "0" {

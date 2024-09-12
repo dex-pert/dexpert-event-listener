@@ -24,3 +24,7 @@ func NewProxy(chains map[int]*config.ChainConfig) (*Proxy, error) {
 func (p *Proxy) WithChainID(chainID int) *Client {
     return p.mapping[chainID]
 }
+
+func (p *Proxy) Chains() map[int]*config.ChainConfig {
+    return p.chains
+}

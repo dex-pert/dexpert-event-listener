@@ -1,49 +1,19 @@
-package listener
+package standardTokenFactory01
 
 import (
-    "context"
-    "log/slog"
-    "math/big"
-    el "github.com/x1rh/event-listener"
-
     "github.com/ethereum/go-ethereum/common"
+    "math/big"
+    "context"
+    el "github.com/x1rh/event-listener"
+    "dexpert-event-listener/abi/standardTokenFactory01"
+    "github.com/shopspring/decimal"
+    "dexpert-event-listener/gorm/model"
+    "time"
+    "dexpert-event-listener/constant"
+    "log/slog"
     "github.com/pkg/errors"
     "dexpert-event-listener/gorm/query"
-    "dexpert-event-listener/gorm/model"
-    "dexpert-event-listener/constant"
-    "time"
-    "github.com/shopspring/decimal"
-    "dexpert-event-listener/abi/standardTokenFactory01"
 )
-
-func NewStandardTokenFactory01EventListener(ltCtx *Context) (*el.EventListener, error) {
-    c := el.ChainConfig{
-        ChainId:   ltCtx.Chain.ChainId,
-        ChainName: ltCtx.Chain.ChainName,
-        URL:       ltCtx.Chain.URL,
-    }
-
-    client := ltCtx.AbiProxy.WithChainID(c.ChainId).Client
-    if client == nil {
-        return nil, errors.Errorf("newStandardTokenFactory01EventListener client is nil")
-    }
-
-    tokenFactory, err := el.NewContract(ltCtx.StandardTokenFactory01Address, ltCtx.StandardTokenFactory01ABIStr, big.NewInt(ltCtx.StandardTokenFactory01BlockNumber), big.NewInt(ltCtx.StandardTokenFactory01Step))
-    if err != nil {
-        panic(err)
-    }
-    tokenFactory.SetLogHandler(standardTokenFactory01EventLogHandler(ltCtx, tokenFactory))
-
-    _el, err := el.New(
-        c,
-        el.WithClient(client),
-        el.WithContract(*tokenFactory),
-    )
-    if err != nil {
-        return nil, errors.Wrap(err, "fail to new an EventListener object")
-    }
-    return _el, nil
-}
 
 // LogTokenCreated signature: TokenCreated(address,address,uint8,uint96,uint256)
 type LogTokenCreated struct {
@@ -68,18 +38,18 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
             slog.Info("TokenCreated event", slog.Any("event", l))
 
             _ = query.Q.Transaction(func(tx *query.Query) error {
-                block, err := ltCtx.AbiProxy.WithChainID(ltCtx.Chain.ChainId).BlockByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
+                block, err := ltCtx.EthClient.BlockByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
                 if err != nil {
                     slog.Error("TokenCreated event", "fail to get block,err is: ", err)
                     return err
                 }
 
-                _fees, err := standardTokenFactory01.GetFees(ltCtx.StandardTokenFactory01Address, l.Level, block.Number(), ltCtx.AbiProxy.WithChainID(ltCtx.Chain.ChainId).Client)
+                _fees, err := standardTokenFactory01.GetFees(ltCtx.StandardTokenFactory01Address, l.Level, block.Number(), ltCtx.EthClient)
                 if err != nil {
                     slog.Error("TokenCreated event", "fail to get fees,err is: ", err)
                     return err
                 }
-                fee := decimal.NewFromBigInt(_fees, -(ltCtx.StandardTokenFactory01FeeDecimal)).String()
+                fee := decimal.NewFromBigInt(_fees, -(ltCtx.FeeDecimal)).String()
 
                 uw := tx.UserWallet
                 userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Owner.String()), uw.ChainID.Eq(int32(ltCtx.Chain.ChainId))).Take()
@@ -95,7 +65,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     ChainID:         int32(ltCtx.Chain.ChainId),
                     PairAddress:     "",
                     Fee:             fee,
-                    FeeTokenSymbol:  ltCtx.StandardTokenFactory01FeeSymbol,
+                    FeeTokenSymbol:  ltCtx.FeeSymbol,
                     Timestamp:       eventTime,
                     TypeName:        constant.WithSwapName(constant.SwapTypeLaunch),
                     ChainName:       ltCtx.Chain.ChainName,
@@ -118,8 +88,8 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     ChainName:       ltCtx.Chain.ChainName,
                     ChainID:         int32(ltCtx.Chain.ChainId),
                     Fee:             fee,
-                    FeeTokenSymbol:  ltCtx.StandardTokenFactory01FeeSymbol,
-                    FeeTokenDecimal: ltCtx.StandardTokenFactory01FeeDecimal,
+                    FeeTokenSymbol:  ltCtx.FeeSymbol,
+                    FeeTokenDecimal: ltCtx.FeeDecimal,
                 }); err != nil {
                     slog.Error("TokenCreated event", "fail to create user transaction,err is: ", err)
                     return errors.Wrap(err, "fail to create user transaction")

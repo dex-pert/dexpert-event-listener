@@ -1,7 +1,6 @@
 package main
 
 import (
-    "dexpert-event-listener/listener"
     "log/slog"
 
     "github.com/x1rh/event-listener/logger"
@@ -14,7 +13,7 @@ import (
     "os/signal"
     "time"
     "syscall"
-    "dexpert-event-listener/constant"
+    "dexpert-event-listener/listener"
 )
 
 func main() {
@@ -37,28 +36,8 @@ func main() {
     c.Chains = appCtx.Chains
     logger.Init(slog.LevelInfo, false)
 
-    if !c.IsCloseStandardTokenFactory01EventListener {
-        if _, ok := c.Chains[constant.ChainIDEthereumSepolia]; !ok {
-            panic(fmt.Sprintf("chain id %d not exist", constant.ChainIDEthereumSepolia))
-        }
-        ethereumSepoliaCtx := listener.NewContext(&listener.ContextParam{ChainConfig: c.Chains[constant.ChainIDEthereumSepolia], AbiProxy: appCtx.AbiProxy})
-        ethereumSepoliaTokenFactoryEventListener, err := listener.NewStandardTokenFactory01EventListener(ethereumSepoliaCtx)
-        if err != nil {
-            slog.Error("ethereum sepolia token factory event listener new failed", slog.Any("err", err))
-        }
-        go ethereumSepoliaTokenFactoryEventListener.Start()
-    }
-    if !c.IsCloseUniversalRouterListener {
-        if _, ok := c.Chains[constant.ChainIDEthereumSepolia]; !ok {
-            panic(fmt.Sprintf("chain id %d not exist", constant.ChainIDEthereumSepolia))
-        }
-        ethereumCtx := listener.NewContext(&listener.ContextParam{ChainConfig: c.Chains[constant.ChainIDEthereumSepolia], AbiProxy: appCtx.AbiProxy})
-        ethereumUniversalRouterEventListener, err := listener.NewDexpertUniversalRouterEventListener(ethereumCtx)
-        if err != nil {
-            slog.Error("ethereum sepolia universal router event listener new failed", slog.Any("err", err))
-        }
-        go ethereumUniversalRouterEventListener.Start()
-    }
+    // 启动监听器
+    listener.Init(&c, appCtx)
 
     signalChan := make(chan os.Signal, 1)
     signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)

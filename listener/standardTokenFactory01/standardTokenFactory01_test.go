@@ -1,4 +1,4 @@
-package listener
+package standardTokenFactory01
 
 import (
     "testing"
@@ -12,7 +12,7 @@ import (
 
 func TestEventListen(t *testing.T) {
     logger.Init(slog.LevelInfo, false)
-    el, err := NewStandardTokenFactory01EventListener(nil)
+    el, err := newStandardTokenFactory01EventListener(nil)
     if err != nil {
         t.Fatal(err)
     }
