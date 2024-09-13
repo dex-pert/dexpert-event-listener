@@ -40,19 +40,19 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
             slog.Info("PaymentFee event", slog.Any("event", l))
 
             _ = query.Q.Transaction(func(tx *query.Query) error {
-                block, err := ltCtx.EthClient.BlockByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
+                block, err := ltCtx.EthClient.HeaderByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
                 if err != nil {
-                    slog.Error("PaymentFee event", "fail to get block,err is: ", err)
+                    slog.Error("PaymentFee event", "fail to get block,err", err, "block number", event.BlockNumber)
                     return err
                 }
                 tokenSymbol, tokenName, tokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.TokenIn, ltCtx.EthClient)
                 if err != nil {
-                    slog.Error("PaymentFee event", "fail to get block,err is: ", err)
+                    slog.Error("PaymentFee event", "fail to get SymbolNameDecimalByAddress,err ", err, "token in", l.TokenIn)
                     return err
                 }
                 feeTokenSymbol, feeTokenName, feeTokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.FeeToken, ltCtx.EthClient)
                 if err != nil {
-                    slog.Error("PaymentFee event", "erc20 getSymbolNameDecimalByAddress,err is: ", err)
+                    slog.Error("PaymentFee event", "erc20 getSymbolNameDecimalByAddress,err", err, "fee token", l.FeeToken)
                     return err
                 }
                 fee := decimal.NewFromBigInt(l.FeeAmount, -int32(feeTokenDecimal)).String()
@@ -69,7 +69,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     }
                     outAmounts, err := uniswapv2router.GetAmountsOutByAddressAndBlockNumber(ltCtx.UniswapV2RouterAddress, new(big.Int).SetUint64(event.BlockNumber), l.AmountIn, ltCtx.EthClient, swapPath)
                     if err != nil {
-                        slog.Error("PaymentFee event", "uniswapv2router getAmountsOutByAddressAndBlockNumber,err is: ", err)
+                        slog.Error("PaymentFee event", "uniswapv2router getAmountsOutByAddressAndBlockNumber,err", err, "uniswapV2RouterAddress", ltCtx.UniswapV2RouterAddress, "block number", event.BlockNumber, "amount in", l.AmountIn, "path", swapPath)
                         return err
                     }
                     volume = decimal.NewFromBigInt(outAmounts[len(outAmounts)-1], -ltCtx.USDTDecimal).String()
@@ -86,7 +86,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     slog.Error("PaymentFee event", "fail to get user wallet,err is: ", err)
                 }
 
-                eventTime := time.Unix(int64(block.Time()), 0)
+                eventTime := time.Unix(int64(block.Time), 0)
                 userSwapTx := model.UserSwapTx{
                     UID:             userWallet.UID,
                     Address:         l.Payer.String(),

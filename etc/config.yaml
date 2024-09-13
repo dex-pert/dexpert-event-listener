@@ -72,7 +72,7 @@ chain_config:
     dexpert_universal_router_is_close: ${IS_CLOSE_BITLAYER_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
   - chain_id: 169
     chain_name: "manta-mainnet"
-    url: "https://pacific-rpc.manta.network/http"
+    url: "https://manta-pacific.drpc.org"
     uniswap_v2_router_address: "0xA3C957B20779Abf06661E25eE361Be1430ef1038"
     standard_token_factory01_address: "0x100BF56427202b895827CecFA623006af86FBbd1"
     standard_token_factory01_fee_symbol: "ETH"
@@ -88,7 +88,7 @@ chain_config:
     dexpert_universal_router_is_close: ${IS_CLOSE_MANTA_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
   - chain_id: 47763
     chain_name: "neo-x-mainnet"
-    url: "https://xexplorer.neo.org/"
+    url: "https://mainnet-1.rpc.banelabs.org"
     uniswap_v2_router_address: "0x82b56Dd9c7FD5A977255BA51B96c3D97fa1Af9A9"
     standard_token_factory01_address: "0x5c165587E94d99952C5dD9AeAdc5F87Ecc5Bfb84"
     standard_token_factory01_fee_symbol: "GAS"
