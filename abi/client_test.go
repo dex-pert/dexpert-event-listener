@@ -4,28 +4,42 @@ import (
     "testing"
     "context"
     "math/big"
-    "github.com/ethereum/go-ethereum/common"
 )
 
 func TestBlockNumber(t *testing.T) {
-    mantaClient := MustNewClient("https://pacific-rpc.manta.network/http")
-    t.Log("mataClient is :", mantaClient)
 
-    block, err := mantaClient.Client.BlockByNumber(context.Background(), new(big.Int).SetUint64(3198801))
-    if err != nil {
-        t.Error(err)
+    tests := []struct {
+        name        string
+        url         string
+        blocknumber uint64
+    }{
+        {name: "ethereum-mainnet", url: "https://eth-mainnet.g.alchemy.com/v2/yySetlFhRixBXll8vY8B-fVbhlcsLg4a", blocknumber: 20711519},
+        {name: "ethereum-sepolia", url: "https://eth-sepolia.g.alchemy.com/v2/gOeoBV9mlFL1pWj7qbKEdlB6pXTfNum6", blocknumber: 6641775},
+        {name: "Conflux-eSpace", url: "https://evm.confluxrpc.com", blocknumber: 104087180},
+        {name: "bitlayer-mainnet", url: "https://rpc.bitlayer.org", blocknumber: 4453885},
+        {name: "manta-mainnet", url: "https://pacific-rpc.manta.network/http", blocknumber: 3198801},
+        {name: "neo-x-mainnet", url: "https://xexplorer.neo.org/", blocknumber: 330867},
     }
-    t.Log(block)
 
-    block1, err := mantaClient.BlockNumber(context.Background())
-    if err != nil {
-        t.Error(err)
-    }
-    t.Log(block1)
+    for _, v := range tests {
+        t.Logf("-------------------------- %s --------------------------\n", v.name)
+        client := MustNewClient(v.url)
+        t.Log("mataClient is :", client)
 
-    block2, err := mantaClient.BlockByHash(context.Background(), common.HexToHash("0xb4a6fe3bf511b9bac8c4ad55a2daa88f49d6e63ee0821e14bd6c45facbd880b0"))
-    if err != nil {
-        t.Error(err)
+        block1, err := client.BlockNumber(context.Background())
+        if err != nil {
+            t.Error(err)
+        }
+        t.Log("the newest block number: ", block1)
+
+        block, err := client.Client.BlockByNumber(context.Background(), new(big.Int).SetUint64(v.blocknumber))
+        if err != nil {
+            t.Error(err)
+            t.Log("failed...")
+            continue
+        }
+        t.Log("success...")
+        t.Log("the block is: ", block)
+        t.Log("the block unix time is: ", block.Time())
     }
-    t.Log(block2)
 }

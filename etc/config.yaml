@@ -86,6 +86,22 @@ chain_config:
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
     dexpert_universal_router_usdt_decimal: 6
     dexpert_universal_router_is_close: ${IS_CLOSE_MANTA_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
+  - chain_id: 47763
+    chain_name: "neo-x-mainnet"
+    url: "https://xexplorer.neo.org/"
+    uniswap_v2_router_address: "0x82b56Dd9c7FD5A977255BA51B96c3D97fa1Af9A9"
+    standard_token_factory01_address: "0x5c165587E94d99952C5dD9AeAdc5F87Ecc5Bfb84"
+    standard_token_factory01_fee_symbol: "GAS"
+    standard_token_factory01_fee_decimal: 18
+    standard_token_factory01_block_number: 330867
+    standard_token_factory01_is_close: ${IS_CLOSE_NEO_X_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
+    dexpert_universal_router_address: "0x2cA866d3FA566fE66e86087Da3a3b8e534F9A588"
+    dexpert_universal_router_block_number: 331871
+    dexpert_universal_router_usdt_address: "0x68b55E582961968ef7758D8454D8A3e78c692e0B"
+    dexpert_universal_router_weth_address: "0xdE41591ED1f8ED1484aC2CD8ca0876428de60EfF"
+    dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_usdt_decimal: 6
+    dexpert_universal_router_is_close: ${IS_CLOSE_NEO_X_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
 
 is_close_standard_token_factory01_listener: ${IS_CLOSE_STANDARD_TOKEN_FACTORY01_LISTENER} # 是否关闭 Standard Token Factory01 Listener， true 关闭
 is_close_dexpert_universal_router_listener: ${IS_CLOSE_DEXPERT_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener， true 关闭
