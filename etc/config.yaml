@@ -69,7 +69,23 @@ chain_config:
     dexpert_universal_router_weth_address: "0xfF204e2681A6fA0e2C3FaDe68a1B28fb90E4Fc5F"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
     dexpert_universal_router_usdt_decimal: 6
-    dexpert_universal_router_is_close: ${IS_CLOSE_BITLAYER_MAINNET_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
+    dexpert_universal_router_is_close: ${IS_CLOSE_BITLAYER_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
+  - chain_id: 169
+    chain_name: "manta-mainnet"
+    url: "https://pacific-rpc.manta.network/http"
+    uniswap_v2_router_address: "0xA3C957B20779Abf06661E25eE361Be1430ef1038"
+    standard_token_factory01_address: "0x100BF56427202b895827CecFA623006af86FBbd1"
+    standard_token_factory01_fee_symbol: "ETH"
+    standard_token_factory01_fee_decimal: 18
+    standard_token_factory01_block_number: 3198801
+    standard_token_factory01_is_close: ${IS_CLOSE_MANTA_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
+    dexpert_universal_router_address: "0xAB255ECA00D1816f35FED0cdebeA5A4C26C7C311"
+    dexpert_universal_router_block_number: 3198603
+    dexpert_universal_router_usdt_address: "0xf417F5A458eC102B90352F697D6e2Ac3A3d2851f"
+    dexpert_universal_router_weth_address: "0x0Dc808adcE2099A9F62AA87D9670745AbA741746"
+    dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_usdt_decimal: 6
+    dexpert_universal_router_is_close: ${IS_CLOSE_MANTA_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
 
 is_close_standard_token_factory01_listener: ${IS_CLOSE_STANDARD_TOKEN_FACTORY01_LISTENER} # 是否关闭 Standard Token Factory01 Listener， true 关闭
 is_close_dexpert_universal_router_listener: ${IS_CLOSE_DEXPERT_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener， true 关闭

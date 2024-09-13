@@ -36,7 +36,6 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
             l.Owner = el.HashToAddress(event.IndexedParams[0])
             l.Token = el.HashToAddress(event.IndexedParams[1])
             slog.Info("TokenCreated event", slog.Any("event", l))
-
             _ = query.Q.Transaction(func(tx *query.Query) error {
                 block, err := ltCtx.EthClient.BlockByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
                 if err != nil {
