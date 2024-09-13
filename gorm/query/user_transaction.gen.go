@@ -39,6 +39,7 @@ func newUserTransaction(db *gorm.DB, opts ...gen.DOOption) userTransaction {
 	_userTransaction.Fee = field.NewString(tableName, "fee")
 	_userTransaction.FeeTokenSymbol = field.NewString(tableName, "fee_token_symbol")
 	_userTransaction.FeeTokenDecimal = field.NewInt32(tableName, "fee_token_decimal")
+	_userTransaction.IdentifyAddress = field.NewString(tableName, "identify_address")
 
 	_userTransaction.fillFieldMap()
 
@@ -61,6 +62,7 @@ type userTransaction struct {
 	Fee             field.String // 手续费
 	FeeTokenSymbol  field.String // 手续费symbol
 	FeeTokenDecimal field.Int32  // 手续费token的decimal
+	IdentifyAddress field.String // 可以是 user_launch_tx 表的 contract_address, 也可以是 user_swap_tx 的 tx, 用于构建唯一索引
 
 	fieldMap map[string]field.Expr
 }
@@ -89,6 +91,7 @@ func (u *userTransaction) updateTableName(table string) *userTransaction {
 	u.Fee = field.NewString(table, "fee")
 	u.FeeTokenSymbol = field.NewString(table, "fee_token_symbol")
 	u.FeeTokenDecimal = field.NewInt32(table, "fee_token_decimal")
+	u.IdentifyAddress = field.NewString(table, "identify_address")
 
 	u.fillFieldMap()
 
@@ -117,7 +120,7 @@ func (u *userTransaction) GetFieldByName(fieldName string) (field.OrderExpr, boo
 }
 
 func (u *userTransaction) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 12)
+	u.fieldMap = make(map[string]field.Expr, 13)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["uid"] = u.UID
 	u.fieldMap["tid"] = u.Tid
@@ -130,6 +133,7 @@ func (u *userTransaction) fillFieldMap() {
 	u.fieldMap["fee"] = u.Fee
 	u.fieldMap["fee_token_symbol"] = u.FeeTokenSymbol
 	u.fieldMap["fee_token_decimal"] = u.FeeTokenDecimal
+	u.fieldMap["identify_address"] = u.IdentifyAddress
 }
 
 func (u userTransaction) clone(db *gorm.DB) userTransaction {

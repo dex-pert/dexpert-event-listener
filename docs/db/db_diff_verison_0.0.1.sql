@@ -72,3 +72,8 @@ CREATE TABLE `user_wallet`  (
 alter table `user_launch_tx` add column `tx` varchar(128) not null default '' comment '交易哈希值';
 alter table `user_launch_tx` add column `owner` varchar(64) COMMENT 'token owner address, eth:42|solana:44|ton:33|btc:';
 alter table `user_launch_tx` add column `level` varchar(10) COMMENT '等级';
+
+# 2024-09-13
+alter table user_swap_tx add unique index uix_chainid_tx_swaptype(tx,chain_id,swap_type);
+alter table `user_transaction` add column `identify_address` varchar(255) not null default '' comment '可以是 user_launch_tx 表的 contract_address, 也可以是 user_swap_tx 的 tx, 用于构建唯一索引';
+alter table `user_transaction` add unique index uix_identify_address_chainid_type(identify_address,chain_id,swap_type);

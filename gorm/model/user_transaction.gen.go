@@ -12,18 +12,19 @@ const TableNameUserTransaction = "user_transaction"
 
 // UserTransaction mapped from table <user_transaction>
 type UserTransaction struct {
-	ID              int32     `gorm:"column:id;primaryKey;autoIncrement:true;comment:记录编号" json:"id"`                      // 记录编号
-	UID             int64     `gorm:"column:uid;not null;comment:用户id" json:"uid"`                                         // 用户id
-	Tid             int32     `gorm:"column:tid;not null;comment:关联的table的 id" json:"tid"`                                 // 关联的table的 id
-	SwapType        int32     `gorm:"column:swap_type;not null;comment:交易类型0:swap 1:sniper 99: launch" json:"swap_type"`   // 交易类型0:swap 1:sniper 99: launch
-	Volume          string    `gorm:"column:volume;not null;default:0.00;comment:交易量" json:"volume"`                       // 交易量
-	Timestamp       time.Time `gorm:"column:timestamp;not null;comment:交易时间" json:"timestamp"`                             // 交易时间
-	SwapName        string    `gorm:"column:swap_name;not null;comment:交易类型的名字" json:"swap_name"`                          // 交易类型的名字
-	ChainName       string    `gorm:"column:chain_name;not null;comment:链名" json:"chain_name"`                             // 链名
-	ChainID         int32     `gorm:"column:chain_id;not null;comment:链id" json:"chain_id"`                                // 链id
-	Fee             string    `gorm:"column:fee;not null;comment:手续费" json:"fee"`                                          // 手续费
-	FeeTokenSymbol  string    `gorm:"column:fee_token_symbol;not null;comment:手续费symbol" json:"fee_token_symbol"`          // 手续费symbol
-	FeeTokenDecimal int32     `gorm:"column:fee_token_decimal;not null;comment:手续费token的decimal" json:"fee_token_decimal"` // 手续费token的decimal
+	ID              int32     `gorm:"column:id;primaryKey;autoIncrement:true;comment:记录编号" json:"id"`                                                                            // 记录编号
+	UID             int64     `gorm:"column:uid;not null;comment:用户id" json:"uid"`                                                                                               // 用户id
+	Tid             int32     `gorm:"column:tid;not null;comment:关联的table的 id" json:"tid"`                                                                                       // 关联的table的 id
+	SwapType        int32     `gorm:"column:swap_type;not null;comment:交易类型0:swap 1:sniper 99: launch" json:"swap_type"`                                                         // 交易类型0:swap 1:sniper 99: launch
+	Volume          string    `gorm:"column:volume;not null;default:0.00;comment:交易量" json:"volume"`                                                                             // 交易量
+	Timestamp       time.Time `gorm:"column:timestamp;not null;comment:交易时间" json:"timestamp"`                                                                                   // 交易时间
+	SwapName        string    `gorm:"column:swap_name;not null;comment:交易类型的名字" json:"swap_name"`                                                                                // 交易类型的名字
+	ChainName       string    `gorm:"column:chain_name;not null;comment:链名" json:"chain_name"`                                                                                   // 链名
+	ChainID         int32     `gorm:"column:chain_id;not null;comment:链id" json:"chain_id"`                                                                                      // 链id
+	Fee             string    `gorm:"column:fee;not null;comment:手续费" json:"fee"`                                                                                                // 手续费
+	FeeTokenSymbol  string    `gorm:"column:fee_token_symbol;not null;comment:手续费symbol" json:"fee_token_symbol"`                                                                // 手续费symbol
+	FeeTokenDecimal int32     `gorm:"column:fee_token_decimal;not null;comment:手续费token的decimal" json:"fee_token_decimal"`                                                       // 手续费token的decimal
+	IdentifyAddress string    `gorm:"column:identify_address;not null;comment:可以是 user_launch_tx 表的 contract_address, 也可以是 user_swap_tx 的 tx, 用于构建唯一索引" json:"identify_address"` // 可以是 user_launch_tx 表的 contract_address, 也可以是 user_swap_tx 的 tx, 用于构建唯一索引
 }
 
 // TableName UserTransaction's table name
