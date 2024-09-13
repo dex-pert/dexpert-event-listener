@@ -54,7 +54,22 @@ chain_config:
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
     dexpert_universal_router_usdt_decimal: 18
     dexpert_universal_router_is_close: ${IS_CLOSE_CONFLUX_ESPACE_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
-
+  - chain_id: 200901
+    chain_name: "bitlayer-mainnet"
+    url: "https://rpc.bitlayer.org"
+    uniswap_v2_router_address: "0xB0Cc30795f9E0125575742cFA8e73D20D9966f81"
+    standard_token_factory01_address: "0x6f6f088bA7409E14f60aFA92D3Bee56a7BAd446B"
+    standard_token_factory01_fee_symbol: "BTC"
+    standard_token_factory01_fee_decimal: 18
+    standard_token_factory01_block_number: 4453885
+    standard_token_factory01_is_close: ${IS_CLOSE_BITLAYER_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
+    dexpert_universal_router_address: "0x4e86cBD95DeD0b00ca0D74713eb6596e4A2B4fD2"
+    dexpert_universal_router_block_number: 4566111
+    dexpert_universal_router_usdt_address: "0xfe9f969faf8ad72a83b761138bf25de87eff9dd2"
+    dexpert_universal_router_weth_address: "0xfF204e2681A6fA0e2C3FaDe68a1B28fb90E4Fc5F"
+    dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_usdt_decimal: 6
+    dexpert_universal_router_is_close: ${IS_CLOSE_BITLAYER_MAINNET_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
 
 is_close_standard_token_factory01_listener: ${IS_CLOSE_STANDARD_TOKEN_FACTORY01_LISTENER} # 是否关闭 Standard Token Factory01 Listener， true 关闭
 is_close_dexpert_universal_router_listener: ${IS_CLOSE_DEXPERT_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener， true 关闭
