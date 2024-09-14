@@ -26,9 +26,13 @@ linuxrund:
 linuxstop:
 	bash stop.sh
 
+.PHONY: compose-build
+compose-build:
+	docker-compose -p $(PROD_PROJECT) -f docker-compose-prod.yaml build dexpert-event-listener && \
+	docker-compose -p $(PROD_PROJECT) -f docker-compose-prod.yaml up -d
+
 .PHONY: compose-up
 compose-up:
-	docker-compose -p $(PROD_PROJECT) -f docker-compose-prod.yaml build dexpert-event-listener && \
 	docker-compose -p $(PROD_PROJECT) -f docker-compose-prod.yaml up -d
 
 .PHONY: compose-down
