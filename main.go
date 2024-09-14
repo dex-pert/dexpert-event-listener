@@ -20,13 +20,13 @@ import (
 func main() {
     dir, err := os.Getwd()
     if err != nil {
-        panic(fmt.Sprintf("os getwd failed: %v", err))
+        slog.Error(fmt.Sprintf("os getwd failed: %v", err))
     }
     envPath := filepath.Join(dir, ".env")
     slog.Info("filepath.Join", "envPath", envPath)
     err = godotenv.Load(envPath)
     if err != nil {
-        panic(fmt.Sprintf("error loading .env file: %v", err))
+        slog.Error(fmt.Sprintf("error loading .env file: %v", err))
     }
 
     file, err := os.ReadFile("./etc/config.yaml")
