@@ -102,6 +102,23 @@ chain_config:
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
     dexpert_universal_router_usdt_decimal: 6
     dexpert_universal_router_is_close: ${IS_CLOSE_NEO_X_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
+  - chain_id: 995
+    chain_name: "5ire-mainnet"
+    url: "https://rpc.5ire.network"
+    uniswap_v2_router_address: "0x733416C974c31778071158Dc00CE295268006024"
+    standard_token_factory01_address: "0xfA9B00d440FadB9802fBF620c7cc7A4541e4d5F9"
+    standard_token_factory01_fee_symbol: "5ire"
+    standard_token_factory01_fee_decimal: 18
+    standard_token_factory01_block_number: 2205361
+    standard_token_factory01_is_close: ${IS_CLOSE_5IRE_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
+    dexpert_universal_router_address: "0x3CCB2da5792C2D4057948b1f5d4C71D98C00F399"
+    dexpert_universal_router_block_number: 2205278
+    dexpert_universal_router_usdt_address: ""
+    dexpert_universal_router_weth_address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+    dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_usdt_decimal: 0
+    dexpert_universal_router_is_close: ${IS_CLOSE_5IRE_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭, usdt address 和 decimal 需要配齐
+
 
 is_close_standard_token_factory01_listener: ${IS_CLOSE_STANDARD_TOKEN_FACTORY01_LISTENER} # 是否关闭 Standard Token Factory01 Listener， true 关闭
 is_close_dexpert_universal_router_listener: ${IS_CLOSE_DEXPERT_UNIVERSAL_ROUTER_LISTENER} # 是否关闭 Universal Router Listener， true 关闭
