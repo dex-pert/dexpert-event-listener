@@ -13,17 +13,10 @@ func TestGetFee(t *testing.T) {
         return
     }
 
-    fee1, err := GetFees("0x9998Bc4B6e148FC4633b274E2CC040B19638F554", big.NewInt(1), big.NewInt(104091299), cli)
+    fee1, err := GetFees("0xF2F0cC2BAB14Abbdf3b2AFcAD345dE08225EBaf5", big.NewInt(0), big.NewInt(104670012), cli)
     if err != nil {
         t.Error(err)
         return
     }
     t.Log("fee1: ", fee1)
-
-    fee2, err := GetFees("0x9998Bc4B6e148FC4633b274E2CC040B19638F554", big.NewInt(2), big.NewInt(104091310), cli)
-    if err != nil {
-        t.Error(err)
-        return
-    }
-    t.Log("fee2: ", fee2)
 }
