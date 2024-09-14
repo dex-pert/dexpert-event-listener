@@ -80,7 +80,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                 }
 
                 uw := tx.UserWallet
-                userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Payer.String()), uw.ChainID.Eq(int32(ltCtx.Chain.ChainId))).Take()
+                userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Payer.String())).Take()
                 if err != nil {
                     userWallet = &model.UserWallet{UID: 0}
                     slog.Error("PaymentFee event", "fail to get user wallet,err is: ", err)

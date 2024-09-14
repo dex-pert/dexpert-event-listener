@@ -51,7 +51,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                 fee := decimal.NewFromBigInt(_fees, -(ltCtx.FeeDecimal)).String()
 
                 uw := tx.UserWallet
-                userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Owner.String()), uw.ChainID.Eq(int32(ltCtx.Chain.ChainId))).Take()
+                userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Owner.String())).Take()
                 if err != nil {
                     userWallet = &model.UserWallet{UID: 0}
                     slog.Error("TokenCreated event", "fail to get user wallet,err", err)

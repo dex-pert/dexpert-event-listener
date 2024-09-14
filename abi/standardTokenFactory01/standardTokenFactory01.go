@@ -29,33 +29,19 @@ var (
 	_ = abi.ConvertType
 )
 
-// TokenInitializeParams is an auto generated low-level Go binding around an user-defined struct.
-type TokenInitializeParams struct {
-	Name         string
-	Symbol       string
-	Decimals     uint8
-	TotalSupply  *big.Int
-	Description  string
-	LogoLink     string
-	TwitterLink  string
-	TelegramLink string
-	DiscordLink  string
-	WebsiteLink  string
-}
-
 // TokenMetaData is an auto generated low-level Go binding around an user-defined struct.
 type TokenMetaData struct {
-	Description  string
-	LogoLink     string
-	TwitterLink  string
-	TelegramLink string
-	DiscordLink  string
-	WebsiteLink  string
+	Description string
+	Logo        string
+	Twitter     string
+	Telegram    string
+	Discord     string
+	Website     string
 }
 
 // StandardTokenFactory01MetaData contains all meta data concerning the StandardTokenFactory01 contract.
 var StandardTokenFactory01MetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"factoryManager_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"implementation_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"feeTo_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxFee_\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"InsufficientFee\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"InvalidFactoryManager\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"InvalidFee\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"InvalidFeeReceiver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"factoryManager\",\"type\":\"address\"}],\"name\":\"InvalidImplementation\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"}],\"name\":\"InvalidLevel\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"}],\"name\":\"InvalidMaxFee\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"OnlyOwner\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newFeeTo\",\"type\":\"address\"}],\"name\":\"FeeToUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"FeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"newLevels\",\"type\":\"uint256[]\"}],\"name\":\"LevelsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"tokenType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint96\",\"name\":\"tokenVersion\",\"type\":\"uint96\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"}],\"name\":\"TokenCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"logoLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"twitterLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"telegramLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"discordLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"websiteLink\",\"type\":\"string\"}],\"indexed\":false,\"internalType\":\"structTokenMetaData\",\"name\":\"tokenMetaData\",\"type\":\"tuple\"}],\"name\":\"TokenMetaDataUpdated\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"FACTORY_MANAGER\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FEE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol\",\"type\":\"string\"},{\"internalType\":\"uint8\",\"name\":\"decimals\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"totalSupply\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"logoLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"twitterLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"telegramLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"discordLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"websiteLink\",\"type\":\"string\"}],\"internalType\":\"structTokenInitializeParams\",\"name\":\"tokenInitializeParams\",\"type\":\"tuple\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeTo\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"fees\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLevels\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"implementation\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"implementationVersion\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"setFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"feeTo_\",\"type\":\"address\"}],\"name\":\"setFeeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"implementation_\",\"type\":\"address\"}],\"name\":\"setImplementation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_levels\",\"type\":\"uint256[]\"}],\"name\":\"setLevels\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"logoLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"twitterLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"telegramLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"discordLink\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"websiteLink\",\"type\":\"string\"}],\"internalType\":\"structTokenMetaData\",\"name\":\"tokenMetaData_\",\"type\":\"tuple\"}],\"name\":\"updateTokenMetaData\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"factoryManager_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"implementation_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"feeTo_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxFee_\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"InsufficientFee\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"InvalidFactoryManager\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"InvalidFee\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"InvalidFeeReceiver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"factoryManager\",\"type\":\"address\"}],\"name\":\"InvalidImplementation\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"}],\"name\":\"InvalidLevel\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"}],\"name\":\"InvalidMaxFee\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"OnlyOwner\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newFeeTo\",\"type\":\"address\"}],\"name\":\"FeeToUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"FeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"newLevels\",\"type\":\"uint256[]\"}],\"name\":\"LevelsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"tokenType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint96\",\"name\":\"tokenVersion\",\"type\":\"uint96\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"}],\"name\":\"TokenCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"logo\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"twitter\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"telegram\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"discord\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"website\",\"type\":\"string\"}],\"indexed\":false,\"internalType\":\"structTokenMetaData\",\"name\":\"metaData\",\"type\":\"tuple\"}],\"name\":\"TokenMetaDataUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"ethAmount\",\"type\":\"uint256\"}],\"name\":\"TradingOpened\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"FACTORY_MANAGER\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FEE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol\",\"type\":\"string\"},{\"internalType\":\"uint8\",\"name\":\"decimals\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"totalSupply\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"logo\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"twitter\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"telegram\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"discord\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"website\",\"type\":\"string\"}],\"internalType\":\"structTokenMetaData\",\"name\":\"metaData\",\"type\":\"tuple\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeTo\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"fees\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLevels\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"implementation\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"implementationVersion\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenAmount\",\"type\":\"uint256\"}],\"name\":\"openTrading\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"setFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"feeTo_\",\"type\":\"address\"}],\"name\":\"setFeeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"implementation_\",\"type\":\"address\"}],\"name\":\"setImplementation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_levels\",\"type\":\"uint256[]\"}],\"name\":\"setLevels\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"logo\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"twitter\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"telegram\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"discord\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"website\",\"type\":\"string\"}],\"internalType\":\"structTokenMetaData\",\"name\":\"metaData_\",\"type\":\"tuple\"}],\"name\":\"updateTokenMetaData\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}]",
 }
 
 // StandardTokenFactory01ABI is the input ABI used to generate the binding from.
@@ -452,25 +438,46 @@ func (_StandardTokenFactory01 *StandardTokenFactory01CallerSession) Owner() (com
 	return _StandardTokenFactory01.Contract.Owner(&_StandardTokenFactory01.CallOpts)
 }
 
-// Create is a paid mutator transaction binding the contract method 0xf9acb57f.
+// Create is a paid mutator transaction binding the contract method 0x53944fe8.
 //
-// Solidity: function create(uint256 level, (string,string,uint8,uint256,string,string,string,string,string,string) tokenInitializeParams) payable returns(address token)
-func (_StandardTokenFactory01 *StandardTokenFactory01Transactor) Create(opts *bind.TransactOpts, level *big.Int, tokenInitializeParams TokenInitializeParams) (*types.Transaction, error) {
-	return _StandardTokenFactory01.contract.Transact(opts, "create", level, tokenInitializeParams)
+// Solidity: function create(uint256 level, string name, string symbol, uint8 decimals, uint256 totalSupply, (string,string,string,string,string,string) metaData) payable returns(address token)
+func (_StandardTokenFactory01 *StandardTokenFactory01Transactor) Create(opts *bind.TransactOpts, level *big.Int, name string, symbol string, decimals uint8, totalSupply *big.Int, metaData TokenMetaData) (*types.Transaction, error) {
+	return _StandardTokenFactory01.contract.Transact(opts, "create", level, name, symbol, decimals, totalSupply, metaData)
 }
 
-// Create is a paid mutator transaction binding the contract method 0xf9acb57f.
+// Create is a paid mutator transaction binding the contract method 0x53944fe8.
 //
-// Solidity: function create(uint256 level, (string,string,uint8,uint256,string,string,string,string,string,string) tokenInitializeParams) payable returns(address token)
-func (_StandardTokenFactory01 *StandardTokenFactory01Session) Create(level *big.Int, tokenInitializeParams TokenInitializeParams) (*types.Transaction, error) {
-	return _StandardTokenFactory01.Contract.Create(&_StandardTokenFactory01.TransactOpts, level, tokenInitializeParams)
+// Solidity: function create(uint256 level, string name, string symbol, uint8 decimals, uint256 totalSupply, (string,string,string,string,string,string) metaData) payable returns(address token)
+func (_StandardTokenFactory01 *StandardTokenFactory01Session) Create(level *big.Int, name string, symbol string, decimals uint8, totalSupply *big.Int, metaData TokenMetaData) (*types.Transaction, error) {
+	return _StandardTokenFactory01.Contract.Create(&_StandardTokenFactory01.TransactOpts, level, name, symbol, decimals, totalSupply, metaData)
 }
 
-// Create is a paid mutator transaction binding the contract method 0xf9acb57f.
+// Create is a paid mutator transaction binding the contract method 0x53944fe8.
 //
-// Solidity: function create(uint256 level, (string,string,uint8,uint256,string,string,string,string,string,string) tokenInitializeParams) payable returns(address token)
-func (_StandardTokenFactory01 *StandardTokenFactory01TransactorSession) Create(level *big.Int, tokenInitializeParams TokenInitializeParams) (*types.Transaction, error) {
-	return _StandardTokenFactory01.Contract.Create(&_StandardTokenFactory01.TransactOpts, level, tokenInitializeParams)
+// Solidity: function create(uint256 level, string name, string symbol, uint8 decimals, uint256 totalSupply, (string,string,string,string,string,string) metaData) payable returns(address token)
+func (_StandardTokenFactory01 *StandardTokenFactory01TransactorSession) Create(level *big.Int, name string, symbol string, decimals uint8, totalSupply *big.Int, metaData TokenMetaData) (*types.Transaction, error) {
+	return _StandardTokenFactory01.Contract.Create(&_StandardTokenFactory01.TransactOpts, level, name, symbol, decimals, totalSupply, metaData)
+}
+
+// OpenTrading is a paid mutator transaction binding the contract method 0xc56af465.
+//
+// Solidity: function openTrading(address token, uint256 tokenAmount) payable returns()
+func (_StandardTokenFactory01 *StandardTokenFactory01Transactor) OpenTrading(opts *bind.TransactOpts, token common.Address, tokenAmount *big.Int) (*types.Transaction, error) {
+	return _StandardTokenFactory01.contract.Transact(opts, "openTrading", token, tokenAmount)
+}
+
+// OpenTrading is a paid mutator transaction binding the contract method 0xc56af465.
+//
+// Solidity: function openTrading(address token, uint256 tokenAmount) payable returns()
+func (_StandardTokenFactory01 *StandardTokenFactory01Session) OpenTrading(token common.Address, tokenAmount *big.Int) (*types.Transaction, error) {
+	return _StandardTokenFactory01.Contract.OpenTrading(&_StandardTokenFactory01.TransactOpts, token, tokenAmount)
+}
+
+// OpenTrading is a paid mutator transaction binding the contract method 0xc56af465.
+//
+// Solidity: function openTrading(address token, uint256 tokenAmount) payable returns()
+func (_StandardTokenFactory01 *StandardTokenFactory01TransactorSession) OpenTrading(token common.Address, tokenAmount *big.Int) (*types.Transaction, error) {
+	return _StandardTokenFactory01.Contract.OpenTrading(&_StandardTokenFactory01.TransactOpts, token, tokenAmount)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
@@ -601,23 +608,23 @@ func (_StandardTokenFactory01 *StandardTokenFactory01TransactorSession) Transfer
 
 // UpdateTokenMetaData is a paid mutator transaction binding the contract method 0xe2a32e3e.
 //
-// Solidity: function updateTokenMetaData(uint256 level, address token, (string,string,string,string,string,string) tokenMetaData_) payable returns()
-func (_StandardTokenFactory01 *StandardTokenFactory01Transactor) UpdateTokenMetaData(opts *bind.TransactOpts, level *big.Int, token common.Address, tokenMetaData_ TokenMetaData) (*types.Transaction, error) {
-	return _StandardTokenFactory01.contract.Transact(opts, "updateTokenMetaData", level, token, tokenMetaData_)
+// Solidity: function updateTokenMetaData(uint256 level, address token, (string,string,string,string,string,string) metaData_) payable returns()
+func (_StandardTokenFactory01 *StandardTokenFactory01Transactor) UpdateTokenMetaData(opts *bind.TransactOpts, level *big.Int, token common.Address, metaData_ TokenMetaData) (*types.Transaction, error) {
+	return _StandardTokenFactory01.contract.Transact(opts, "updateTokenMetaData", level, token, metaData_)
 }
 
 // UpdateTokenMetaData is a paid mutator transaction binding the contract method 0xe2a32e3e.
 //
-// Solidity: function updateTokenMetaData(uint256 level, address token, (string,string,string,string,string,string) tokenMetaData_) payable returns()
-func (_StandardTokenFactory01 *StandardTokenFactory01Session) UpdateTokenMetaData(level *big.Int, token common.Address, tokenMetaData_ TokenMetaData) (*types.Transaction, error) {
-	return _StandardTokenFactory01.Contract.UpdateTokenMetaData(&_StandardTokenFactory01.TransactOpts, level, token, tokenMetaData_)
+// Solidity: function updateTokenMetaData(uint256 level, address token, (string,string,string,string,string,string) metaData_) payable returns()
+func (_StandardTokenFactory01 *StandardTokenFactory01Session) UpdateTokenMetaData(level *big.Int, token common.Address, metaData_ TokenMetaData) (*types.Transaction, error) {
+	return _StandardTokenFactory01.Contract.UpdateTokenMetaData(&_StandardTokenFactory01.TransactOpts, level, token, metaData_)
 }
 
 // UpdateTokenMetaData is a paid mutator transaction binding the contract method 0xe2a32e3e.
 //
-// Solidity: function updateTokenMetaData(uint256 level, address token, (string,string,string,string,string,string) tokenMetaData_) payable returns()
-func (_StandardTokenFactory01 *StandardTokenFactory01TransactorSession) UpdateTokenMetaData(level *big.Int, token common.Address, tokenMetaData_ TokenMetaData) (*types.Transaction, error) {
-	return _StandardTokenFactory01.Contract.UpdateTokenMetaData(&_StandardTokenFactory01.TransactOpts, level, token, tokenMetaData_)
+// Solidity: function updateTokenMetaData(uint256 level, address token, (string,string,string,string,string,string) metaData_) payable returns()
+func (_StandardTokenFactory01 *StandardTokenFactory01TransactorSession) UpdateTokenMetaData(level *big.Int, token common.Address, metaData_ TokenMetaData) (*types.Transaction, error) {
+	return _StandardTokenFactory01.Contract.UpdateTokenMetaData(&_StandardTokenFactory01.TransactOpts, level, token, metaData_)
 }
 
 // StandardTokenFactory01FeeToUpdatedIterator is returned from FilterFeeToUpdated and is used to iterate over the raw logs and unpacked data for FeeToUpdated events raised by the StandardTokenFactory01 contract.
@@ -1401,13 +1408,15 @@ func (it *StandardTokenFactory01TokenMetaDataUpdatedIterator) Close() error {
 
 // StandardTokenFactory01TokenMetaDataUpdated represents a TokenMetaDataUpdated event raised by the StandardTokenFactory01 contract.
 type StandardTokenFactory01TokenMetaDataUpdated struct {
-	TokenMetaData TokenMetaData
-	Raw           types.Log // Blockchain specific contextual infos
+	Owner    common.Address
+	Token    common.Address
+	MetaData TokenMetaData
+	Raw      types.Log // Blockchain specific contextual infos
 }
 
-// FilterTokenMetaDataUpdated is a free log retrieval operation binding the contract event 0xd9fb697fa8ae059c60cd51834b683372711582a630b9e3beba4d0420e8be170e.
+// FilterTokenMetaDataUpdated is a free log retrieval operation binding the contract event 0x8c6839bc78d4b28b0168d22b050c0e2dc9a51e90f3e8dd7bbdc5a5e8d17aa78c.
 //
-// Solidity: event TokenMetaDataUpdated((string,string,string,string,string,string) tokenMetaData)
+// Solidity: event TokenMetaDataUpdated(address owner, address token, (string,string,string,string,string,string) metaData)
 func (_StandardTokenFactory01 *StandardTokenFactory01Filterer) FilterTokenMetaDataUpdated(opts *bind.FilterOpts) (*StandardTokenFactory01TokenMetaDataUpdatedIterator, error) {
 
 	logs, sub, err := _StandardTokenFactory01.contract.FilterLogs(opts, "TokenMetaDataUpdated")
@@ -1417,9 +1426,9 @@ func (_StandardTokenFactory01 *StandardTokenFactory01Filterer) FilterTokenMetaDa
 	return &StandardTokenFactory01TokenMetaDataUpdatedIterator{contract: _StandardTokenFactory01.contract, event: "TokenMetaDataUpdated", logs: logs, sub: sub}, nil
 }
 
-// WatchTokenMetaDataUpdated is a free log subscription operation binding the contract event 0xd9fb697fa8ae059c60cd51834b683372711582a630b9e3beba4d0420e8be170e.
+// WatchTokenMetaDataUpdated is a free log subscription operation binding the contract event 0x8c6839bc78d4b28b0168d22b050c0e2dc9a51e90f3e8dd7bbdc5a5e8d17aa78c.
 //
-// Solidity: event TokenMetaDataUpdated((string,string,string,string,string,string) tokenMetaData)
+// Solidity: event TokenMetaDataUpdated(address owner, address token, (string,string,string,string,string,string) metaData)
 func (_StandardTokenFactory01 *StandardTokenFactory01Filterer) WatchTokenMetaDataUpdated(opts *bind.WatchOpts, sink chan<- *StandardTokenFactory01TokenMetaDataUpdated) (event.Subscription, error) {
 
 	logs, sub, err := _StandardTokenFactory01.contract.WatchLogs(opts, "TokenMetaDataUpdated")
@@ -1454,12 +1463,149 @@ func (_StandardTokenFactory01 *StandardTokenFactory01Filterer) WatchTokenMetaDat
 	}), nil
 }
 
-// ParseTokenMetaDataUpdated is a log parse operation binding the contract event 0xd9fb697fa8ae059c60cd51834b683372711582a630b9e3beba4d0420e8be170e.
+// ParseTokenMetaDataUpdated is a log parse operation binding the contract event 0x8c6839bc78d4b28b0168d22b050c0e2dc9a51e90f3e8dd7bbdc5a5e8d17aa78c.
 //
-// Solidity: event TokenMetaDataUpdated((string,string,string,string,string,string) tokenMetaData)
+// Solidity: event TokenMetaDataUpdated(address owner, address token, (string,string,string,string,string,string) metaData)
 func (_StandardTokenFactory01 *StandardTokenFactory01Filterer) ParseTokenMetaDataUpdated(log types.Log) (*StandardTokenFactory01TokenMetaDataUpdated, error) {
 	event := new(StandardTokenFactory01TokenMetaDataUpdated)
 	if err := _StandardTokenFactory01.contract.UnpackLog(event, "TokenMetaDataUpdated", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// StandardTokenFactory01TradingOpenedIterator is returned from FilterTradingOpened and is used to iterate over the raw logs and unpacked data for TradingOpened events raised by the StandardTokenFactory01 contract.
+type StandardTokenFactory01TradingOpenedIterator struct {
+	Event *StandardTokenFactory01TradingOpened // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *StandardTokenFactory01TradingOpenedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(StandardTokenFactory01TradingOpened)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(StandardTokenFactory01TradingOpened)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *StandardTokenFactory01TradingOpenedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *StandardTokenFactory01TradingOpenedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// StandardTokenFactory01TradingOpened represents a TradingOpened event raised by the StandardTokenFactory01 contract.
+type StandardTokenFactory01TradingOpened struct {
+	Sender      common.Address
+	Token       common.Address
+	TokenAmount *big.Int
+	EthAmount   *big.Int
+	Raw         types.Log // Blockchain specific contextual infos
+}
+
+// FilterTradingOpened is a free log retrieval operation binding the contract event 0x6a54ccb2e00fc37e5a22e3b5c0513547ebb704626a209cce2421005ece87fbc0.
+//
+// Solidity: event TradingOpened(address sender, address token, uint256 tokenAmount, uint256 ethAmount)
+func (_StandardTokenFactory01 *StandardTokenFactory01Filterer) FilterTradingOpened(opts *bind.FilterOpts) (*StandardTokenFactory01TradingOpenedIterator, error) {
+
+	logs, sub, err := _StandardTokenFactory01.contract.FilterLogs(opts, "TradingOpened")
+	if err != nil {
+		return nil, err
+	}
+	return &StandardTokenFactory01TradingOpenedIterator{contract: _StandardTokenFactory01.contract, event: "TradingOpened", logs: logs, sub: sub}, nil
+}
+
+// WatchTradingOpened is a free log subscription operation binding the contract event 0x6a54ccb2e00fc37e5a22e3b5c0513547ebb704626a209cce2421005ece87fbc0.
+//
+// Solidity: event TradingOpened(address sender, address token, uint256 tokenAmount, uint256 ethAmount)
+func (_StandardTokenFactory01 *StandardTokenFactory01Filterer) WatchTradingOpened(opts *bind.WatchOpts, sink chan<- *StandardTokenFactory01TradingOpened) (event.Subscription, error) {
+
+	logs, sub, err := _StandardTokenFactory01.contract.WatchLogs(opts, "TradingOpened")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(StandardTokenFactory01TradingOpened)
+				if err := _StandardTokenFactory01.contract.UnpackLog(event, "TradingOpened", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseTradingOpened is a log parse operation binding the contract event 0x6a54ccb2e00fc37e5a22e3b5c0513547ebb704626a209cce2421005ece87fbc0.
+//
+// Solidity: event TradingOpened(address sender, address token, uint256 tokenAmount, uint256 ethAmount)
+func (_StandardTokenFactory01 *StandardTokenFactory01Filterer) ParseTradingOpened(log types.Log) (*StandardTokenFactory01TradingOpened, error) {
+	event := new(StandardTokenFactory01TradingOpened)
+	if err := _StandardTokenFactory01.contract.UnpackLog(event, "TradingOpened", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
