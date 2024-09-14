@@ -33,7 +33,7 @@ func GetStandardTokenFactory01ABIByChainId(chainId int) string {
     case ChainIDNeoX:
         return StandardTokenFactory01ABINeoX
     default:
-        return ""
+        return StandardTokenFactory01ABIEthereum
     }
 }
 
@@ -61,6 +61,6 @@ func GetDexpertUniversalRouterABIByChainId(chainId int) string {
     case ChainIDNeoX:
         return DexpertUniversalRouterABINeoX
     default:
-        return ""
+        return DexpertUniversalRouterABIEthereum
     }
 }
