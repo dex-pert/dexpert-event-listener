@@ -14,13 +14,21 @@ import (
     "time"
     "syscall"
     "dexpert-event-listener/listener"
+    "path/filepath"
 )
 
 func main() {
-    err := godotenv.Load(".env")
+    dir, err := os.Getwd()
+    if err != nil {
+        panic(fmt.Sprintf("os getwd failed: %v", err))
+    }
+    envPath := filepath.Join(dir, ".env")
+    slog.Info("filepath.Join", "envPath", envPath)
+    err = godotenv.Load(envPath)
     if err != nil {
         panic(fmt.Sprintf("error loading .env file: %v", err))
     }
+
     file, err := os.ReadFile("./etc/config.yaml")
     if err != nil {
         panic(fmt.Sprintf("error reading config.yaml: %v", err))

@@ -89,7 +89,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     Fee:             fee,
                     FeeTokenSymbol:  ltCtx.FeeSymbol,
                     FeeTokenDecimal: ltCtx.FeeDecimal,
-                    IdentifyAddress: userLaunchTx.ContractAddress,
+                    IdentifyAddress: l.Token.String(),
                 }); err != nil {
                     slog.Error("TokenCreated event", "fail to create user transaction,err", err)
                     return errors.Wrap(err, "fail to create user transaction")

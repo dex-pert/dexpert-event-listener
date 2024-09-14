@@ -124,7 +124,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     Fee:             fee,
                     FeeTokenSymbol:  feeTokenSymbol,
                     FeeTokenDecimal: int32(feeTokenDecimal),
-                    IdentifyAddress: userSwapTx.Tx,
+                    IdentifyAddress: event.TxHash.String(),
                 }); err != nil {
                     slog.Error("PaymentFee event", "fail to create user transaction,err is: ", err)
                     return errors.Wrap(err, "fail to create user transaction")
