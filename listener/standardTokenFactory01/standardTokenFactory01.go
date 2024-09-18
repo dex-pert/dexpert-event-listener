@@ -20,16 +20,17 @@ func newStandardTokenFactory01EventListener(ltCtx *Context) (*el.EventListener, 
 
     blockNumber := ltCtx.BlockNumber
     if ltCtx.StandardTokenFactory01IsStartSavedNewestBlockNumber {
-        ul := query.UserLaunchTx
-        newestUserLaunchTx, err := ul.WithContext(context.Background()).Order(ul.BlockNumber.Desc()).Take()
+        ul := query.ListenerNewestBlocknumber
+        record, err := ul.WithContext(context.Background()).Where(ul.ContractAddress.Eq(ltCtx.StandardTokenFactory01Address), ul.ChainID.Eq(int32(ltCtx.Chain.ChainId))).Take()
         if err != nil {
-            slog.Error("newStandardTokenFactory01EventListener", "err", err.Error())
+            slog.Error("newStandardTokenFactory01EventListener", "failed to select ListenerNewestBlocknumber", err.Error(),
+                "contract address", ltCtx.StandardTokenFactory01Address, "chain_id", ltCtx.Chain.ChainId)
             if !errors.Is(err, gorm.ErrRecordNotFound) {
-                return nil, errors.Wrap(err, "fail to get newest user launch tx")
+                return nil, errors.Wrap(err, "fail to get newest user swap tx")
             }
         } else {
-            if newestUserLaunchTx.BlockNumber > int32(blockNumber) {
-                blockNumber = int64(newestUserLaunchTx.BlockNumber)
+            if record.BlockNumber > int32(blockNumber) {
+                blockNumber = int64(record.BlockNumber)
             }
         }
     }

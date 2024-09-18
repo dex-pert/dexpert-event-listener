@@ -82,3 +82,13 @@ alter table `user_transaction` add unique index uix_identify_address_chainid_typ
 alter table `user_launch_tx` add column `created_at` timestamp not null default CURRENT_TIMESTAMP;
 alter table `user_launch_tx` add column `block_number` int not null default 0 comment '区块数';
 alter table `user_transaction` add column `created_at` timestamp not null default CURRENT_TIMESTAMP;
+
+create table if not exists listener_newest_blocknumber(
+    id int primary key auto_increment not null,
+    contract_address varchar(128) not null comment '合约地址',
+    chain_id int not null,
+    block_number int not null comment '最新爬到的区块',
+    created_at timestamp not null default current_timestamp,
+    updated_at timestamp not null default current_timestamp,
+    unique index `invited_id`(`contract_address` asc,`chain_id` asc) using btree
+)engine='innodb', charset='utf8mb4', comment '事件监听器区块记录表，存放监听器已监听的最新区块数';

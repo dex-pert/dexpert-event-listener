@@ -34,7 +34,9 @@ func main() {
     g.ApplyBasic(g.GenerateModel("user_transaction"),
         g.GenerateModel("user_launch_tx"),
         g.GenerateModel("user_wallet"),
-        g.GenerateModel("user_swap_tx"))
+        g.GenerateModel("user_swap_tx"),
+        g.GenerateModel("listener_newest_blocknumber"),
+    )
     // Generate the code
     g.Execute()
 }

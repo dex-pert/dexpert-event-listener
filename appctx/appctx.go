@@ -18,7 +18,7 @@ type Context struct {
 }
 
 func NewContext(c *config.Config) *Context {
-    dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", c.MySQL.User, c.MySQL.Pass, c.MySQL.Host, c.MySQL.Port, c.MySQL.DB)
+    dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True", c.MySQL.User, c.MySQL.Pass, c.MySQL.Host, c.MySQL.Port, c.MySQL.DB)
     db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
         SkipDefaultTransaction: true,
         PrepareStmt:            true,

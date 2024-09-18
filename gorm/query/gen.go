@@ -16,15 +16,17 @@ import (
 )
 
 var (
-	Q               = new(Query)
-	UserLaunchTx    *userLaunchTx
-	UserSwapTx      *userSwapTx
-	UserTransaction *userTransaction
-	UserWallet      *userWallet
+	Q                         = new(Query)
+	ListenerNewestBlocknumber *listenerNewestBlocknumber
+	UserLaunchTx              *userLaunchTx
+	UserSwapTx                *userSwapTx
+	UserTransaction           *userTransaction
+	UserWallet                *userWallet
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
+	ListenerNewestBlocknumber = &Q.ListenerNewestBlocknumber
 	UserLaunchTx = &Q.UserLaunchTx
 	UserSwapTx = &Q.UserSwapTx
 	UserTransaction = &Q.UserTransaction
@@ -33,32 +35,35 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:              db,
-		UserLaunchTx:    newUserLaunchTx(db, opts...),
-		UserSwapTx:      newUserSwapTx(db, opts...),
-		UserTransaction: newUserTransaction(db, opts...),
-		UserWallet:      newUserWallet(db, opts...),
+		db:                        db,
+		ListenerNewestBlocknumber: newListenerNewestBlocknumber(db, opts...),
+		UserLaunchTx:              newUserLaunchTx(db, opts...),
+		UserSwapTx:                newUserSwapTx(db, opts...),
+		UserTransaction:           newUserTransaction(db, opts...),
+		UserWallet:                newUserWallet(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	UserLaunchTx    userLaunchTx
-	UserSwapTx      userSwapTx
-	UserTransaction userTransaction
-	UserWallet      userWallet
+	ListenerNewestBlocknumber listenerNewestBlocknumber
+	UserLaunchTx              userLaunchTx
+	UserSwapTx                userSwapTx
+	UserTransaction           userTransaction
+	UserWallet                userWallet
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:              db,
-		UserLaunchTx:    q.UserLaunchTx.clone(db),
-		UserSwapTx:      q.UserSwapTx.clone(db),
-		UserTransaction: q.UserTransaction.clone(db),
-		UserWallet:      q.UserWallet.clone(db),
+		db:                        db,
+		ListenerNewestBlocknumber: q.ListenerNewestBlocknumber.clone(db),
+		UserLaunchTx:              q.UserLaunchTx.clone(db),
+		UserSwapTx:                q.UserSwapTx.clone(db),
+		UserTransaction:           q.UserTransaction.clone(db),
+		UserWallet:                q.UserWallet.clone(db),
 	}
 }
 
@@ -72,27 +77,30 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:              db,
-		UserLaunchTx:    q.UserLaunchTx.replaceDB(db),
-		UserSwapTx:      q.UserSwapTx.replaceDB(db),
-		UserTransaction: q.UserTransaction.replaceDB(db),
-		UserWallet:      q.UserWallet.replaceDB(db),
+		db:                        db,
+		ListenerNewestBlocknumber: q.ListenerNewestBlocknumber.replaceDB(db),
+		UserLaunchTx:              q.UserLaunchTx.replaceDB(db),
+		UserSwapTx:                q.UserSwapTx.replaceDB(db),
+		UserTransaction:           q.UserTransaction.replaceDB(db),
+		UserWallet:                q.UserWallet.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	UserLaunchTx    IUserLaunchTxDo
-	UserSwapTx      IUserSwapTxDo
-	UserTransaction IUserTransactionDo
-	UserWallet      IUserWalletDo
+	ListenerNewestBlocknumber IListenerNewestBlocknumberDo
+	UserLaunchTx              IUserLaunchTxDo
+	UserSwapTx                IUserSwapTxDo
+	UserTransaction           IUserTransactionDo
+	UserWallet                IUserWalletDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		UserLaunchTx:    q.UserLaunchTx.WithContext(ctx),
-		UserSwapTx:      q.UserSwapTx.WithContext(ctx),
-		UserTransaction: q.UserTransaction.WithContext(ctx),
-		UserWallet:      q.UserWallet.WithContext(ctx),
+		ListenerNewestBlocknumber: q.ListenerNewestBlocknumber.WithContext(ctx),
+		UserLaunchTx:              q.UserLaunchTx.WithContext(ctx),
+		UserSwapTx:                q.UserSwapTx.WithContext(ctx),
+		UserTransaction:           q.UserTransaction.WithContext(ctx),
+		UserWallet:                q.UserWallet.WithContext(ctx),
 	}
 }
 

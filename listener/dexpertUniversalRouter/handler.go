@@ -42,17 +42,17 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
 
             block, err := ltCtx.EthClient.HeaderByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
             if err != nil {
-                slog.Error("PaymentFee event", "fail to get block,err", err, "block number", event.BlockNumber)
+                slog.Error("PaymentFee event", "fail to get block", err, "block number", event.BlockNumber)
                 return err
             }
             tokenSymbol, tokenName, tokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.TokenIn, ltCtx.EthClient)
             if err != nil {
-                slog.Error("PaymentFee event", "fail to get SymbolNameDecimalByAddress,err ", err, "token in", l.TokenIn)
+                slog.Error("PaymentFee event", "fail to get SymbolNameDecimalByAddress", err, "token in", l.TokenIn)
                 return err
             }
             feeTokenSymbol, feeTokenName, feeTokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.FeeToken, ltCtx.EthClient)
             if err != nil {
-                slog.Error("PaymentFee event", "erc20 getSymbolNameDecimalByAddress,err", err, "fee token", l.FeeToken)
+                slog.Error("PaymentFee event", "erc20 getSymbolNameDecimalByAddress", err, "fee token", l.FeeToken)
                 return err
             }
             fee := decimal.NewFromBigInt(l.FeeAmount, -int32(feeTokenDecimal)).String()
@@ -69,7 +69,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                 }
                 outAmounts, err := uniswapv2router.GetAmountsOutByAddressAndBlockNumber(ltCtx.UniswapV2RouterAddress, new(big.Int).SetUint64(event.BlockNumber), l.AmountIn, ltCtx.EthClient, swapPath)
                 if err != nil {
-                    slog.Error("PaymentFee event", "uniswapv2router getAmountsOutByAddressAndBlockNumber,err", err, "uniswapV2RouterAddress", ltCtx.UniswapV2RouterAddress, "block number", event.BlockNumber, "amount in", l.AmountIn, "path", swapPath)
+                    slog.Error("PaymentFee event", "uniswapv2router getAmountsOutByAddressAndBlockNumber", err, "uniswapV2RouterAddress", ltCtx.UniswapV2RouterAddress, "block number", event.BlockNumber, "amount in", l.AmountIn, "path", swapPath)
                     return err
                 }
                 volume = decimal.NewFromBigInt(outAmounts[len(outAmounts)-1], -ltCtx.USDTDecimal).String()
@@ -84,7 +84,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                 userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Payer.String())).Take()
                 if err != nil {
                     userWallet = &model.UserWallet{UID: 0}
-                    slog.Error("PaymentFee event", "fail to get user wallet,err is: ", err)
+                    slog.Error("PaymentFee event", "fail to get user wallet", err)
                 }
 
                 now := time.Now().UTC()
@@ -110,7 +110,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     CreatedAt:       now,
                 }
                 if err = tx.WithContext(ctx).UserSwapTx.Clauses(clause.OnConflict{DoNothing: true}).Create(&userSwapTx); err != nil {
-                    slog.Error("PaymentFee event", "fail to create user swap tx,err is: ", err)
+                    slog.Error("PaymentFee event", "fail to create user swap tx", err)
                     return errors.Wrap(err, "fail to create user swap tx")
                 }
 
@@ -129,15 +129,38 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     IdentifyAddress: event.TxHash.String(),
                     CreatedAt:       now,
                 }); err != nil {
-                    slog.Error("PaymentFee event", "fail to create user transaction,err is: ", err)
+                    slog.Error("PaymentFee event", "fail to create user transaction", err)
                     return errors.Wrap(err, "fail to create user transaction")
+                }
+
+                if err = tx.ListenerNewestBlocknumber.WithContext(ctx).Clauses(clause.OnConflict{DoUpdates: clause.AssignmentColumns([]string{"block_number", "updated_at"})}).
+                    Create(&model.ListenerNewestBlocknumber{
+                        ContractAddress: ltCtx.DexpertUniversalRouterAddress,
+                        ChainID:         int32(ltCtx.Chain.ChainId),
+                        BlockNumber:     int32(event.BlockNumber),
+                        CreatedAt:       time.Now().UTC(),
+                        UpdatedAt:       time.Now().UTC(),
+                    }); err != nil {
+                    slog.Error("PaymentFee event", "fail to refresh listener block number", err)
+                    return errors.Wrap(err, "fail to refresh listener block number")
                 }
 
                 return nil
             })
         default:
-            // do nothing
+            listenerNewestBlockNumber := query.ListenerNewestBlocknumber
+            if err := listenerNewestBlockNumber.WithContext(ctx).Clauses(clause.OnConflict{DoUpdates: clause.AssignmentColumns([]string{"block_number", "updated_at"})}).
+                Create(&model.ListenerNewestBlocknumber{
+                    ContractAddress: ltCtx.DexpertUniversalRouterAddress,
+                    ChainID:         int32(ltCtx.Chain.ChainId),
+                    BlockNumber:     int32(event.BlockNumber),
+                    CreatedAt:       time.Now().UTC(),
+                    UpdatedAt:       time.Now().UTC(),
+                }); err != nil {
+                slog.Error("PaymentFee event", "fail to refresh listener block number", err)
+                return errors.Wrap(err, "fail to refresh listener block number")
+            }
+            return nil
         }
-        return nil
     }
 }

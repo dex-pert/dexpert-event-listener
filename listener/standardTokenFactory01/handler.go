@@ -60,7 +60,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                 }
 
                 now := time.Now().UTC()
-                eventTime := time.Unix(int64(block.Time), 0)
+                eventTime := time.Unix(int64(block.Time), 0).UTC()
                 userLaunchTx := model.UserLaunchTx{
                     UID:             userWallet.UID,
                     ContractAddress: l.Token.String(),
@@ -101,11 +101,34 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     return errors.Wrap(err, "fail to create user transaction")
                 }
 
+                if err = tx.ListenerNewestBlocknumber.WithContext(ctx).Clauses(clause.OnConflict{DoUpdates: clause.AssignmentColumns([]string{"block_number", "updated_at"})}).
+                    Create(&model.ListenerNewestBlocknumber{
+                        ContractAddress: ltCtx.StandardTokenFactory01Address,
+                        ChainID:         int32(ltCtx.Chain.ChainId),
+                        BlockNumber:     int32(event.BlockNumber),
+                        CreatedAt:       time.Now().UTC(),
+                        UpdatedAt:       time.Now().UTC(),
+                    }); err != nil {
+                    slog.Error("PaymentFee event", "fail to refresh listener block number", err)
+                    return errors.Wrap(err, "fail to refresh listener block number")
+                }
+
                 return nil
             })
         default:
-            // do nothing
+            listenerNewestBlockNumber := query.ListenerNewestBlocknumber
+            if err := listenerNewestBlockNumber.WithContext(ctx).Clauses(clause.OnConflict{DoUpdates: clause.AssignmentColumns([]string{"block_number", "updated_at"})}).
+                Create(&model.ListenerNewestBlocknumber{
+                    ContractAddress: ltCtx.StandardTokenFactory01Address,
+                    ChainID:         int32(ltCtx.Chain.ChainId),
+                    BlockNumber:     int32(event.BlockNumber),
+                    CreatedAt:       time.Now().UTC(),
+                    UpdatedAt:       time.Now().UTC(),
+                }); err != nil {
+                slog.Error("PaymentFee event", "fail to refresh listener block number", err)
+                return errors.Wrap(err, "fail to refresh listener block number")
+            }
+            return nil
         }
-        return nil
     }
 }
