@@ -52,6 +52,12 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
             fee := decimal.NewFromBigInt(_fees, -(ltCtx.FeeDecimal)).String()
 
             return query.Q.Transaction(func(tx *query.Query) error {
+                contractAddress := l.Token.String()
+                if len(contractAddress) == 0 {
+                    slog.Error("TokenCreated event", "contract address is null", contractAddress, "block number", event.BlockNumber, "token", l.Token, "owner", l.Owner.String())
+                    return nil
+                }
+
                 uw := tx.UserWallet
                 userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Owner.String())).Take()
                 if err != nil {
@@ -63,7 +69,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                 eventTime := time.Unix(int64(block.Time), 0).UTC()
                 userLaunchTx := model.UserLaunchTx{
                     UID:             userWallet.UID,
-                    ContractAddress: l.Token.String(),
+                    ContractAddress: contractAddress,
                     ChainID:         int32(ltCtx.Chain.ChainId),
                     PairAddress:     "",
                     Fee:             fee,
@@ -81,6 +87,11 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     slog.Error("TokenCreated event", "fail to create user launch tx,err", err)
                     return errors.Wrap(err, "fail to create user launch tx")
                 }
+                if userLaunchTx.ID == 0 {
+                    err = errors.Wrap(err, "new user launch tx is is 0")
+                    slog.Error("PaymentFee event", "userLaunchTx.ID == 0", err, "contract address", contractAddress)
+                    return err
+                }
 
                 if err = tx.WithContext(ctx).UserTransaction.Clauses(clause.OnConflict{DoNothing: true}).Create(&model.UserTransaction{
                     UID:             userWallet.UID,
@@ -94,7 +105,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     Fee:             fee,
                     FeeTokenSymbol:  ltCtx.FeeSymbol,
                     FeeTokenDecimal: ltCtx.FeeDecimal,
-                    IdentifyAddress: l.Token.String(),
+                    IdentifyAddress: contractAddress,
                     CreatedAt:       now,
                 }); err != nil {
                     slog.Error("TokenCreated event", "fail to create user transaction,err", err)

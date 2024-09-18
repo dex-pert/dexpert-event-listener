@@ -102,6 +102,12 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
             }
 
             return query.Q.Transaction(func(tx *query.Query) error {
+                txStr := event.TxHash.String()
+                if len(txStr) == 0 {
+                    slog.Error("PaymentFee event", "tx hash is null", txStr, "block number", event.BlockNumber, "token in", l.TokenIn)
+                    return nil
+                }
+
                 uw := tx.UserWallet
                 userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Payer.String())).Take()
                 if err != nil {
@@ -114,9 +120,9 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                 userSwapTx := model.UserSwapTx{
                     UID:             userWallet.UID,
                     Address:         l.Payer.String(),
-                    Tx:              event.TxHash.String(),
+                    Tx:              txStr,
                     TokenSymbol:     tokenSymbol,
-                    AmountIn:        decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal)).String(),
+                    AmountIn:        decimal.NewFromBigInt(l.AmountIn, tokenDecimal).String(),
                     TokenIn:         l.TokenIn.String(),
                     TransactionTime: eventTime,
                     Fee:             fee,
@@ -135,6 +141,11 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     slog.Error("PaymentFee event", "fail to create user swap tx", err)
                     return errors.Wrap(err, "fail to create user swap tx")
                 }
+                if userSwapTx.ID == 0 {
+                    err = errors.Wrap(err, "new user swap tx is is 0")
+                    slog.Error("PaymentFee event", "userSwapTx.ID == 0", err, "tx", txStr)
+                    return err
+                }
 
                 if err = tx.WithContext(ctx).UserTransaction.Clauses(clause.OnConflict{DoNothing: true}).Create(&model.UserTransaction{
                     UID:             userWallet.UID,
@@ -148,7 +159,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     Fee:             fee,
                     FeeTokenSymbol:  feeTokenSymbol,
                     FeeTokenDecimal: feeTokenDecimal,
-                    IdentifyAddress: event.TxHash.String(),
+                    IdentifyAddress: txStr,
                     CreatedAt:       now,
                 }); err != nil {
                     slog.Error("PaymentFee event", "fail to create user transaction", err)
