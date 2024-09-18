@@ -13,11 +13,11 @@ chain_config:
     standard_token_factory01_address: "0xDDCBc0CD4a80836801Aba6767FFE20995aaC449F"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 20748885
+    standard_token_factory01_block_number: 20748885 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     dexpert_universal_router_address: "0xdF2bf594cCaF8199348E9b0a6d3767dd6adB998b"
-    dexpert_universal_router_block_number: 20711609
+    dexpert_universal_router_block_number: 20711609 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     dexpert_universal_router_weth_address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
@@ -28,14 +28,14 @@ chain_config:
     chain_name: "ethereum-sepolia"
     url: "https://eth-sepolia.g.alchemy.com/v2/gOeoBV9mlFL1pWj7qbKEdlB6pXTfNum6"
     uniswap_v2_router_address: "0xb22cE52905d25987321d6BF73d1705886f1Cc4F4"
-    standard_token_factory01_address: "0x822935C2240E6A0b5C96E3eA355446a83ed12C03"
+    standard_token_factory01_address: "0x51777D3544Bc2489F667522B60766EA3EaDC4AE0"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 6641775
+    standard_token_factory01_block_number: 6690181 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     dexpert_universal_router_address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
-    dexpert_universal_router_block_number: 6441775
+    dexpert_universal_router_block_number: 6441775 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xB72bC8971D5e595776592E8290bE6F31937097c6"
     dexpert_universal_router_weth_address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
@@ -49,11 +49,11 @@ chain_config:
     standard_token_factory01_address: "0xF2F0cC2BAB14Abbdf3b2AFcAD345dE08225EBaf5"
     standard_token_factory01_fee_symbol: "CFX"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 104670012
+    standard_token_factory01_block_number: 104670012 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_CONFLUX_ESPACE_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_CONFLUX_ESPACE_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     dexpert_universal_router_address: "0x962408EDa28732fAcE8d2BD4056628de044eeEc1"
-    dexpert_universal_router_block_number: 103999855
+    dexpert_universal_router_block_number: 103999855 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xfe97E85d13ABD9c1c33384E796F10B73905637cE"
     dexpert_universal_router_weth_address: "0x14b2D3bC65e74DAE1030EAFd8ac30c533c976A9b"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
@@ -67,11 +67,11 @@ chain_config:
     standard_token_factory01_address: "0x69C3926284699989B5dF13432B80171F8b3aCBe9"
     standard_token_factory01_fee_symbol: "BTC"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 4680991
+    standard_token_factory01_block_number: 4680991 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_BITLAYER_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_BITLAYER_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     dexpert_universal_router_address: "0x4e86cBD95DeD0b00ca0D74713eb6596e4A2B4fD2"
-    dexpert_universal_router_block_number: 4566111
+    dexpert_universal_router_block_number: 4566111 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xfe9f969faf8ad72a83b761138bf25de87eff9dd2"
     dexpert_universal_router_weth_address: "0xfF204e2681A6fA0e2C3FaDe68a1B28fb90E4Fc5F"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
@@ -85,11 +85,11 @@ chain_config:
     standard_token_factory01_address: "0xC8549d0d81F17BF8010D618a62f260BaF8F7F0e4"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 3209273
+    standard_token_factory01_block_number: 3209273 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_MANTA_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_MANTA_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     dexpert_universal_router_address: "0xAB255ECA00D1816f35FED0cdebeA5A4C26C7C311"
-    dexpert_universal_router_block_number: 3198603
+    dexpert_universal_router_block_number: 3198603 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xf417F5A458eC102B90352F697D6e2Ac3A3d2851f"
     dexpert_universal_router_weth_address: "0x0Dc808adcE2099A9F62AA87D9670745AbA741746"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
@@ -103,11 +103,11 @@ chain_config:
     standard_token_factory01_address: "0xfB05D2228C242b85f12E743DB756E7ef23A90D8c"
     standard_token_factory01_fee_symbol: "GAS"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 368634
+    standard_token_factory01_block_number: 368634 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_NEO_X_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_NEO_X_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     dexpert_universal_router_address: "0x2cA866d3FA566fE66e86087Da3a3b8e534F9A588"
-    dexpert_universal_router_block_number: 331871
+    dexpert_universal_router_block_number: 331871 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0x68b55E582961968ef7758D8454D8A3e78c692e0B"
     dexpert_universal_router_weth_address: "0xdE41591ED1f8ED1484aC2CD8ca0876428de60EfF"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
@@ -121,11 +121,11 @@ chain_config:
     standard_token_factory01_address: "0xfA9B00d440FadB9802fBF620c7cc7A4541e4d5F9"
     standard_token_factory01_fee_symbol: "5ire"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 2205361
+    standard_token_factory01_block_number: 2205361 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_5IRE_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_5IRE_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     dexpert_universal_router_address: "0x3CCB2da5792C2D4057948b1f5d4C71D98C00F399"
-    dexpert_universal_router_block_number: 2205278
+    dexpert_universal_router_block_number: 2205278 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: ""
     dexpert_universal_router_weth_address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"

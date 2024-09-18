@@ -28,10 +28,10 @@ chain_config:
     chain_name: "ethereum-sepolia"
     url: "https://eth-sepolia.g.alchemy.com/v2/gOeoBV9mlFL1pWj7qbKEdlB6pXTfNum6"
     uniswap_v2_router_address: "0xb22cE52905d25987321d6BF73d1705886f1Cc4F4"
-    standard_token_factory01_address: "0x822935C2240E6A0b5C96E3eA355446a83ed12C03"
+    standard_token_factory01_address: "0x51777D3544Bc2489F667522B60766EA3EaDC4AE0"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 6641775 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+    standard_token_factory01_block_number: 6690181 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     dexpert_universal_router_address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
