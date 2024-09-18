@@ -21,6 +21,9 @@ chain_config:
     dexpert_universal_router_usdt_address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     dexpert_universal_router_weth_address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_eth_name: "Ether"
+    dexpert_universal_router_eth_symbol: "ETH"
+    dexpert_universal_router_eth_decimal: 18
     dexpert_universal_router_usdt_decimal: 6
     dexpert_universal_router_is_close: ${IS_CLOSE_ETHEREUM_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
@@ -39,6 +42,9 @@ chain_config:
     dexpert_universal_router_usdt_address: "0xB72bC8971D5e595776592E8290bE6F31937097c6"
     dexpert_universal_router_weth_address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_eth_name: "Ether"
+    dexpert_universal_router_eth_symbol: "ETH"
+    dexpert_universal_router_eth_decimal: 18
     dexpert_universal_router_usdt_decimal: 6
     dexpert_universal_router_is_close: ${IS_CLOSE_ETHEREUM_SEPOLIA_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_SEPOLIA_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
@@ -57,6 +63,9 @@ chain_config:
     dexpert_universal_router_usdt_address: "0xfe97E85d13ABD9c1c33384E796F10B73905637cE"
     dexpert_universal_router_weth_address: "0x14b2D3bC65e74DAE1030EAFd8ac30c533c976A9b"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_eth_name: "CFX"
+    dexpert_universal_router_eth_symbol: "CFX"
+    dexpert_universal_router_eth_decimal: 18
     dexpert_universal_router_usdt_decimal: 18
     dexpert_universal_router_is_close: ${IS_CLOSE_CONFLUX_ESPACE_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_CONFLUX_ESPACE_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
@@ -75,6 +84,9 @@ chain_config:
     dexpert_universal_router_usdt_address: "0xfe9f969faf8ad72a83b761138bf25de87eff9dd2"
     dexpert_universal_router_weth_address: "0xfF204e2681A6fA0e2C3FaDe68a1B28fb90E4Fc5F"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_eth_name: "BTC"
+    dexpert_universal_router_eth_symbol: "BTC"
+    dexpert_universal_router_eth_decimal: 18
     dexpert_universal_router_usdt_decimal: 6
     dexpert_universal_router_is_close: ${IS_CLOSE_BITLAYER_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_BITLAYER_MAINNET_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
@@ -93,6 +105,9 @@ chain_config:
     dexpert_universal_router_usdt_address: "0xf417F5A458eC102B90352F697D6e2Ac3A3d2851f"
     dexpert_universal_router_weth_address: "0x0Dc808adcE2099A9F62AA87D9670745AbA741746"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_eth_name: "ETH"
+    dexpert_universal_router_eth_symbol: "ETH"
+    dexpert_universal_router_eth_decimal: 18
     dexpert_universal_router_usdt_decimal: 6
     dexpert_universal_router_is_close: ${IS_CLOSE_MANTA_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_MANTA_MAINNET_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
@@ -111,6 +126,9 @@ chain_config:
     dexpert_universal_router_usdt_address: "0x68b55E582961968ef7758D8454D8A3e78c692e0B"
     dexpert_universal_router_weth_address: "0xdE41591ED1f8ED1484aC2CD8ca0876428de60EfF"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_eth_name: "GAS"
+    dexpert_universal_router_eth_symbol: "GAS"
+    dexpert_universal_router_eth_decimal: 18
     dexpert_universal_router_usdt_decimal: 6
     dexpert_universal_router_is_close: ${IS_CLOSE_NEO_X_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_NEO_X_MAINNET_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
@@ -129,6 +147,9 @@ chain_config:
     dexpert_universal_router_usdt_address: ""
     dexpert_universal_router_weth_address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
+    dexpert_universal_router_eth_name: "5ire"
+    dexpert_universal_router_eth_symbol: "5ire"
+    dexpert_universal_router_eth_decimal: 18
     dexpert_universal_router_usdt_decimal: 0
     dexpert_universal_router_is_close: ${IS_CLOSE_5IRE_MAINNET_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭, usdt address 和 decimal 需要配齐
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_5IRE_MAINNET_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用

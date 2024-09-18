@@ -21,6 +21,9 @@ type Context struct {
     USDTAddress                                         string
     WethAddress                                         string
     EthAddress                                          string
+    EthName                                             string
+    EthSymbol                                           string
+    EthDecimal                                          int32
     USDTDecimal                                         int32
     UniswapV2RouterAddress                              string
     DexpertUniversalRouterIsStartSavedNewestBlockNumber bool
@@ -71,6 +74,9 @@ func NewContext(c *ContextParam, opts ...Option) *Context {
         USDTAddress:                   c.ChainConfig.DexpertUniversalRouterUSDTAddress,
         WethAddress:                   c.ChainConfig.DexpertUniversalRouterWethAddress,
         EthAddress:                    c.ChainConfig.DexpertUniversalRouterEthAddress,
+        EthName:                       c.ChainConfig.DexpertUniversalRouterEthName,
+        EthSymbol:                     c.ChainConfig.DexpertUniversalRouterEthSymbol,
+        EthDecimal:                    c.ChainConfig.DexpertUniversalRouterEthDecimal,
         USDTDecimal:                   c.ChainConfig.DexpertUniversalRouterUSDTDecimal,
         DexpertUniversalRouterIsStartSavedNewestBlockNumber: c.ChainConfig.DexpertUniversalRouterIsStartSavedNewestBlockNumber,
     }

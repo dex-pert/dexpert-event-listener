@@ -7,18 +7,7 @@ import (
     "github.com/ethereum/go-ethereum/ethclient"
 )
 
-const (
-    defaultAddress  = "0x0000000000000000000000000000000000000000"
-    defaultSymbol   = "ETH"
-    defaultName     = "Ether"
-    defaultDecimals = 18
-)
-
-func GetSymbolNameDecimalByAddress(tokenAddress common.Address, client *ethclient.Client) (symbol string, name string, decimals uint8, err error) {
-    if tokenAddress.String() == defaultAddress {
-        return defaultSymbol, defaultName, defaultDecimals, nil
-    }
-
+func GetSymbolNameDecimalByAddress(tokenAddress common.Address, client *ethclient.Client) (symbol string, name string, decimals int32, err error) {
     erc20, err := NewERC20(tokenAddress, client)
     if err != nil {
         return "", "", 0, errors.Wrap(err, "failed to new erc20")
@@ -40,9 +29,10 @@ func GetSymbolNameDecimalByAddress(tokenAddress common.Address, client *ethclien
     if err != nil {
         return "", "", 0, errors.Wrap(err, "failed to get erc20 name")
     }
-    decimals, err = erc20.Decimals(&opt)
+    _decimals, err := erc20.Decimals(&opt)
     if err != nil {
         return "", "", 0, errors.Wrap(err, "failed to get erc20 decimals")
     }
+    decimals = int32(_decimals)
     return symbol, name, decimals, nil
 }

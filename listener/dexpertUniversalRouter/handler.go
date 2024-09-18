@@ -45,21 +45,43 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                 slog.Error("PaymentFee event", "fail to get block", err, "block number", event.BlockNumber)
                 return err
             }
-            tokenSymbol, tokenName, tokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.TokenIn, ltCtx.EthClient)
-            if err != nil {
-                slog.Error("PaymentFee event", "fail to get SymbolNameDecimalByAddress", err, "token in", l.TokenIn)
-                return err
-            }
-            feeTokenSymbol, feeTokenName, feeTokenDecimal, err := erc20.GetSymbolNameDecimalByAddress(l.FeeToken, ltCtx.EthClient)
-            if err != nil {
-                slog.Error("PaymentFee event", "erc20 getSymbolNameDecimalByAddress", err, "fee token", l.FeeToken)
-                return err
-            }
-            fee := decimal.NewFromBigInt(l.FeeAmount, -int32(feeTokenDecimal)).String()
 
+            var (
+                tokenSymbol, tokenName string
+                tokenDecimal           int32
+            )
+            if l.TokenIn.String() == ltCtx.EthAddress || l.TokenIn.String() == ltCtx.WethAddress {
+                tokenSymbol = ltCtx.EthSymbol
+                tokenName = ltCtx.EthName
+                tokenDecimal = ltCtx.EthDecimal
+            } else {
+                tokenSymbol, tokenName, tokenDecimal, err = erc20.GetSymbolNameDecimalByAddress(l.TokenIn, ltCtx.EthClient)
+                if err != nil {
+                    slog.Error("PaymentFee event", "fail to get SymbolNameDecimalByAddress", err, "token in", l.TokenIn)
+                    return err
+                }
+            }
+
+            var (
+                feeTokenSymbol, feeTokenName string
+                feeTokenDecimal              int32
+            )
+            if l.FeeToken.String() == ltCtx.EthAddress || l.FeeToken.String() == ltCtx.WethAddress {
+                feeTokenSymbol = ltCtx.EthSymbol
+                feeTokenName = ltCtx.EthName
+                feeTokenDecimal = ltCtx.EthDecimal
+            } else {
+                feeTokenSymbol, feeTokenName, feeTokenDecimal, err = erc20.GetSymbolNameDecimalByAddress(l.FeeToken, ltCtx.EthClient)
+                if err != nil {
+                    slog.Error("PaymentFee event", "erc20 getSymbolNameDecimalByAddress", err, "fee token", l.FeeToken)
+                    return err
+                }
+            }
+
+            fee := decimal.NewFromBigInt(l.FeeAmount, -feeTokenDecimal).String()
             volume := ""
             if l.TokenIn.String() == ltCtx.USDTAddress {
-                volume = decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal)).String()
+                volume = decimal.NewFromBigInt(l.AmountIn, -tokenDecimal).String()
             } else {
                 var swapPath []common.Address
                 if l.TokenIn.String() == ltCtx.EthAddress || l.TokenIn.String() == ltCtx.WethAddress {
@@ -103,9 +125,9 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     ChainName:       ltCtx.Chain.ChainName,
                     SwapType:        int32(l.SwapType.Int64()),
                     TokenName:       tokenName,
-                    Decimal:         int32(tokenDecimal),
+                    Decimal:         tokenDecimal,
                     FeeTokenName:    feeTokenName,
-                    FeeDecimal:      int32(feeTokenDecimal),
+                    FeeDecimal:      feeTokenDecimal,
                     FeeTokenSymbol:  feeTokenSymbol,
                     CreatedAt:       now,
                 }
@@ -125,7 +147,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     ChainID:         int32(ltCtx.Chain.ChainId),
                     Fee:             fee,
                     FeeTokenSymbol:  feeTokenSymbol,
-                    FeeTokenDecimal: int32(feeTokenDecimal),
+                    FeeTokenDecimal: feeTokenDecimal,
                     IdentifyAddress: event.TxHash.String(),
                     CreatedAt:       now,
                 }); err != nil {

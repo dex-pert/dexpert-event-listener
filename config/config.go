@@ -32,6 +32,9 @@ type ChainConfig struct {
     DexpertUniversalRouterUSDTAddress                   string `yaml:"dexpert_universal_router_usdt_address" json:"dexpert_universal_router_usdt_address,omitempty"`
     DexpertUniversalRouterWethAddress                   string `yaml:"dexpert_universal_router_weth_address" json:"dexpert_universal_router_weth_address,omitempty"`
     DexpertUniversalRouterEthAddress                    string `yaml:"dexpert_universal_router_eth_address" json:"dexpert_universal_router_eth_address,omitempty"`
+    DexpertUniversalRouterEthName                       string `yaml:"dexpert_universal_router_eth_name" json:"dexpert_universal_router_eth_name,omitempty"`
+    DexpertUniversalRouterEthSymbol                     string `yaml:"dexpert_universal_router_eth_symbol" json:"dexpert_universal_router_eth_symbol,omitempty"`
+    DexpertUniversalRouterEthDecimal                    int32  `yaml:"dexpert_universal_router_eth_decimal" json:"dexpert_universal_router_eth_decimal"`
     DexpertUniversalRouterUSDTDecimal                   int32  `yaml:"dexpert_universal_router_usdt_decimal" json:"dexpert_universal_router_usdt_decimal,omitempty"`
     DexpertUniversalRouterIsClose                       bool   `yaml:"dexpert_universal_router_is_close" json:"dexpert_universal_router_is_close,omitempty"`
     DexpertUniversalRouterIsStartSavedNewestBlockNumber bool   `yaml:"dexpert_universal_router_is_start_saved_newest_block_number"`
