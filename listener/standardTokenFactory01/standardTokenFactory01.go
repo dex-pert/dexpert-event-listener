@@ -19,7 +19,7 @@ func newStandardTokenFactory01EventListener(ltCtx *Context) (*el.EventListener, 
     }
 
     blockNumber := ltCtx.BlockNumber
-    if ltCtx.StandardTokenFactory01IsStartSavedNewestBlockNumber {
+    if ltCtx.IsStartSavedNewestBlockNumber {
         ul := query.ListenerNewestBlocknumber
         record, err := ul.WithContext(context.Background()).Where(ul.ContractAddress.Eq(ltCtx.StandardTokenFactory01Address), ul.ChainID.Eq(int32(ltCtx.Chain.ChainId))).Take()
         if err != nil {
@@ -33,6 +33,14 @@ func newStandardTokenFactory01EventListener(ltCtx *Context) (*el.EventListener, 
                 blockNumber = int64(record.BlockNumber)
             }
         }
+    }
+    if ltCtx.IsUseNewestBlockNumber {
+        _newestBlockNumber, err := ltCtx.EthClient.BlockNumber(context.Background())
+        if err != nil {
+            slog.Error("newStandardTokenFactory01EventListener", "failed to get newest block number", err, "chain_id", ltCtx.Chain.ChainId)
+            return nil, errors.Wrap(err, "failed to get newest block number")
+        }
+        blockNumber = int64(_newestBlockNumber)
     }
 
     tokenFactory, err := el.NewContract(ltCtx.StandardTokenFactory01Address, ltCtx.ABIStr, big.NewInt(blockNumber), big.NewInt(ltCtx.Step))

@@ -27,6 +27,7 @@ type ChainConfig struct {
     StandardTokenFactory01BlockNumber                   int64  `yaml:"standard_token_factory01_block_number" json:"standard_token_factory01_block_number,omitempty"`
     StandardTokenFactory01IsClose                       bool   `yaml:"standard_token_factory01_is_close" json:"standard_token_factory01_is_close,omitempty"`
     StandardTokenFactory01IsStartSavedNewestBlockNumber bool   `yaml:"standard_token_factory01_is_start_saved_newest_block_number"`
+    StandardTokenFactory01IsUseNewestBlockNumber        bool   `yaml:"standard_token_factory01_is_use_newest_block_number"`
     DexpertUniversalRouterAddress                       string `yaml:"dexpert_universal_router_address" json:"dexpert_universal_router_address,omitempty"`
     DexpertUniversalRouterBlockNumber                   int64  `yaml:"dexpert_universal_router_block_number" json:"dexpert_universal_router_block_number,omitempty"`
     DexpertUniversalRouterUSDTAddress                   string `yaml:"dexpert_universal_router_usdt_address" json:"dexpert_universal_router_usdt_address,omitempty"`
@@ -38,4 +39,5 @@ type ChainConfig struct {
     DexpertUniversalRouterUSDTDecimal                   int32  `yaml:"dexpert_universal_router_usdt_decimal" json:"dexpert_universal_router_usdt_decimal,omitempty"`
     DexpertUniversalRouterIsClose                       bool   `yaml:"dexpert_universal_router_is_close" json:"dexpert_universal_router_is_close,omitempty"`
     DexpertUniversalRouterIsStartSavedNewestBlockNumber bool   `yaml:"dexpert_universal_router_is_start_saved_newest_block_number"`
+    DexpertUniversalRouterIsUseNewestBlockNumber        bool   `yaml:"dexpert_universal_router_is_use_newest_block_number"`
 }

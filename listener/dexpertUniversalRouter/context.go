@@ -12,21 +12,22 @@ const (
 )
 
 type Context struct {
-    EthClient                                           *ethclient.Client
-    Chain                                               el.ChainConfig
-    DexpertUniversalRouterAddress                       string
-    Step                                                int64
-    ABIStr                                              string
-    BlockNumber                                         int64
-    USDTAddress                                         string
-    WethAddress                                         string
-    EthAddress                                          string
-    EthName                                             string
-    EthSymbol                                           string
-    EthDecimal                                          int32
-    USDTDecimal                                         int32
-    UniswapV2RouterAddress                              string
-    DexpertUniversalRouterIsStartSavedNewestBlockNumber bool
+    EthClient                     *ethclient.Client
+    Chain                         el.ChainConfig
+    DexpertUniversalRouterAddress string
+    Step                          int64
+    ABIStr                        string
+    BlockNumber                   int64
+    USDTAddress                   string
+    WethAddress                   string
+    EthAddress                    string
+    EthName                       string
+    EthSymbol                     string
+    EthDecimal                    int32
+    USDTDecimal                   int32
+    UniswapV2RouterAddress        string
+    IsStartSavedNewestBlockNumber bool
+    IsUseNewestBlockNumber        bool
 }
 
 type ContextParam struct {
@@ -78,6 +79,7 @@ func NewContext(c *ContextParam, opts ...Option) *Context {
         EthSymbol:                     c.ChainConfig.DexpertUniversalRouterEthSymbol,
         EthDecimal:                    c.ChainConfig.DexpertUniversalRouterEthDecimal,
         USDTDecimal:                   c.ChainConfig.DexpertUniversalRouterUSDTDecimal,
-        DexpertUniversalRouterIsStartSavedNewestBlockNumber: c.ChainConfig.DexpertUniversalRouterIsStartSavedNewestBlockNumber,
+        IsStartSavedNewestBlockNumber: c.ChainConfig.DexpertUniversalRouterIsStartSavedNewestBlockNumber,
+        IsUseNewestBlockNumber:        c.ChainConfig.DexpertUniversalRouterIsUseNewestBlockNumber,
     }
 }
