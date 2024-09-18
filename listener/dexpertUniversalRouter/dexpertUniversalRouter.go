@@ -4,6 +4,10 @@ import (
     el "github.com/x1rh/event-listener"
     "math/big"
     "github.com/pkg/errors"
+    "dexpert-event-listener/gorm/query"
+    "gorm.io/gorm"
+    "context"
+    "log/slog"
 )
 
 func newDexpertUniversalRouterEventListener(ltCtx *Context) (*el.EventListener, error) {
@@ -13,7 +17,23 @@ func newDexpertUniversalRouterEventListener(ltCtx *Context) (*el.EventListener, 
         URL:       ltCtx.Chain.URL,
     }
 
-    universalRouter, err := el.NewContract(ltCtx.DexpertUniversalRouterAddress, ltCtx.ABIStr, big.NewInt(ltCtx.BlockNumber), big.NewInt(ltCtx.Step))
+    blockNumber := ltCtx.BlockNumber
+    if ltCtx.DexpertUniversalRouterIsStartSavedNewestBlockNumber {
+        ul := query.UserSwapTx
+        newestUserSwapTx, err := ul.WithContext(context.Background()).Order(ul.BlockNumber.Desc()).Take()
+        if err != nil {
+            slog.Error("newDexpertUniversalRouterEventListener", "err", err.Error())
+            if !errors.Is(err, gorm.ErrRecordNotFound) {
+                return nil, errors.Wrap(err, "fail to get newest user swap tx")
+            }
+        } else {
+            if newestUserSwapTx.BlockNumber > int32(blockNumber) {
+                blockNumber = int64(newestUserSwapTx.BlockNumber)
+            }
+        }
+    }
+
+    universalRouter, err := el.NewContract(ltCtx.DexpertUniversalRouterAddress, ltCtx.ABIStr, big.NewInt(blockNumber), big.NewInt(ltCtx.Step))
     if err != nil {
         panic(err)
     }

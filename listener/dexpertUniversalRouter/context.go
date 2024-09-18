@@ -12,18 +12,18 @@ const (
 )
 
 type Context struct {
-    EthClient                     *ethclient.Client
-    Chain                         el.ChainConfig
-    DexpertUniversalRouterAddress string
-    Step                          int64
-    ABIStr                        string
-    BlockNumber                   int64
-    USDTAddress                   string
-    WethAddress                   string
-    EthAddress                    string
-    USDTDecimal                   int32
-
-    UniswapV2RouterAddress string
+    EthClient                                           *ethclient.Client
+    Chain                                               el.ChainConfig
+    DexpertUniversalRouterAddress                       string
+    Step                                                int64
+    ABIStr                                              string
+    BlockNumber                                         int64
+    USDTAddress                                         string
+    WethAddress                                         string
+    EthAddress                                          string
+    USDTDecimal                                         int32
+    UniswapV2RouterAddress                              string
+    DexpertUniversalRouterIsStartSavedNewestBlockNumber bool
 }
 
 type ContextParam struct {
@@ -72,5 +72,6 @@ func NewContext(c *ContextParam, opts ...Option) *Context {
         WethAddress:                   c.ChainConfig.DexpertUniversalRouterWethAddress,
         EthAddress:                    c.ChainConfig.DexpertUniversalRouterEthAddress,
         USDTDecimal:                   c.ChainConfig.DexpertUniversalRouterUSDTDecimal,
+        DexpertUniversalRouterIsStartSavedNewestBlockNumber: c.ChainConfig.DexpertUniversalRouterIsStartSavedNewestBlockNumber,
     }
 }

@@ -12,15 +12,16 @@ const (
 )
 
 type Context struct {
-    EthClient                     *ethclient.Client
-    Chain                         el.ChainConfig
-    UniswapV2RouterAddress        string
-    StandardTokenFactory01Address string
-    Step                          int64
-    FeeSymbol                     string
-    FeeDecimal                    int32
-    BlockNumber                   int64
-    ABIStr                        string
+    EthClient                                           *ethclient.Client
+    Chain                                               el.ChainConfig
+    UniswapV2RouterAddress                              string
+    StandardTokenFactory01Address                       string
+    Step                                                int64
+    FeeSymbol                                           string
+    FeeDecimal                                          int32
+    BlockNumber                                         int64
+    ABIStr                                              string
+    StandardTokenFactory01IsStartSavedNewestBlockNumber bool
 }
 
 type ContextParam struct {
@@ -67,5 +68,6 @@ func NewContext(c *ContextParam, opts ...Option) *Context {
         StandardTokenFactory01Address: c.ChainConfig.StandardTokenFactory01Address,
         FeeSymbol:                     c.ChainConfig.StandardTokenFactory01FeeSymbol,
         FeeDecimal:                    c.ChainConfig.StandardTokenFactory01FeeDecimal,
+        StandardTokenFactory01IsStartSavedNewestBlockNumber: c.ChainConfig.StandardTokenFactory01IsStartSavedNewestBlockNumber,
     }
 }
