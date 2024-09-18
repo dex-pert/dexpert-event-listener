@@ -40,6 +40,8 @@ func newUserLaunchTx(db *gorm.DB, opts ...gen.DOOption) userLaunchTx {
 	_userLaunchTx.Tx = field.NewString(tableName, "tx")
 	_userLaunchTx.Owner = field.NewString(tableName, "owner")
 	_userLaunchTx.Level = field.NewString(tableName, "level")
+	_userLaunchTx.CreatedAt = field.NewTime(tableName, "created_at")
+	_userLaunchTx.BlockNumber = field.NewInt32(tableName, "block_number")
 
 	_userLaunchTx.fillFieldMap()
 
@@ -63,6 +65,8 @@ type userLaunchTx struct {
 	Tx              field.String // 交易哈希值
 	Owner           field.String // token owner address, eth:42|solana:44|ton:33|btc:
 	Level           field.String // 等级
+	CreatedAt       field.Time
+	BlockNumber     field.Int32 // 区块数
 
 	fieldMap map[string]field.Expr
 }
@@ -92,6 +96,8 @@ func (u *userLaunchTx) updateTableName(table string) *userLaunchTx {
 	u.Tx = field.NewString(table, "tx")
 	u.Owner = field.NewString(table, "owner")
 	u.Level = field.NewString(table, "level")
+	u.CreatedAt = field.NewTime(table, "created_at")
+	u.BlockNumber = field.NewInt32(table, "block_number")
 
 	u.fillFieldMap()
 
@@ -120,7 +126,7 @@ func (u *userLaunchTx) GetFieldByName(fieldName string) (field.OrderExpr, bool) 
 }
 
 func (u *userLaunchTx) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 13)
+	u.fieldMap = make(map[string]field.Expr, 15)
 	u.fieldMap["Id"] = u.ID
 	u.fieldMap["uid"] = u.UID
 	u.fieldMap["contract_address"] = u.ContractAddress
@@ -134,6 +140,8 @@ func (u *userLaunchTx) fillFieldMap() {
 	u.fieldMap["tx"] = u.Tx
 	u.fieldMap["owner"] = u.Owner
 	u.fieldMap["level"] = u.Level
+	u.fieldMap["created_at"] = u.CreatedAt
+	u.fieldMap["block_number"] = u.BlockNumber
 }
 
 func (u userLaunchTx) clone(db *gorm.DB) userLaunchTx {

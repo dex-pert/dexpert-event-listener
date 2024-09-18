@@ -77,3 +77,8 @@ alter table `user_launch_tx` add column `level` varchar(10) COMMENT '等级';
 alter table user_swap_tx add unique index uix_chainid_tx_swaptype(tx,chain_id,swap_type);
 alter table `user_transaction` add column `identify_address` varchar(255) not null default '' comment '可以是 user_launch_tx 表的 contract_address, 也可以是 user_swap_tx 的 tx, 用于构建唯一索引';
 alter table `user_transaction` add unique index uix_identify_address_chainid_type(identify_address,chain_id,swap_type);
+
+# 2024-09-18
+alter table `user_launch_tx` add column `created_at` timestamp not null default CURRENT_TIMESTAMP;
+alter table `user_launch_tx` add column `block_number` int not null default 0 comment '区块数';
+alter table `user_transaction` add column `created_at` timestamp not null default CURRENT_TIMESTAMP;

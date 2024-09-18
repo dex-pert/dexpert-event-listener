@@ -13,6 +13,7 @@ import (
     "log/slog"
     "github.com/pkg/errors"
     "dexpert-event-listener/gorm/query"
+    "gorm.io/gorm/clause"
 )
 
 // LogTokenCreated signature: TokenCreated(address,address,uint8,uint96,uint256)
@@ -36,20 +37,21 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
             l.Owner = el.HashToAddress(event.IndexedParams[0])
             l.Token = el.HashToAddress(event.IndexedParams[1])
             slog.Info("TokenCreated event", slog.Any("event", l))
-            _ = query.Q.Transaction(func(tx *query.Query) error {
-                block, err := ltCtx.EthClient.HeaderByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
-                if err != nil {
-                    slog.Error("TokenCreated event", "fail to get block,err", err, "block number", event.BlockNumber)
-                    return err
-                }
 
-                _fees, err := standardTokenFactory01.GetFees(ltCtx.StandardTokenFactory01Address, l.Level, block.Number, ltCtx.EthClient)
-                if err != nil {
-                    slog.Error("TokenCreated event", "fail to get fees,err", err, "standardTokenFactory01Address", ltCtx.StandardTokenFactory01Address, "level", l.Level, "block number", block.Number)
-                    return err
-                }
-                fee := decimal.NewFromBigInt(_fees, -(ltCtx.FeeDecimal)).String()
+            block, err := ltCtx.EthClient.HeaderByNumber(ctx, new(big.Int).SetUint64(event.BlockNumber))
+            if err != nil {
+                slog.Error("TokenCreated event", "fail to get block,err", err, "block number", event.BlockNumber)
+                return err
+            }
 
+            _fees, err := standardTokenFactory01.GetFees(ltCtx.StandardTokenFactory01Address, l.Level, block.Number, ltCtx.EthClient)
+            if err != nil {
+                slog.Error("TokenCreated event", "fail to get fees,err", err, "standardTokenFactory01Address", ltCtx.StandardTokenFactory01Address, "level", l.Level, "block number", block.Number)
+                return err
+            }
+            fee := decimal.NewFromBigInt(_fees, -(ltCtx.FeeDecimal)).String()
+
+            return query.Q.Transaction(func(tx *query.Query) error {
                 uw := tx.UserWallet
                 userWallet, err := uw.WithContext(ctx).Where(uw.Address.Eq(l.Owner.String())).Take()
                 if err != nil {
@@ -57,6 +59,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     slog.Error("TokenCreated event", "fail to get user wallet,err", err)
                 }
 
+                now := time.Now().UTC()
                 eventTime := time.Unix(int64(block.Time), 0)
                 userLaunchTx := model.UserLaunchTx{
                     UID:             userWallet.UID,
@@ -71,13 +74,15 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     Tx:              event.TxHash.String(),
                     Owner:           l.Owner.String(),
                     Level:           l.Level.String(),
+                    CreatedAt:       now,
+                    BlockNumber:     int32(event.BlockNumber),
                 }
-                if err = tx.WithContext(ctx).UserLaunchTx.Create(&userLaunchTx); err != nil {
+                if err = tx.WithContext(ctx).UserLaunchTx.Clauses(clause.OnConflict{DoNothing: true}).Create(&userLaunchTx); err != nil {
                     slog.Error("TokenCreated event", "fail to create user launch tx,err", err)
                     return errors.Wrap(err, "fail to create user launch tx")
                 }
 
-                if err = tx.WithContext(ctx).UserTransaction.Create(&model.UserTransaction{
+                if err = tx.WithContext(ctx).UserTransaction.Clauses(clause.OnConflict{DoNothing: true}).Create(&model.UserTransaction{
                     UID:             userWallet.UID,
                     Tid:             userLaunchTx.ID,
                     SwapType:        constant.SwapTypeLaunch,
@@ -90,6 +95,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     FeeTokenSymbol:  ltCtx.FeeSymbol,
                     FeeTokenDecimal: ltCtx.FeeDecimal,
                     IdentifyAddress: l.Token.String(),
+                    CreatedAt:       now,
                 }); err != nil {
                     slog.Error("TokenCreated event", "fail to create user transaction,err", err)
                     return errors.Wrap(err, "fail to create user transaction")

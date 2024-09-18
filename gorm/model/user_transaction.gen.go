@@ -25,6 +25,7 @@ type UserTransaction struct {
 	FeeTokenSymbol  string    `gorm:"column:fee_token_symbol;not null;comment:手续费symbol" json:"fee_token_symbol"`                                                                // 手续费symbol
 	FeeTokenDecimal int32     `gorm:"column:fee_token_decimal;not null;comment:手续费token的decimal" json:"fee_token_decimal"`                                                       // 手续费token的decimal
 	IdentifyAddress string    `gorm:"column:identify_address;not null;comment:可以是 user_launch_tx 表的 contract_address, 也可以是 user_swap_tx 的 tx, 用于构建唯一索引" json:"identify_address"` // 可以是 user_launch_tx 表的 contract_address, 也可以是 user_swap_tx 的 tx, 用于构建唯一索引
+	CreatedAt       time.Time `gorm:"column:created_at;not null;default:CURRENT_TIMESTAMP" json:"created_at"`
 }
 
 // TableName UserTransaction's table name
