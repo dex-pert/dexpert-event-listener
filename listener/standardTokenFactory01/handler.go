@@ -87,10 +87,10 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     slog.Error("TokenCreated event", "fail to create user launch tx,err", err)
                     return errors.Wrap(err, "fail to create user launch tx")
                 }
-                if userLaunchTx.ID == 0 {
+                if userLaunchTx.ID == 0 { // 说明 Clauses(clause.OnConflict{DoNothing: true}) 生效, 有重复数据，下面不再执行
                     err = errors.Wrap(err, "new user launch tx is is 0")
                     slog.Error("PaymentFee event", "userLaunchTx.ID == 0", err, "contract address", contractAddress)
-                    return err
+                    return nil
                 }
 
                 if err = tx.WithContext(ctx).UserTransaction.Clauses(clause.OnConflict{DoNothing: true}).Create(&model.UserTransaction{

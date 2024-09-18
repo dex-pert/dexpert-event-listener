@@ -141,10 +141,10 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     slog.Error("PaymentFee event", "fail to create user swap tx", err)
                     return errors.Wrap(err, "fail to create user swap tx")
                 }
-                if userSwapTx.ID == 0 {
+                if userSwapTx.ID == 0 { // 说明 Clauses(clause.OnConflict{DoNothing: true}) 生效, 有重复数据，下面不再执行
                     err = errors.Wrap(err, "new user swap tx is is 0")
                     slog.Error("PaymentFee event", "userSwapTx.ID == 0", err, "tx", txStr)
-                    return err
+                    return nil
                 }
 
                 if err = tx.WithContext(ctx).UserTransaction.Clauses(clause.OnConflict{DoNothing: true}).Create(&model.UserTransaction{
