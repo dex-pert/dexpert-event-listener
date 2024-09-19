@@ -29,7 +29,11 @@ func main() {
         slog.Error(fmt.Sprintf("error loading .env file: %v", err))
     }
 
-    file, err := os.ReadFile("./etc/config.yaml")
+    configFile := "./etc/config.yaml"
+    if len(os.Args) > 2 {
+        configFile = os.Args[2]
+    }
+    file, err := os.ReadFile(configFile)
     if err != nil {
         panic(fmt.Sprintf("error reading config.yaml: %v", err))
     }
