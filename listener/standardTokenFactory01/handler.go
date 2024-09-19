@@ -81,7 +81,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     Owner:           l.Owner.String(),
                     Level:           l.Level.String(),
                     CreatedAt:       now,
-                    BlockNumber:     int32(event.BlockNumber),
+                    BlockNumber:     int64(event.BlockNumber),
                 }
                 if err = tx.WithContext(ctx).UserLaunchTx.Clauses(clause.OnConflict{DoNothing: true}).Create(&userLaunchTx); err != nil {
                     slog.Error("TokenCreated event", "fail to create user launch tx,err", err)
@@ -116,7 +116,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                     Create(&model.ListenerNewestBlocknumber{
                         ContractAddress: ltCtx.StandardTokenFactory01Address,
                         ChainID:         int32(ltCtx.Chain.ChainId),
-                        BlockNumber:     int32(event.BlockNumber),
+                        BlockNumber:     int64(event.BlockNumber),
                         CreatedAt:       time.Now().UTC(),
                         UpdatedAt:       time.Now().UTC(),
                     }); err != nil {
@@ -132,7 +132,7 @@ func standardTokenFactory01EventLogHandler(ltCtx *Context, c *el.Contract) el.Lo
                 Create(&model.ListenerNewestBlocknumber{
                     ContractAddress: ltCtx.StandardTokenFactory01Address,
                     ChainID:         int32(ltCtx.Chain.ChainId),
-                    BlockNumber:     int32(event.BlockNumber),
+                    BlockNumber:     int64(event.BlockNumber),
                     CreatedAt:       time.Now().UTC(),
                     UpdatedAt:       time.Now().UTC(),
                 }); err != nil {

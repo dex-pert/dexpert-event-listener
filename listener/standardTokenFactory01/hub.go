@@ -17,7 +17,13 @@ func NewHub(p *abi.Proxy) (*Hub, error) {
         if v.StandardTokenFactory01IsClose { // 关闭
             continue
         }
-        eventListener, err := newStandardTokenFactory01EventListener(NewContext(&ContextParam{EthClient: p.WithChainID(v.ChainId).Client, ChainConfig: p.Chains()[i]}))
+        var context *Context
+        if p.Chains()[i].StandardTokenFactory01Step > 0 {
+            context = NewContext(&ContextParam{EthClient: p.WithChainID(v.ChainId).Client, ChainConfig: p.Chains()[i]}, WithStep(p.Chains()[i].StandardTokenFactory01Step))
+        } else {
+            context = NewContext(&ContextParam{EthClient: p.WithChainID(v.ChainId).Client, ChainConfig: p.Chains()[i]})
+        }
+        eventListener, err := newStandardTokenFactory01EventListener(context)
         if err != nil {
             return nil, errors.Wrap(err, fmt.Sprintf("(chain_id:%d) new standard token factory01 event listener failed", v.ChainId))
         }

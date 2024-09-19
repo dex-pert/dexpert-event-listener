@@ -126,7 +126,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     TokenIn:         l.TokenIn.String(),
                     TransactionTime: eventTime,
                     Fee:             fee,
-                    BlockNumber:     int32(event.BlockNumber),
+                    BlockNumber:     int64(event.BlockNumber),
                     ChainID:         int32(ltCtx.Chain.ChainId),
                     ChainName:       ltCtx.Chain.ChainName,
                     SwapType:        int32(l.SwapType.Int64()),
@@ -170,7 +170,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                     Create(&model.ListenerNewestBlocknumber{
                         ContractAddress: ltCtx.DexpertUniversalRouterAddress,
                         ChainID:         int32(ltCtx.Chain.ChainId),
-                        BlockNumber:     int32(event.BlockNumber),
+                        BlockNumber:     int64(event.BlockNumber),
                         CreatedAt:       time.Now().UTC(),
                         UpdatedAt:       time.Now().UTC(),
                     }); err != nil {
@@ -186,7 +186,7 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
                 Create(&model.ListenerNewestBlocknumber{
                     ContractAddress: ltCtx.DexpertUniversalRouterAddress,
                     ChainID:         int32(ltCtx.Chain.ChainId),
-                    BlockNumber:     int32(event.BlockNumber),
+                    BlockNumber:     int64(event.BlockNumber),
                     CreatedAt:       time.Now().UTC(),
                     UpdatedAt:       time.Now().UTC(),
                 }); err != nil {

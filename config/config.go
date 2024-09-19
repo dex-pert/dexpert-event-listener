@@ -21,6 +21,7 @@ type ChainConfig struct {
     ChainName                                           string `yaml:"chain_name" json:"chain_name,omitempty"`
     URL                                                 string `yaml:"url" json:"url,omitempty"`
     UniswapV2RouterAddress                              string `yaml:"uniswap_v2_router_address" json:"uniswap_v_2_router_address,omitempty"`
+    StandardTokenFactory01Step                          int64  `yaml:"standard_token_factory01_step" json:"standard_token_factory01_step,omitempty"`
     StandardTokenFactory01Address                       string `yaml:"standard_token_factory01_address" json:"standard_token_factory_01_address,omitempty"`
     StandardTokenFactory01FeeSymbol                     string `yaml:"standard_token_factory01_fee_symbol" json:"standard_token_factory01_fee_symbol,omitempty"`
     StandardTokenFactory01FeeDecimal                    int32  `yaml:"standard_token_factory01_fee_decimal" json:"standard_token_factory01_fee_decimal,omitempty"`
@@ -28,6 +29,7 @@ type ChainConfig struct {
     StandardTokenFactory01IsClose                       bool   `yaml:"standard_token_factory01_is_close" json:"standard_token_factory01_is_close,omitempty"`
     StandardTokenFactory01IsStartSavedNewestBlockNumber bool   `yaml:"standard_token_factory01_is_start_saved_newest_block_number"`
     StandardTokenFactory01IsUseNewestBlockNumber        bool   `yaml:"standard_token_factory01_is_use_newest_block_number"`
+    DexpertUniversalRouterStep                          int64  `yaml:"dexpert_universal_router_step"`
     DexpertUniversalRouterAddress                       string `yaml:"dexpert_universal_router_address" json:"dexpert_universal_router_address,omitempty"`
     DexpertUniversalRouterBlockNumber                   int64  `yaml:"dexpert_universal_router_block_number" json:"dexpert_universal_router_block_number,omitempty"`
     DexpertUniversalRouterUSDTAddress                   string `yaml:"dexpert_universal_router_usdt_address" json:"dexpert_universal_router_usdt_address,omitempty"`

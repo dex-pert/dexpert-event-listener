@@ -23,7 +23,7 @@ CREATE TABLE `user_swap_tx`  (
                                  `token_in` varchar(42) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '第一个代币的地址',
                                  `transaction_time` timestamp NOT NULL COMMENT '时间',
                                  `fee` varchar(66) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '手续费',
-                                 `block_number` int NOT NULL COMMENT '区块Id',
+                                 `block_number` bigint NOT NULL COMMENT '区块Id',
                                  `chain_id` int NOT NULL COMMENT '链id',
                                  `chain_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '链名',
                                  `swap_type` int NOT NULL DEFAULT 0 COMMENT '交易类型0：swap，1：Sniper',
@@ -80,14 +80,14 @@ alter table `user_transaction` add unique index uix_identify_address_chainid_typ
 
 # 2024-09-18
 alter table `user_launch_tx` add column `created_at` timestamp not null default CURRENT_TIMESTAMP;
-alter table `user_launch_tx` add column `block_number` int not null default 0 comment '区块数';
+alter table `user_launch_tx` add column `block_number` bigint not null default 0 comment '区块数';
 alter table `user_transaction` add column `created_at` timestamp not null default CURRENT_TIMESTAMP;
 
 create table if not exists listener_newest_blocknumber(
     id int primary key auto_increment not null,
     contract_address varchar(128) not null comment '合约地址',
     chain_id int not null,
-    block_number int not null comment '最新爬到的区块',
+    block_number bigint not null comment '最新爬到的区块',
     created_at timestamp not null default current_timestamp,
     updated_at timestamp not null default current_timestamp,
     unique index `invited_id`(`contract_address` asc,`chain_id` asc) using btree

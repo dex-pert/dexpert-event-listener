@@ -30,7 +30,7 @@ func newListenerNewestBlocknumber(db *gorm.DB, opts ...gen.DOOption) listenerNew
 	_listenerNewestBlocknumber.ID = field.NewInt32(tableName, "id")
 	_listenerNewestBlocknumber.ContractAddress = field.NewString(tableName, "contract_address")
 	_listenerNewestBlocknumber.ChainID = field.NewInt32(tableName, "chain_id")
-	_listenerNewestBlocknumber.BlockNumber = field.NewInt32(tableName, "block_number")
+	_listenerNewestBlocknumber.BlockNumber = field.NewInt64(tableName, "block_number")
 	_listenerNewestBlocknumber.CreatedAt = field.NewTime(tableName, "created_at")
 	_listenerNewestBlocknumber.UpdatedAt = field.NewTime(tableName, "updated_at")
 
@@ -47,7 +47,7 @@ type listenerNewestBlocknumber struct {
 	ID              field.Int32
 	ContractAddress field.String // 合约地址
 	ChainID         field.Int32
-	BlockNumber     field.Int32 // 最新爬到的区块
+	BlockNumber     field.Int64 // 最新爬到的区块
 	CreatedAt       field.Time
 	UpdatedAt       field.Time
 
@@ -69,7 +69,7 @@ func (l *listenerNewestBlocknumber) updateTableName(table string) *listenerNewes
 	l.ID = field.NewInt32(table, "id")
 	l.ContractAddress = field.NewString(table, "contract_address")
 	l.ChainID = field.NewInt32(table, "chain_id")
-	l.BlockNumber = field.NewInt32(table, "block_number")
+	l.BlockNumber = field.NewInt64(table, "block_number")
 	l.CreatedAt = field.NewTime(table, "created_at")
 	l.UpdatedAt = field.NewTime(table, "updated_at")
 

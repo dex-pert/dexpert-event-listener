@@ -36,7 +36,7 @@ func newUserSwapTx(db *gorm.DB, opts ...gen.DOOption) userSwapTx {
 	_userSwapTx.TokenIn = field.NewString(tableName, "token_in")
 	_userSwapTx.TransactionTime = field.NewTime(tableName, "transaction_time")
 	_userSwapTx.Fee = field.NewString(tableName, "fee")
-	_userSwapTx.BlockNumber = field.NewInt32(tableName, "block_number")
+	_userSwapTx.BlockNumber = field.NewInt64(tableName, "block_number")
 	_userSwapTx.ChainID = field.NewInt32(tableName, "chain_id")
 	_userSwapTx.ChainName = field.NewString(tableName, "chain_name")
 	_userSwapTx.SwapType = field.NewInt32(tableName, "swap_type")
@@ -66,7 +66,7 @@ type userSwapTx struct {
 	TokenIn         field.String // 第一个代币的地址
 	TransactionTime field.Time   // 时间
 	Fee             field.String // 手续费
-	BlockNumber     field.Int32  // 区块Id
+	BlockNumber     field.Int64  // 区块Id
 	ChainID         field.Int32  // 链id
 	ChainName       field.String // 链名
 	SwapType        field.Int32  // 交易类型0：swap，1：Sniper
@@ -101,7 +101,7 @@ func (u *userSwapTx) updateTableName(table string) *userSwapTx {
 	u.TokenIn = field.NewString(table, "token_in")
 	u.TransactionTime = field.NewTime(table, "transaction_time")
 	u.Fee = field.NewString(table, "fee")
-	u.BlockNumber = field.NewInt32(table, "block_number")
+	u.BlockNumber = field.NewInt64(table, "block_number")
 	u.ChainID = field.NewInt32(table, "chain_id")
 	u.ChainName = field.NewString(table, "chain_name")
 	u.SwapType = field.NewInt32(table, "swap_type")
