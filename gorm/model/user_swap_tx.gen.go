@@ -21,7 +21,7 @@ type UserSwapTx struct {
 	TokenIn         string    `gorm:"column:token_in;not null;comment:第一个代币的地址" json:"token_in"`              // 第一个代币的地址
 	TransactionTime time.Time `gorm:"column:transaction_time;not null;comment:时间" json:"transaction_time"`    // 时间
 	Fee             string    `gorm:"column:fee;not null;comment:手续费" json:"fee"`                             // 手续费
-	BlockNumber     int32     `gorm:"column:block_number;not null;comment:区块Id" json:"block_number"`          // 区块Id
+	BlockNumber     int64     `gorm:"column:block_number;not null;comment:区块Id" json:"block_number"`          // 区块Id
 	ChainID         int32     `gorm:"column:chain_id;not null;comment:链id" json:"chain_id"`                   // 链id
 	ChainName       string    `gorm:"column:chain_name;not null;comment:链名" json:"chain_name"`                // 链名
 	SwapType        int32     `gorm:"column:swap_type;not null;comment:交易类型0：swap，1：Sniper" json:"swap_type"` // 交易类型0：swap，1：Sniper

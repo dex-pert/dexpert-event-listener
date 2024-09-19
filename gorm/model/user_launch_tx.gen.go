@@ -26,7 +26,7 @@ type UserLaunchTx struct {
 	Owner           string    `gorm:"column:owner;comment:token owner address, eth:42|solana:44|ton:33|btc:" json:"owner"` // token owner address, eth:42|solana:44|ton:33|btc:
 	Level           string    `gorm:"column:level;comment:等级" json:"level"`                                                // 等级
 	CreatedAt       time.Time `gorm:"column:created_at;not null;default:CURRENT_TIMESTAMP" json:"created_at"`
-	BlockNumber     int32     `gorm:"column:block_number;not null;comment:区块数" json:"block_number"` // 区块数
+	BlockNumber     int64     `gorm:"column:block_number;not null;comment:区块数" json:"block_number"` // 区块数
 }
 
 // TableName UserLaunchTx's table name

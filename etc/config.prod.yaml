@@ -8,8 +8,9 @@ mysql:
 chain_config:
   - chain_id: 1
     chain_name: "ethereum-mainnet"
-    url: "https://eth-mainnet.g.alchemy.com/v2/yySetlFhRixBXll8vY8B-fVbhlcsLg4a"
+    url: "https://eth.drpc.org"
     uniswap_v2_router_address: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+    standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     standard_token_factory01_address: "0xDDCBc0CD4a80836801Aba6767FFE20995aaC449F"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
@@ -17,6 +18,7 @@ chain_config:
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     dexpert_universal_router_address: "0xdF2bf594cCaF8199348E9b0a6d3767dd6adB998b"
     dexpert_universal_router_block_number: 20711609 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
@@ -31,8 +33,9 @@ chain_config:
     dexpert_universal_router_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
   - chain_id: 11155111
     chain_name: "ethereum-sepolia"
-    url: "https://eth-sepolia.g.alchemy.com/v2/gOeoBV9mlFL1pWj7qbKEdlB6pXTfNum6"
+    url: "https://rpc.sepolia.org/"
     uniswap_v2_router_address: "0xb22cE52905d25987321d6BF73d1705886f1Cc4F4"
+    standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     standard_token_factory01_address: "0x51777D3544Bc2489F667522B60766EA3EaDC4AE0"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
@@ -40,6 +43,7 @@ chain_config:
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     dexpert_universal_router_address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
     dexpert_universal_router_block_number: 6441775 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xB72bC8971D5e595776592E8290bE6F31937097c6"
@@ -56,6 +60,7 @@ chain_config:
     chain_name: "Conflux-eSpace"
     url: "https://evm.confluxrpc.com"
     uniswap_v2_router_address: "0x62b0873055Bf896DD869e172119871ac24aEA305"
+    standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     standard_token_factory01_address: "0xF2F0cC2BAB14Abbdf3b2AFcAD345dE08225EBaf5"
     standard_token_factory01_fee_symbol: "CFX"
     standard_token_factory01_fee_decimal: 18
@@ -63,6 +68,7 @@ chain_config:
     standard_token_factory01_is_close: ${IS_CLOSE_CONFLUX_ESPACE_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_CONFLUX_ESPACE_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     dexpert_universal_router_address: "0x962408EDa28732fAcE8d2BD4056628de044eeEc1"
     dexpert_universal_router_block_number: 103999855 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xfe97E85d13ABD9c1c33384E796F10B73905637cE"
@@ -79,6 +85,7 @@ chain_config:
     chain_name: "bitlayer-mainnet"
     url: "https://rpc.bitlayer.org"
     uniswap_v2_router_address: "0xB0Cc30795f9E0125575742cFA8e73D20D9966f81"
+    standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     standard_token_factory01_address: "0x69C3926284699989B5dF13432B80171F8b3aCBe9"
     standard_token_factory01_fee_symbol: "BTC"
     standard_token_factory01_fee_decimal: 18
@@ -86,6 +93,7 @@ chain_config:
     standard_token_factory01_is_close: ${IS_CLOSE_BITLAYER_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_BITLAYER_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     dexpert_universal_router_address: "0x4e86cBD95DeD0b00ca0D74713eb6596e4A2B4fD2"
     dexpert_universal_router_block_number: 4566111 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xfe9f969faf8ad72a83b761138bf25de87eff9dd2"
@@ -102,6 +110,7 @@ chain_config:
     chain_name: "manta-mainnet"
     url: "https://manta-pacific.drpc.org"
     uniswap_v2_router_address: "0xA3C957B20779Abf06661E25eE361Be1430ef1038"
+    standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     standard_token_factory01_address: "0xC8549d0d81F17BF8010D618a62f260BaF8F7F0e4"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
@@ -109,6 +118,7 @@ chain_config:
     standard_token_factory01_is_close: ${IS_CLOSE_MANTA_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_MANTA_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     dexpert_universal_router_address: "0xAB255ECA00D1816f35FED0cdebeA5A4C26C7C311"
     dexpert_universal_router_block_number: 3198603 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0xf417F5A458eC102B90352F697D6e2Ac3A3d2851f"
@@ -125,6 +135,7 @@ chain_config:
     chain_name: "neo-x-mainnet"
     url: "https://mainnet-1.rpc.banelabs.org"
     uniswap_v2_router_address: "0x82b56Dd9c7FD5A977255BA51B96c3D97fa1Af9A9"
+    standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     standard_token_factory01_address: "0xfB05D2228C242b85f12E743DB756E7ef23A90D8c"
     standard_token_factory01_fee_symbol: "GAS"
     standard_token_factory01_fee_decimal: 18
@@ -132,6 +143,7 @@ chain_config:
     standard_token_factory01_is_close: ${IS_CLOSE_NEO_X_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_NEO_X_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     dexpert_universal_router_address: "0x2cA866d3FA566fE66e86087Da3a3b8e534F9A588"
     dexpert_universal_router_block_number: 331871 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: "0x68b55E582961968ef7758D8454D8A3e78c692e0B"
@@ -148,6 +160,7 @@ chain_config:
     chain_name: "5ire-mainnet"
     url: "https://rpc.5ire.network"
     uniswap_v2_router_address: "0x733416C974c31778071158Dc00CE295268006024"
+    standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     standard_token_factory01_address: "0xfA9B00d440FadB9802fBF620c7cc7A4541e4d5F9"
     standard_token_factory01_fee_symbol: "5ire"
     standard_token_factory01_fee_decimal: 18
@@ -155,6 +168,7 @@ chain_config:
     standard_token_factory01_is_close: ${IS_CLOSE_5IRE_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_5IRE_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     dexpert_universal_router_address: "0x3CCB2da5792C2D4057948b1f5d4C71D98C00F399"
     dexpert_universal_router_block_number: 2205278 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: ""

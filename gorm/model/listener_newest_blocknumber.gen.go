@@ -15,7 +15,7 @@ type ListenerNewestBlocknumber struct {
 	ID              int32     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	ContractAddress string    `gorm:"column:contract_address;not null;comment:合约地址" json:"contract_address"` // 合约地址
 	ChainID         int32     `gorm:"column:chain_id;not null" json:"chain_id"`
-	BlockNumber     int32     `gorm:"column:block_number;not null;comment:最新爬到的区块" json:"block_number"` // 最新爬到的区块
+	BlockNumber     int64     `gorm:"column:block_number;not null;comment:最新爬到的区块" json:"block_number"` // 最新爬到的区块
 	CreatedAt       time.Time `gorm:"column:created_at;not null;default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt       time.Time `gorm:"column:updated_at;not null;default:CURRENT_TIMESTAMP" json:"updated_at"`
 }

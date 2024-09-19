@@ -8,7 +8,7 @@ import (
 )
 
 const (
-    defaultStep = 10
+    defaultStep = 100
 )
 
 type Context struct {

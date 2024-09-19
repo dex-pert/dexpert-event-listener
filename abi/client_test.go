@@ -13,8 +13,8 @@ func TestBlockNumber(t *testing.T) {
         url         string
         blocknumber uint64
     }{
-        {name: "ethereum-mainnet", url: "https://eth-mainnet.g.alchemy.com/v2/yySetlFhRixBXll8vY8B-fVbhlcsLg4a", blocknumber: 20711519},
-        {name: "ethereum-sepolia", url: "https://eth-sepolia.g.alchemy.com/v2/gOeoBV9mlFL1pWj7qbKEdlB6pXTfNum6", blocknumber: 6641775},
+        {name: "ethereum-mainnet", url: "https://eth.drpc.org", blocknumber: 20711519},
+        {name: "ethereum-sepolia", url: "https://rpc.sepolia.org/", blocknumber: 6641775},
         {name: "Conflux-eSpace", url: "https://evm.confluxrpc.com", blocknumber: 104087180},
         {name: "bitlayer-mainnet", url: "https://rpc.bitlayer.org", blocknumber: 4453885},
         {name: "manta-mainnet", url: "https://manta-pacific.drpc.org", blocknumber: 3198801},

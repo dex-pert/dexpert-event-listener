@@ -41,7 +41,7 @@ func newUserLaunchTx(db *gorm.DB, opts ...gen.DOOption) userLaunchTx {
 	_userLaunchTx.Owner = field.NewString(tableName, "owner")
 	_userLaunchTx.Level = field.NewString(tableName, "level")
 	_userLaunchTx.CreatedAt = field.NewTime(tableName, "created_at")
-	_userLaunchTx.BlockNumber = field.NewInt32(tableName, "block_number")
+	_userLaunchTx.BlockNumber = field.NewInt64(tableName, "block_number")
 
 	_userLaunchTx.fillFieldMap()
 
@@ -66,7 +66,7 @@ type userLaunchTx struct {
 	Owner           field.String // token owner address, eth:42|solana:44|ton:33|btc:
 	Level           field.String // 等级
 	CreatedAt       field.Time
-	BlockNumber     field.Int32 // 区块数
+	BlockNumber     field.Int64 // 区块数
 
 	fieldMap map[string]field.Expr
 }
@@ -97,7 +97,7 @@ func (u *userLaunchTx) updateTableName(table string) *userLaunchTx {
 	u.Owner = field.NewString(table, "owner")
 	u.Level = field.NewString(table, "level")
 	u.CreatedAt = field.NewTime(table, "created_at")
-	u.BlockNumber = field.NewInt32(table, "block_number")
+	u.BlockNumber = field.NewInt64(table, "block_number")
 
 	u.fillFieldMap()
 

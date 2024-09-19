@@ -29,8 +29,8 @@ func newStandardTokenFactory01EventListener(ltCtx *Context) (*el.EventListener, 
                 return nil, errors.Wrap(err, "fail to get newest user swap tx")
             }
         } else {
-            if record.BlockNumber > int32(blockNumber) {
-                blockNumber = int64(record.BlockNumber)
+            if record.BlockNumber > blockNumber {
+                blockNumber = record.BlockNumber
             }
         }
     }
