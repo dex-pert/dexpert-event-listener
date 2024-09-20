@@ -92,3 +92,6 @@ create table if not exists listener_newest_blocknumber(
     updated_at timestamp not null default current_timestamp,
     unique index `invited_id`(`contract_address` asc,`chain_id` asc) using btree
 )engine='innodb', charset='utf8mb4', comment '事件监听器区块记录表，存放监听器已监听的最新区块数';
+
+# 2024-09-20
+insert into `user_transaction_chain_list` (`chain_id`,`chain_name`) values (8453,'base-mainnet');
