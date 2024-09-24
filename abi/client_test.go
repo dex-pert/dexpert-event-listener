@@ -45,7 +45,7 @@ func TestBlockNumber(t *testing.T) {
 }
 
 func TestBlockTxHash(t *testing.T) {
-    client := MustNewClient("https://evm.confluxrpc.com")
+    client := MustNewClient("https://evmmain-china.confluxrpc.com")
     t.Log("mataClient is :", client)
 
     block1, err := client.BlockNumber(context.Background())
