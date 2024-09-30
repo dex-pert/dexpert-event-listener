@@ -11,10 +11,10 @@ chain_config:
     url: "https://eth.drpc.org"
     uniswap_v2_router_address: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
     standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
-    standard_token_factory01_address: "0xDDCBc0CD4a80836801Aba6767FFE20995aaC449F"
+    standard_token_factory01_address: "0x82f777B726537d0b854fD0447996177c05eeC82E"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 20748885 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+    standard_token_factory01_block_number: 20863023 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
@@ -36,17 +36,17 @@ chain_config:
     url: "https://rpc.sepolia.org/"
     uniswap_v2_router_address: "0xb22cE52905d25987321d6BF73d1705886f1Cc4F4"
     standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
-    standard_token_factory01_address: "0x51777D3544Bc2489F667522B60766EA3EaDC4AE0"
+    standard_token_factory01_address: "0x05D1c16b41620D6C0DEab24a1782eEd5A1BcA7FE"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 6690181 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+    standard_token_factory01_block_number: 6781627 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
     dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
     dexpert_universal_router_address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
     dexpert_universal_router_block_number: 6441775 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
-    dexpert_universal_router_usdt_address: "0xB72bC8971D5e595776592E8290bE6F31937097c6"
+    dexpert_universal_router_usdt_address: "0xb72bc8971d5e595776592e8290be6f31937097c6"
     dexpert_universal_router_weth_address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
     dexpert_universal_router_eth_name: "Ether"
@@ -60,12 +60,12 @@ chain_config:
     chain_name: "Conflux-eSpace"
     url: "https://evmmain-china.confluxrpc.com"
 #    url: "https://evm.confluxrpc.com"
-    uniswap_v2_router_address: "0x62b0873055Bf896DD869e172119871ac24aEA305"
+    uniswap_v2_router_address: "0x62b0873055bf896dd869e172119871ac24aea305"
     standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
-    standard_token_factory01_address: "0xF2F0cC2BAB14Abbdf3b2AFcAD345dE08225EBaf5"
+    standard_token_factory01_address: "0xCd8cb6776C715Ae2d7101CAF182b6A10224d71a3"
     standard_token_factory01_fee_symbol: "CFX"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 104670012 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+    standard_token_factory01_block_number: 105818415 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_CONFLUX_ESPACE_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_CONFLUX_ESPACE_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
@@ -112,10 +112,10 @@ chain_config:
     url: "https://manta-pacific.drpc.org"
     uniswap_v2_router_address: "0xA3C957B20779Abf06661E25eE361Be1430ef1038"
     standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
-    standard_token_factory01_address: "0xC8549d0d81F17BF8010D618a62f260BaF8F7F0e4"
+    standard_token_factory01_address: "0x66717210bB5bA75Df52E50d77E7E2CF005C42143"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 3209273 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+    standard_token_factory01_block_number: 3339243 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_MANTA_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_MANTA_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
@@ -137,10 +137,10 @@ chain_config:
     url: "https://mainnet-1.rpc.banelabs.org"
     uniswap_v2_router_address: "0x82b56Dd9c7FD5A977255BA51B96c3D97fa1Af9A9"
     standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
-    standard_token_factory01_address: "0xfB05D2228C242b85f12E743DB756E7ef23A90D8c"
+    standard_token_factory01_address: "0x1233BD26E785bE84D006b904fc1527A227733e75"
     standard_token_factory01_fee_symbol: "GAS"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 368634 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+    standard_token_factory01_block_number: 433264 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_NEO_X_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_NEO_X_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
@@ -160,20 +160,20 @@ chain_config:
   - chain_id: 995
     chain_name: "5ire-mainnet"
     url: "https://rpc.5ire.network"
-    uniswap_v2_router_address: "0x733416C974c31778071158Dc00CE295268006024"
+    uniswap_v2_router_address: "0xA5F3d2cAd89BA44CEb13D7e4E917f6eb180FbCaE"
     standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
-    standard_token_factory01_address: "0xfA9B00d440FadB9802fBF620c7cc7A4541e4d5F9"
+    standard_token_factory01_address: "0x69FdF199340107102158e6D8a44aeC83Fe041A3F"
     standard_token_factory01_fee_symbol: "5ire"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 2205361 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+    standard_token_factory01_block_number: 2689523 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_5IRE_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_5IRE_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
     dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
-    dexpert_universal_router_address: "0x3CCB2da5792C2D4057948b1f5d4C71D98C00F399"
-    dexpert_universal_router_block_number: 2205278 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+    dexpert_universal_router_address: "0x9080Cd17174FB1E2a00dF668E5C4Ff21256410bA"
+    dexpert_universal_router_block_number: 2689470 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     dexpert_universal_router_usdt_address: ""
-    dexpert_universal_router_weth_address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+    dexpert_universal_router_weth_address: "0xCFaEB74409E4C6756C43F75455fc42A6A3FdEb1f"
     dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
     dexpert_universal_router_eth_name: "5ire"
     dexpert_universal_router_eth_symbol: "5ire"
@@ -187,10 +187,10 @@ chain_config:
     url: "https://base.drpc.org/"
     uniswap_v2_router_address: "0x4752ba5dbc23f44d87826276bf6fd6b1c372ad24"
     standard_token_factory01_step: 0
-    standard_token_factory01_address: "0xa8295c0022edcd69a62e2188215D306103C5E25C"
+    standard_token_factory01_address: "0x6643CABa0966FfF2Bed8A2f59c34E55A2e00B2ae"
     standard_token_factory01_fee_symbol: "ETH"
     standard_token_factory01_fee_decimal: 18
-    standard_token_factory01_block_number: 19967901 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+    standard_token_factory01_block_number: 20413471 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
     standard_token_factory01_is_close: ${IS_CLOSE_BASE_MAINNET_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_BASE_MAINNET_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
