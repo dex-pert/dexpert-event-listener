@@ -16,7 +16,7 @@ func TestBlockNumber(t *testing.T) {
         {name: "ethereum-mainnet", url: "https://eth.drpc.org", blocknumber: 20711519},
         {name: "ethereum-sepolia", url: "https://rpc.sepolia.org/", blocknumber: 6641775},
         {name: "Conflux-eSpace", url: "https://evm.confluxrpc.com", blocknumber: 104087180},
-        {name: "bitlayer-mainnet", url: "https://rpc.bitlayer.org", blocknumber: 4453885},
+        {name: "bitlayer-mainnet", url: "https://rpc-bitlayer.rockx.com", blocknumber: 4453885},
         {name: "manta-mainnet", url: "https://manta-pacific.drpc.org", blocknumber: 3198801},
         {name: "neo-x-mainnet", url: "https://mainnet-1.rpc.banelabs.org", blocknumber: 330867},
     }

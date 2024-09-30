@@ -84,10 +84,11 @@ chain_config:
     dexpert_universal_router_usdt_decimal: 18
     dexpert_universal_router_is_close: ${IS_CLOSE_CONFLUX_ESPACE_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_CONFLUX_ESPACE_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
-    dexpert_universal_router_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router_is_use_newest_block_number: true # true 表示从链上最新的区块开始爬，主要用于测试
   - chain_id: 200901
     chain_name: "bitlayer-mainnet"
-    url: "https://rpc.bitlayer.org"
+#    url: "https://rpc.bitlayer.org"
+    url: "https://rpc-bitlayer.rockx.com"
     uniswap_v2_router_address: "0xB0Cc30795f9E0125575742cFA8e73D20D9966f81"
     uniswap_v2_factory_address : "0x1037E9078df7ab09B9AF78B15D5E7aaD7C1AfDd0"
     standard_token_factory01_step: 0

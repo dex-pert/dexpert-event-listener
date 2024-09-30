@@ -87,7 +87,8 @@ chain_config:
     dexpert_universal_router_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
   - chain_id: 200901
     chain_name: "bitlayer-mainnet"
-    url: "https://rpc.bitlayer.org"
+    #    url: "https://rpc.bitlayer.org"
+    url: "https://rpc-bitlayer.rockx.com"
     uniswap_v2_router_address: "0xB0Cc30795f9E0125575742cFA8e73D20D9966f81"
     uniswap_v2_factory_address : "0x1037E9078df7ab09B9AF78B15D5E7aaD7C1AfDd0"
     standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
