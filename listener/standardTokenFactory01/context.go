@@ -23,6 +23,7 @@ type Context struct {
     ABIStr                        string
     IsStartSavedNewestBlockNumber bool
     IsUseNewestBlockNumber        bool
+    UniswapV2FactoryAddress       string
 }
 
 type ContextParam struct {
@@ -62,6 +63,7 @@ func NewContext(c *ContextParam, opts ...Option) *Context {
             URL:       c.ChainConfig.URL,
         },
         UniswapV2RouterAddress:        c.ChainConfig.UniswapV2RouterAddress,
+        UniswapV2FactoryAddress:       c.ChainConfig.UniswapV2FactoryAddress,
         EthClient:                     c.EthClient,
         Step:                          _options.Step,
         BlockNumber:                   c.ChainConfig.StandardTokenFactory01BlockNumber,

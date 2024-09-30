@@ -16,6 +16,11 @@ dexpertUniversalRouter:
 uniswapv2router:
 	cd abi && abigen --abi uniswapv2router/uniswapv2router.abi --pkg uniswapv2router --type uniswapv2router --out ./uniswapv2router/uniswapv2router.go
 
+.PHONY: uniswapv2factoryaddress
+uniswapv2factoryaddress:
+	cd abi && abigen --abi uniswapv2factoryaddress/uniswapv2factoryaddress.abi --pkg uniswapv2factoryaddress --type uniswapv2factoryaddress --out ./uniswapv2factoryaddress/uniswapv2factoryaddress.go
+
+
 .PHONY: linuxrund
 linuxrund:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o ./dexperteventlistener ./main.go && \

@@ -15,6 +15,7 @@ import (
     "github.com/pkg/errors"
     "dexpert-event-listener/gorm/query"
     "gorm.io/gorm/clause"
+    "dexpert-event-listener/abi/uniswapv2factoryaddress"
 )
 
 // LogPaymentFee event PaymentFee(address payer, address tokenIn, uint256 amountIn, address feeToken, uint256 feeAmount, uint256 level, uint256 swapType, uint256 feeBps, uint256 feeBaseBps)
@@ -83,19 +84,32 @@ func dexpertUniversalRouterLogHandler(ltCtx *Context, c *el.Contract) el.LogHand
             if l.TokenIn.String() == ltCtx.USDTAddress {
                 volume = decimal.NewFromBigInt(l.AmountIn, -tokenDecimal).String()
             } else {
+                isStop := false
                 var swapPath []common.Address
                 if l.TokenIn.String() == ltCtx.EthAddress || l.TokenIn.String() == ltCtx.WethAddress {
                     swapPath = []common.Address{common.HexToAddress(ltCtx.WethAddress), common.HexToAddress(ltCtx.USDTAddress)}
+
+                    _address, err := uniswapv2factoryaddress.GetPair(new(big.Int).SetUint64(event.BlockNumber), ltCtx.UniswapV2FactoryAddress, ltCtx.WethAddress, ltCtx.USDTAddress, ltCtx.EthClient)
+                    if err != nil {
+                        slog.Error("PaymentFee event", "fail to get UniswapV2FactoryAddress", err, "block number", event.BlockNumber, "contract address", ltCtx.UniswapV2FactoryAddress, "arg0 weth", ltCtx.WethAddress, "arg1 usdt", ltCtx.USDTAddress)
+                        return err
+                    }
+                    if _address == ltCtx.EthAddress {
+                        volume = "0"
+                        isStop = true
+                    }
                 } else {
                     swapPath = []common.Address{l.TokenIn, common.HexToAddress(ltCtx.WethAddress), common.HexToAddress(ltCtx.USDTAddress)}
                 }
-                outAmounts, err := uniswapv2router.GetAmountsOutByAddressAndBlockNumber(ltCtx.UniswapV2RouterAddress, new(big.Int).SetUint64(event.BlockNumber), l.AmountIn, ltCtx.EthClient, swapPath)
-                if err != nil {
-                    slog.Error("PaymentFee event", "uniswapv2router getAmountsOutByAddressAndBlockNumber", err, "uniswapV2RouterAddress", ltCtx.UniswapV2RouterAddress, "block number", event.BlockNumber, "amount in", l.AmountIn, "path", swapPath)
-                    return err
+                if !isStop {
+                    outAmounts, err := uniswapv2router.GetAmountsOutByAddressAndBlockNumber(ltCtx.UniswapV2RouterAddress, new(big.Int).SetUint64(event.BlockNumber), l.AmountIn, ltCtx.EthClient, swapPath)
+                    if err != nil {
+                        slog.Error("PaymentFee event", "uniswapv2router getAmountsOutByAddressAndBlockNumber", err, "uniswapV2RouterAddress", ltCtx.UniswapV2RouterAddress, "block number", event.BlockNumber, "amount in", l.AmountIn, "path", swapPath)
+                        return err
+                    }
+                    volume = decimal.NewFromBigInt(outAmounts[len(outAmounts)-1], -ltCtx.USDTDecimal).String()
+                    // volume = _volume.Mul(decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal))).String()
                 }
-                volume = decimal.NewFromBigInt(outAmounts[len(outAmounts)-1], -ltCtx.USDTDecimal).String()
-                // volume = _volume.Mul(decimal.NewFromBigInt(l.AmountIn, -int32(tokenDecimal))).String()
             }
             if volume == "0" {
                 volume = "0.00"

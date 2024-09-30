@@ -26,6 +26,7 @@ type Context struct {
     EthDecimal                    int32
     USDTDecimal                   int32
     UniswapV2RouterAddress        string
+    UniswapV2FactoryAddress       string
     IsStartSavedNewestBlockNumber bool
     IsUseNewestBlockNumber        bool
 }
@@ -67,6 +68,7 @@ func NewContext(c *ContextParam, opts ...Option) *Context {
             URL:       c.ChainConfig.URL,
         },
         UniswapV2RouterAddress:        c.ChainConfig.UniswapV2RouterAddress,
+        UniswapV2FactoryAddress:       c.ChainConfig.UniswapV2FactoryAddress,
         EthClient:                     c.EthClient,
         Step:                          _options.Step,
         DexpertUniversalRouterAddress: c.ChainConfig.DexpertUniversalRouterAddress,

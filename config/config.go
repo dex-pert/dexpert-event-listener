@@ -21,6 +21,7 @@ type ChainConfig struct {
     ChainName                                           string `yaml:"chain_name" json:"chain_name,omitempty"`
     URL                                                 string `yaml:"url" json:"url,omitempty"`
     UniswapV2RouterAddress                              string `yaml:"uniswap_v2_router_address" json:"uniswap_v_2_router_address,omitempty"`
+    UniswapV2FactoryAddress                             string `yaml:"uniswap_v2_factory_address"`
     StandardTokenFactory01Step                          int64  `yaml:"standard_token_factory01_step" json:"standard_token_factory01_step,omitempty"`
     StandardTokenFactory01Address                       string `yaml:"standard_token_factory01_address" json:"standard_token_factory_01_address,omitempty"`
     StandardTokenFactory01FeeSymbol                     string `yaml:"standard_token_factory01_fee_symbol" json:"standard_token_factory01_fee_symbol,omitempty"`

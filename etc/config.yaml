@@ -10,6 +10,7 @@ chain_config:
     chain_name: "ethereum-mainnet"
     url: "https://eth.drpc.org"
     uniswap_v2_router_address: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+    uniswap_v2_factory_address : "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
     standard_token_factory01_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：100
     standard_token_factory01_address: "0x82f777B726537d0b854fD0447996177c05eeC82E"
     standard_token_factory01_fee_symbol: "ETH"
@@ -35,6 +36,7 @@ chain_config:
     chain_name: "ethereum-sepolia"
     url: "https://rpc.sepolia.org/"
     uniswap_v2_router_address: "0xb22cE52905d25987321d6BF73d1705886f1Cc4F4"
+    uniswap_v2_factory_address : "0xce71f5957f481A77161F368AD6dFc61d694Cf171"
     standard_token_factory01_step: 0
     standard_token_factory01_address: "0x05D1c16b41620D6C0DEab24a1782eEd5A1BcA7FE"
     standard_token_factory01_fee_symbol: "ETH"
@@ -61,6 +63,7 @@ chain_config:
     url: "https://evmmain-china.confluxrpc.com"
     #    url: "https://evm.confluxrpc.com"
     uniswap_v2_router_address: "0x62b0873055bf896dd869e172119871ac24aea305"
+    uniswap_v2_factory_address : "0xe2a6f7c0ce4d5d300f97aa7e125455f5cd3342f5"
     standard_token_factory01_step: 0
     standard_token_factory01_address: "0xCd8cb6776C715Ae2d7101CAF182b6A10224d71a3"
     standard_token_factory01_fee_symbol: "CFX"
@@ -81,11 +84,12 @@ chain_config:
     dexpert_universal_router_usdt_decimal: 18
     dexpert_universal_router_is_close: ${IS_CLOSE_CONFLUX_ESPACE_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_CONFLUX_ESPACE_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
-    dexpert_universal_router_is_use_newest_block_number: true # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
   - chain_id: 200901
     chain_name: "bitlayer-mainnet"
     url: "https://rpc.bitlayer.org"
     uniswap_v2_router_address: "0xB0Cc30795f9E0125575742cFA8e73D20D9966f81"
+    uniswap_v2_factory_address : "0x1037E9078df7ab09B9AF78B15D5E7aaD7C1AfDd0"
     standard_token_factory01_step: 0
     standard_token_factory01_address: "0x69C3926284699989B5dF13432B80171F8b3aCBe9"
     standard_token_factory01_fee_symbol: "BTC"
@@ -111,6 +115,7 @@ chain_config:
     chain_name: "manta-mainnet"
     url: "https://manta-pacific.drpc.org"
     uniswap_v2_router_address: "0xA3C957B20779Abf06661E25eE361Be1430ef1038"
+    uniswap_v2_factory_address : "0x31a78894a2B5dE2C4244cD41595CD0050a906Db3"
     standard_token_factory01_step: 0
     standard_token_factory01_address: "0x66717210bB5bA75Df52E50d77E7E2CF005C42143"
     standard_token_factory01_fee_symbol: "ETH"
@@ -136,6 +141,7 @@ chain_config:
     chain_name: "neo-x-mainnet"
     url: "https://mainnet-1.rpc.banelabs.org"
     uniswap_v2_router_address: "0x82b56Dd9c7FD5A977255BA51B96c3D97fa1Af9A9"
+    uniswap_v2_factory_address : "0x753df473702cB31BB81a93966e658e1AA4f10DD8"
     standard_token_factory01_step: 0
     standard_token_factory01_address: "0x1233BD26E785bE84D006b904fc1527A227733e75"
     standard_token_factory01_fee_symbol: "GAS"
@@ -161,6 +167,7 @@ chain_config:
     chain_name: "5ire-mainnet"
     url: "https://rpc.5ire.network"
     uniswap_v2_router_address: "0xA5F3d2cAd89BA44CEb13D7e4E917f6eb180FbCaE"
+    uniswap_v2_factory_address : "0xD5F2C72CB142A665b5D4987a5a5eEa5bfC53BD8c"
     standard_token_factory01_step: 0
     standard_token_factory01_address: "0x69FdF199340107102158e6D8a44aeC83Fe041A3F"
     standard_token_factory01_fee_symbol: "5ire"
@@ -186,6 +193,7 @@ chain_config:
     chain_name: "base-mainnet"
     url: "https://base.drpc.org/"
     uniswap_v2_router_address: "0x4752ba5dbc23f44d87826276bf6fd6b1c372ad24"
+    uniswap_v2_factory_address : "0x8909Dc15e40173Ff4699343b6eB8132c65e18eC6"
     standard_token_factory01_step: 0
     standard_token_factory01_address: "0x6643CABa0966FfF2Bed8A2f59c34E55A2e00B2ae"
     standard_token_factory01_fee_symbol: "ETH"
