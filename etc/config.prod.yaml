@@ -19,19 +19,20 @@ chain_config:
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
-    dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
-    dexpert_universal_router_address: "0xdF2bf594cCaF8199348E9b0a6d3767dd6adB998b"
-    dexpert_universal_router_block_number: 20711609 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
-    dexpert_universal_router_usdt_address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-    dexpert_universal_router_weth_address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
-    dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
-    dexpert_universal_router_eth_name: "Ether"
-    dexpert_universal_router_eth_symbol: "ETH"
-    dexpert_universal_router_eth_decimal: 18
-    dexpert_universal_router_usdt_decimal: 6
-    dexpert_universal_router_is_close: ${IS_CLOSE_ETHEREUM_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
-    dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
-    dexpert_universal_router_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
+    dexpert_universal_router:
+      step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：100
+      address: "0xdF2bf594cCaF8199348E9b0a6d3767dd6adB998b"
+      block_number: 20711609 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+      usdt_address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+      weth_address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+      eth_address: "0x0000000000000000000000000000000000000000"
+      eth_name: "Ether"
+      eth_symbol: "ETH"
+      eth_decimal: 18
+      usdt_decimal: 6
+      is_close: ${IS_CLOSE_ETHEREUM_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
+      is_start_saved_newest_block_number: ${IS_START_ETHEREUM_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
+      is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
   - chain_id: 11155111
     chain_name: "ethereum-sepolia"
     url: "https://rpc.sepolia.org/"
@@ -45,16 +46,21 @@ chain_config:
     standard_token_factory01_is_close:  ${IS_CLOSE_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01} # 是否关闭， true 关闭
     standard_token_factory01_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_SEPOLIA_STANDARD_TOKEN_FACTORY01_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     standard_token_factory01_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
-    dexpert_universal_router_step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：10
-    dexpert_universal_router_address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
-    dexpert_universal_router_block_number: 6441775 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
-    dexpert_universal_router_usdt_address: "0xb72bc8971d5e595776592e8290be6f31937097c6"
-    dexpert_universal_router_weth_address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
-    dexpert_universal_router_eth_address: "0x0000000000000000000000000000000000000000"
-    dexpert_universal_router_eth_name: "Ether"
-    dexpert_universal_router_eth_symbol: "ETH"
-    dexpert_universal_router_eth_decimal: 18
-    dexpert_universal_router_usdt_decimal: 6
+    dexpert_universal_router:
+      step: 0 # 每次爬取的块的区间，等于 0 将使用默认值，如：100
+      address: "0xF2f344e5fBf4FA8aAC548a8401c8E023b2783A92"
+      block_number: 6441775 # 开始爬的区号，如果从已爬到的数据的最新区块开始爬，此配置项将会忽略
+      usdt_address: "0xb72bc8971d5e595776592e8290be6f31937097c6"
+      weth_address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
+      eth_address: "0x0000000000000000000000000000000000000000"
+      eth_name: "Ether"
+      eth_symbol: "ETH"
+      eth_decimal: 18
+      usdt_decimal: 6
+      is_close: ${IS_CLOSE_ETHEREUM_SEPOLIA_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
+      is_start_saved_newest_block_number: ${IS_START_ETHEREUM_SEPOLIA_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
+      is_use_newest_block_number: true # true 表示从链上最新的区块开始爬，主要用于测试
+
     dexpert_universal_router_is_close: ${IS_CLOSE_ETHEREUM_SEPOLIA_DEXPERT_UNIVERSAL_ROUTER} # 是否关闭， true 关闭
     dexpert_universal_router_is_start_saved_newest_block_number: ${IS_START_ETHEREUM_SEPOLIA_DEXPERT_UNIVERSAL_ROUTER_SAVED_NEWEST_BLOCK_NUMBER} # 是否从已爬到的数据的最新区块开始爬, true 表示使用
     dexpert_universal_router_is_use_newest_block_number: false # true 表示从链上最新的区块开始爬，主要用于测试
