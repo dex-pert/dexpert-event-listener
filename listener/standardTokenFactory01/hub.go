@@ -14,12 +14,12 @@ type Hub struct {
 func NewHub(p *abi.Proxy) (*Hub, error) {
     eventListenerMap := make(map[int]*el.EventListener)
     for i, v := range p.Chains() {
-        if v.StandardTokenFactory01IsClose { // 关闭
+        if v.StandardTokenFactory01.IsClose { // 关闭
             continue
         }
         var context *Context
-        if p.Chains()[i].StandardTokenFactory01Step > 0 {
-            context = NewContext(&ContextParam{EthClient: p.WithChainID(v.ChainId).Client, ChainConfig: p.Chains()[i]}, WithStep(p.Chains()[i].StandardTokenFactory01Step))
+        if p.Chains()[i].StandardTokenFactory01.Step > 0 {
+            context = NewContext(&ContextParam{EthClient: p.WithChainID(v.ChainId).Client, ChainConfig: p.Chains()[i]}, WithStep(p.Chains()[i].StandardTokenFactory01.Step))
         } else {
             context = NewContext(&ContextParam{EthClient: p.WithChainID(v.ChainId).Client, ChainConfig: p.Chains()[i]})
         }

@@ -17,20 +17,24 @@ type MySQL struct {
 }
 
 type ChainConfig struct {
-    ChainId                                             int                    `yaml:"chain_id" json:"chain_id,omitempty"`
-    ChainName                                           string                 `yaml:"chain_name" json:"chain_name,omitempty"`
-    URL                                                 string                 `yaml:"url" json:"url,omitempty"`
-    UniswapV2RouterAddress                              string                 `yaml:"uniswap_v2_router_address" json:"uniswap_v_2_router_address,omitempty"`
-    UniswapV2FactoryAddress                             string                 `yaml:"uniswap_v2_factory_address"`
-    StandardTokenFactory01Step                          int64                  `yaml:"standard_token_factory01_step" json:"standard_token_factory01_step,omitempty"`
-    StandardTokenFactory01Address                       string                 `yaml:"standard_token_factory01_address" json:"standard_token_factory_01_address,omitempty"`
-    StandardTokenFactory01FeeSymbol                     string                 `yaml:"standard_token_factory01_fee_symbol" json:"standard_token_factory01_fee_symbol,omitempty"`
-    StandardTokenFactory01FeeDecimal                    int32                  `yaml:"standard_token_factory01_fee_decimal" json:"standard_token_factory01_fee_decimal,omitempty"`
-    StandardTokenFactory01BlockNumber                   int64                  `yaml:"standard_token_factory01_block_number" json:"standard_token_factory01_block_number,omitempty"`
-    StandardTokenFactory01IsClose                       bool                   `yaml:"standard_token_factory01_is_close" json:"standard_token_factory01_is_close,omitempty"`
-    StandardTokenFactory01IsStartSavedNewestBlockNumber bool                   `yaml:"standard_token_factory01_is_start_saved_newest_block_number"`
-    StandardTokenFactory01IsUseNewestBlockNumber        bool                   `yaml:"standard_token_factory01_is_use_newest_block_number"`
-    DexpertUniversalRouter                              DexpertUniversalRouter `yaml:"dexpert_universal_router"`
+    ChainId                 int                    `yaml:"chain_id" json:"chain_id,omitempty"`
+    ChainName               string                 `yaml:"chain_name" json:"chain_name,omitempty"`
+    URL                     string                 `yaml:"url" json:"url,omitempty"`
+    UniswapV2RouterAddress  string                 `yaml:"uniswap_v2_router_address" json:"uniswap_v_2_router_address,omitempty"`
+    UniswapV2FactoryAddress string                 `yaml:"uniswap_v2_factory_address"`
+    StandardTokenFactory01  StandardTokenFactory01 `yaml:"standard_token_factory01"`
+    DexpertUniversalRouter  DexpertUniversalRouter `yaml:"dexpert_universal_router"`
+}
+
+type StandardTokenFactory01 struct {
+    Step                          int64  `yaml:"step"`
+    Address                       string `yaml:"address"`
+    FeeSymbol                     string `yaml:"fee_symbol"`
+    FeeDecimal                    int32  `yaml:"fee_decimal"`
+    BlockNumber                   int64  `yaml:"block_number"`
+    IsClose                       bool   `yaml:"is_close"`
+    IsStartSavedNewestBlockNumber bool   `yaml:"is_start_saved_newest_block_number"`
+    IsUseNewestBlockNumber        bool   `yaml:"is_use_newest_block_number"`
 }
 
 type DexpertUniversalRouter struct {

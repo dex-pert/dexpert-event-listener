@@ -66,12 +66,12 @@ func NewContext(c *ContextParam, opts ...Option) *Context {
         UniswapV2FactoryAddress:       c.ChainConfig.UniswapV2FactoryAddress,
         EthClient:                     c.EthClient,
         Step:                          _options.Step,
-        BlockNumber:                   c.ChainConfig.StandardTokenFactory01BlockNumber,
+        BlockNumber:                   c.ChainConfig.StandardTokenFactory01.BlockNumber,
         ABIStr:                        constant.GetStandardTokenFactory01ABIByChainId(c.ChainConfig.ChainId),
-        StandardTokenFactory01Address: c.ChainConfig.StandardTokenFactory01Address,
-        FeeSymbol:                     c.ChainConfig.StandardTokenFactory01FeeSymbol,
-        FeeDecimal:                    c.ChainConfig.StandardTokenFactory01FeeDecimal,
-        IsStartSavedNewestBlockNumber: c.ChainConfig.StandardTokenFactory01IsStartSavedNewestBlockNumber,
-        IsUseNewestBlockNumber:        c.ChainConfig.StandardTokenFactory01IsUseNewestBlockNumber,
+        StandardTokenFactory01Address: c.ChainConfig.StandardTokenFactory01.Address,
+        FeeSymbol:                     c.ChainConfig.StandardTokenFactory01.FeeSymbol,
+        FeeDecimal:                    c.ChainConfig.StandardTokenFactory01.FeeDecimal,
+        IsStartSavedNewestBlockNumber: c.ChainConfig.StandardTokenFactory01.IsStartSavedNewestBlockNumber,
+        IsUseNewestBlockNumber:        c.ChainConfig.StandardTokenFactory01.IsUseNewestBlockNumber,
     }
 }
